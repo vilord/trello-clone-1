@@ -1,0 +1,11 @@
+{
+  "files.exclude": {
+    ".vscode/": true,
+    ".eslintrc.json": true,
+    ".gitignore": true,
+    "yarn.lock": true,
+    "package.json": true,
+    "src/**/*.css": true,
+    "build/": true
+  }
+}
