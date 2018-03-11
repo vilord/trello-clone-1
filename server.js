@@ -32,6 +32,7 @@ if (process.env.NODE_ENV === 'development') {
 const sessionSecret = process.env.SESSION_SECRET || 'mySecret';
 app.use(logger('dev'));
 app.use(bodyParser.json());
+app.use(bodyParser.text());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser(sessionSecret));
 app.use(

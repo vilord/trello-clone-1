@@ -1,0 +1,19 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`>>>H O M E --- Snapshot +++capturing Snapshot of Home 1`] = `
+<div
+  className="App"
+>
+  <input
+    onClick={[Function]}
+    type="button"
+    value="Click Me"
+  />
+  <p>
+    Showing
+  </p>
+  <p>
+    
+  </p>
+</div>
+`;
