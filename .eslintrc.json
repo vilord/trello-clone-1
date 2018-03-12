@@ -1,0 +1,9 @@
+{
+  "extends": "/Users/juandaco/.eslintrc.json",
+  "env": {
+    "jest": true
+  },
+  "parserOptions": {
+    "ecmaVersion": 8
+  }
+}

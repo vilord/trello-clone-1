@@ -1,7 +1,7 @@
 const express = require('express');
 const router = express.Router();
 
-const User = require('../models/users');
+const User = require('../models/user');
 
 router.post('/:id', function(req, res, next) {
   const userID = Number.parseFloat(req.params.id, 10);
