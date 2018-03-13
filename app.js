@@ -1,4 +1,4 @@
-require('dotenv').config();
+// require('dotenv').config();
 
 const express = require('express');
 const logger = require('morgan');
@@ -61,8 +61,7 @@ app.use(function(req, res, next) {
  * Error Handler
  */
 app.use(function(err, req, res, next) {
-  console.log(err.stack);
-  res.status(err.status).send(err);
+  res.status(err.status || 500).send(err);
 });
 
 module.exports = app;

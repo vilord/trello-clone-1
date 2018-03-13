@@ -13,6 +13,7 @@
   "author": "Juan D. Acosta <juandacorias@gmail.com>",
   "license": "MIT",
   "devDependencies": {
+    "axios": "^0.18.0",
     "concurrently": "^3.5.0",
     "jest": "^22.4.2",
     "nock": "^9.2.3",

@@ -1,14 +1,12 @@
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
-// Customize to your Application Needs
 const User = new Schema(
   {
     username: {
       type: String,
       required: true,
     },
-    id: Number,
     name: String,
   },
   {
@@ -16,9 +14,12 @@ const User = new Schema(
   },
 );
 
-User.static('findByUsername', function(username) {
-  return this.find({ username })
-    .exec();
+User.static('createUser', function(name, username) {
+  return this.create({name, username});
+});
+
+User.static('listUsers', function() {
+  return this.find({});
 });
 
 module.exports = mongoose.model('User', User);

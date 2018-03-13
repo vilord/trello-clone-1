@@ -9,9 +9,8 @@ const mongoURI = process.env.MONGO_URI || 'mongodb://localhost:27017/trello';
 mongoose
   .connect(mongoURI)
   .then(db => console.log(`Connected to the Database on ${mongoURI}`));
-if (process.env.NODE_ENV === 'development') {
-  mongoose.set('debug', true);
-}
+
+mongoose.set('debug', process.env.NODE_ENV === 'development');
 
 /**
  * Listening Port

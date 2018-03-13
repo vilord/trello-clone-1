@@ -1,22 +1,25 @@
 const express = require('express');
 const router = express.Router();
-
 const User = require('../models/user');
 
-router.post('/:id', function(req, res, next) {
-  const userID = Number.parseFloat(req.params.id, 10);
+router.get('/', async (req, res, next) => {
+  try {
+    const users = await User.listUsers();
+    res.json(users);
+  } catch (err) {
+    next(err);
+  }
+});
 
-  User.create({
-    username: 'juandaco',
-    id: userID,
-    name: 'Juan D. Acosta',
-  })
-    .then(user => {
-      console.log(user);
+router.post('/', async (req, res, next) => {
+  const { name, username } = req.query;
 
-      res.send(`Successfuly added user with id: ${userID}`);
-    })
-    .catch(err => console.log(err));
+  try {
+    const user = await User.createUser(name, username);
+    res.json(user);
+  } catch (err) {
+    next(err);
+  }
 });
 
 module.exports = router;
