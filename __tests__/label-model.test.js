@@ -8,13 +8,13 @@ describe('Label Model', () => {
     expect(user.color).toBeDefined();
   });
 
-  it('requires a color', () => {
+  it('requires color', () => {
     const label = new Label();
     const err = label.validateSync();
     expect(err.errors.color).toBeDefined();
   });
 
-  it('requires a valid hex color', () => {
+  it('requires valid hex color', () => {
     const label = new Label({
       color: 'not a hex color',
     });
@@ -30,7 +30,7 @@ describe('Label Model', () => {
     expect(err.errors.color).toBeDefined();
   });
 
-  it('passes with a valid label hex color', () => {
+  it('passes with a valid theme label hex color', () => {
     const label = new Label({
       color: GREEN,
     });
@@ -40,5 +40,9 @@ describe('Label Model', () => {
 
   it('has a text field', () => {
     expect(user.text).toBeDefined();
+  });
+
+  it('text field is of type String', () => {
+    expect(user.text).toBe(String);
   });
 });
