@@ -12,10 +12,10 @@ router.get('/', async (req, res, next) => {
 });
 
 router.post('/', async (req, res, next) => {
-  const { name, username } = req.query;
+  const { email, username } = req.query;
 
   try {
-    const user = await User.createUser(name, username);
+    const user = await User.createUser(email, username);
     res.json(user);
   } catch (err) {
     next(err);

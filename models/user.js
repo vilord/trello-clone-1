@@ -6,6 +6,12 @@ const User = new Schema(
     username: {
       type: String,
       required: true,
+      unique: true,
+    },
+    email: {
+      type: String,
+      required: true,
+      unique: true,
     },
     name: String,
   },
@@ -14,8 +20,8 @@ const User = new Schema(
   },
 );
 
-User.static('createUser', function(name, username) {
-  return this.create({name, username});
+User.static('createUser', function(email, username) {
+  return this.create({ email, username });
 });
 
 User.static('listUsers', function() {

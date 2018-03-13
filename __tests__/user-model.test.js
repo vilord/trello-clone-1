@@ -6,8 +6,48 @@ const User = require('../models/user');
 const UserMock = sinon.mock(User);
 
 describe('User Model', () => {
+  describe('fields', () => {
+    const user = User.schema.obj;
+
+    it('has email', () => {
+      expect(user.email).toBeDefined();
+    });
+
+    it('requires an email', () => {
+      const user = new User();
+      const err = user.validateSync();
+      expect(err.errors.email).toBeDefined();
+    });
+
+    it('email is unique', () => {
+      expect(user.email.unique).toBe(true);
+    });
+
+    it('has username', () => {
+      expect(user.username).toBeDefined();
+    });
+
+    it('requires username', () => {
+      const user = new User();
+      const err = user.validateSync();
+      expect(err.errors.username).toBeDefined();
+    });
+
+    it('username is unique', () => {
+      expect(user.username.unique).toBe(true);
+    });
+
+    it('has name', () => {
+      expect(user.name).toBeDefined();
+    });
+
+    it.skip('has boards', () => {
+      expect(user.boards).toBeDefined();
+    });
+  });
+
   describe('createUser method', () => {
-    it('exists', () => {
+    it('is defined', () => {
       expect(User.createUser).toBeDefined();
     });
 
@@ -19,15 +59,17 @@ describe('User Model', () => {
 
     it('calls create with arguments', () => {
       UserMock.expects('create')
-        .withArgs({ name: 'Juan', username: 'juandaco' })
+        .withArgs({ email: 'juandacorias@gmail.com', username: 'juandaco' })
         .chain('exec')
         .resolves('RESULT');
 
-      return User.createUser('Juan', 'juandaco').then(result => {
-        UserMock.verify();
-        UserMock.restore();
-        expect(result).toEqual('RESULT');
-      });
+      return User.createUser('juandacorias@gmail.com', 'juandaco').then(
+        result => {
+          UserMock.verify();
+          UserMock.restore();
+          expect(result).toEqual('RESULT');
+        },
+      );
     });
   });
 

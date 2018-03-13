@@ -7,7 +7,7 @@ const axios = require('axios');
 describe('Basic route', () => {
   const host = 'http://localhost';
 
-  it.only('POST /api/users/:id', () => {
+  it('POST /api/users/:id', () => {
     const apiRoute = '/api/users/1234';
     nock(host)
       .post(apiRoute)
