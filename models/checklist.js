@@ -6,16 +6,18 @@ const Checklist = new Schema({
     type: String,
     required: true,
   },
-  items: [{
-    status: {
-      type: Boolean,
-      default: false,
+  items: [
+    {
+      status: {
+        type: Boolean,
+        default: false,
+      },
+      text: {
+        type: String,
+        required: true,
+      },
     },
-    text: {
-      type: String,
-      required: true,
-    },
-  }],
+  ],
 });
 
 module.exports = mongoose.model('Checklist', Checklist);
