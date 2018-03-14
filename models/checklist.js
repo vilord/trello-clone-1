@@ -8,7 +8,7 @@ const Checklist = new Schema({
   },
   items: [
     {
-      status: {
+      completed: {
         type: Boolean,
         default: false,
       },

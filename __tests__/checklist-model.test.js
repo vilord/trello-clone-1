@@ -24,11 +24,11 @@ describe('Checklist model', () => {
     });
 
     it('items have boolean status', () => {
-      expect(checklist.items[0].status.type).toBe(Boolean);
+      expect(checklist.items[0].completed.type).toBe(Boolean);
     });
 
     it('items boolean status defaults to false', () => {
-      expect(checklist.items[0].status.default).toBe(false);
+      expect(checklist.items[0].completed.default).toBe(false);
     });
 
     it('items have text', () => {
