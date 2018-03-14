@@ -94,4 +94,18 @@ describe('Card model', () => {
       expect(card.due_date.completed.default).toEqual(false);
     });
   });
+
+  describe('archived field', () => {
+    it('exists', () => {
+      expect(card.archived).toBeDefined();
+    });
+
+    it('is of type Boolean', () => {
+      expect(card.archived.type).toBe(Boolean);
+    });
+
+    it('defaults to false', () => {
+      expect(card.archived.default).toBe(false);
+    });
+  });
 });

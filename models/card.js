@@ -24,6 +24,10 @@ const Card = new Schema({
       default: false,
     },
   },
+  archived: {
+    type: Boolean,
+    default: false,
+  },
 });
 
 module.exports = mongoose.model('Card', Card);
