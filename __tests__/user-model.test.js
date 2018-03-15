@@ -41,9 +41,9 @@ describe('User Model', () => {
       expect(user.name).toBeDefined();
     });
 
-    it.skip('has boards', () => {
-      expect(user.boards).toBeDefined();
-    });
+    // it.skip('has boards', () => {
+    //   expect(user.boards).toBeDefined();
+    // });
   });
 
   describe('createUser method', () => {
