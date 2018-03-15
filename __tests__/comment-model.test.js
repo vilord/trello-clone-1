@@ -2,12 +2,33 @@ const Comment = require('../models/comment');
 const User = require('../models/user');
 const emojiCodes = require('../constants/emoji-codes');
 
+// Schemas
+const UserSchema = User.schema;
+
 describe('Comment Model', () => {
   const comment = Comment.schema.obj;
 
   it('has timestap date', () => {
     const comment = Comment.schema.paths;
     expect(comment.createdAt).toBeDefined();
+  });
+
+  describe('user field', () => {
+    it('exists', () => {
+      expect(comment.user).toBeDefined();
+    });
+
+    it('is of type UserSchema', () => {
+      expect(comment.user.type).toBe(UserSchema);
+    });
+
+    it('is required', () => {
+      const comment = new Comment({
+        text: 'some comment',
+      });
+      const err = comment.validateSync();
+      expect(err.errors.user).toBeDefined();
+    });
   });
 
   describe('text field', () => {
@@ -48,13 +69,19 @@ describe('Comment Model', () => {
 
     it('text_code passes with a valid emojiCode', () => {
       const comment = new Comment({
+        user: new User({
+          username: 'pepito',
+          email: 'pepito@perez.com',
+        }),
         text: 'some comment',
         emoji_reaction: {
           text_code: emojiCodes[0],
-          users: [new User({
-            email: 'some email',
-            username: 'some username',
-          })],
+          users: [
+            new User({
+              email: 'some email',
+              username: 'some username',
+            }),
+          ],
         },
       });
       const err = comment.validateSync();

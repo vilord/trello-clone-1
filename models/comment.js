@@ -5,6 +5,10 @@ const emojiCodes = require('../constants/emoji-codes');
 
 const Comment = new Schema(
   {
+    user: {
+      type: UserSchema,
+      required: true,
+    },
     text: {
       type: String,
       required: true,
@@ -17,7 +21,9 @@ const Comment = new Schema(
       users: {
         type: [UserSchema],
         validate: {
-          validator: x => x.length >= 1,
+          validator: function(x) {
+            return !this.emoji_reaction.text_code || x.length >= 1;
+          },
           message: 'Your emoji_reaction need at least one user',
         },
       },
