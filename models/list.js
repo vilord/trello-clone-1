@@ -1,15 +1,18 @@
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
-
-// Schemas
-const CardSchema = require('./card').schema;
+const { ObjectId } = Schema.Types;
 
 const List = new Schema({
-  title: { 
+  title: {
     type: String,
     required: true,
   },
-  cards: [CardSchema],
+  cards: [
+    {
+      type: ObjectId,
+      ref: 'Card',
+    },
+  ],
   archived: {
     type: Boolean,
     default: false,

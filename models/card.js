@@ -1,22 +1,59 @@
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
+const { ObjectId } = Schema.Types;
 
-// Schemas
-const UserSchema = require('./user').schema;
-const LabelSchema = require('./label').schema;
-const ChecklistSchema = require('./checklist').schema;
-const CommentSchema = require('./comment').schema;
+const Checklist = new Schema({
+  title: {
+    type: String,
+    required: true,
+  },
+  items: [
+    {
+      completed: {
+        type: Boolean,
+        default: false,
+      },
+      text: {
+        type: String,
+        required: true,
+      },
+    },
+  ],
+});
 
 const Card = new Schema({
   title: {
     type: String,
     required: true,
   },
+  list: {
+    type: ObjectId,
+    ref: 'List',
+  },
+  board: {
+    type: ObjectId,
+    ref: 'Board',
+  },
   description: String,
-  members: [UserSchema],
-  label: [LabelSchema],
-  checklists: [ChecklistSchema],
-  comments: [CommentSchema],
+  members: [
+    {
+      type: ObjectId,
+      ref: 'User',
+    },
+  ],
+  label: [
+    {
+      type: ObjectId,
+      ref: 'Label',
+    },
+  ],
+  checklists: [Checklist],
+  comments: [
+    {
+      type: ObjectId,
+      ref: 'User',
+    },
+  ],
   due_date: {
     type: Date,
     completed: {

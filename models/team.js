@@ -2,10 +2,7 @@ const mongoose = require('mongoose');
 const isURL = require('validator/lib/isURL');
 
 const Schema = mongoose.Schema;
-
-// Schemas
-const BoardSchema = require('./board').schema;
-const UserSchema = require('./user').schema;
+const { ObjectId } = Schema.Types;
 
 const Team = new Schema({
   name: {
@@ -33,11 +30,19 @@ const Team = new Schema({
     type: String,
     trim: true,
   },
-  boards: [BoardSchema],
+  boards: [
+    {
+      type: ObjectId,
+      ref: 'Board',
+    },
+  ],
   members: {
     type: [
       {
-        user: UserSchema,
+        user: {
+          type: ObjectId,
+          ref: 'User',
+        },
         admin: {
           type: Boolean,
           default: false,

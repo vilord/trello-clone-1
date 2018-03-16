@@ -1,19 +1,10 @@
 const Card = require('../models/card');
-
-// Schemas
-const LabelSchema = require('../models/label').schema;
-const ChecklistSchema = require('../models/checklist').schema;
-const CommentSchema = require('../models/comment').schema;
-const UserSchema = require('../models/user').schema;
+const { ObjectId } = require('mongoose').Schema.Types;
 
 describe('Card model', () => {
   const card = Card.schema.obj;
 
-  describe('title field', () => {
-    it('exists', () => {
-      expect(card.title).toBeDefined();
-    });
-
+  describe('title', () => {
     it('is of type String', () => {
       expect(card.title.type).toBe(String);
     });
@@ -25,65 +16,137 @@ describe('Card model', () => {
     });
   });
 
-  describe('description field', () => {
-    it('exists', () => {
-      expect(card.description).toBeDefined();
-    });
-
+  describe('description', () => {
     it('is of type String', () => {
       expect(card.description).toBe(String);
     });
   });
 
-  describe('members field', () => {
-    it('exists', () => {
-      expect(card.members).toBeDefined();
+  describe('list', () => {
+    it('is of type ObjectId', () => {
+      expect(card.list.type).toBe(ObjectId);
     });
 
-    it('is an Array of UserSchemas', () => {
+    it('is of ref List', () => {
+      expect(card.list.ref).toEqual('List');
+    });
+  });
+
+  describe('board', () => {
+    it('is of type ObjectId', () => {
+      expect(card.board.type).toBe(ObjectId);
+    });
+
+    it('is of ref Board', () => {
+      expect(card.board.ref).toEqual('Board');
+    });
+  });
+
+  describe('members', () => {
+    it('is an Array', () => {
       expect(card.members).toBeInstanceOf(Array);
-      expect(card.members[0]).toBe(UserSchema);
+    });
+
+    describe('obj', () => {
+      const obj = card.members[0];
+
+      it('is of type ObjectId', () => {
+        expect(obj.type).toBe(ObjectId);
+      });
+
+      it('is of ref User', () => {
+        expect(obj.ref).toBe('User');
+      });
     });
   });
 
-  describe('labels field', () => {
-    it('exists', () => {
-      expect(card.label).toBeDefined();
-    });
-
-    it('is an Array of LabelSchemas', () => {
+  describe('labels', () => {
+    it('is an Array', () => {
       expect(card.label).toBeInstanceOf(Array);
-      expect(card.label[0]).toBe(LabelSchema);
+    });
+
+    describe('obj', () => {
+      const obj = card.label[0];
+
+      it('is of type ObjectId', () => {
+        expect(obj.type).toBe(ObjectId);
+      });
+
+      it('if of ref Label', () => {
+        expect(obj.ref).toBe('Label');
+      });
     });
   });
 
-  describe('comments field', () => {
-    it('exists', () => {
-      expect(card.comments).toBeDefined();
-    });
-
-    it('is an Array of CommentSchemas', () => {
+  describe('comments', () => {
+    it('is an Array', () => {
       expect(card.comments).toBeInstanceOf(Array);
-      expect(card.comments[0]).toBe(CommentSchema);
+    });
+
+    describe('obj', () => {
+      const obj = card.comments[0];
+
+      it('is of type ObjectId', () => {
+        expect(obj.type).toBe(ObjectId);
+      });
+
+      it('is of ref User', () => {
+        expect(obj.ref).toBe('User');
+      });
     });
   });
 
-  describe('checklists field', () => {
-    it('exists', () => {
-      expect(card.checklists).toBeDefined();
-    });
-
-    it('is an Array of ChecklistSchemas', () => {
+  describe('checklists', () => {
+    it('is an Array of objects', () => {
       expect(card.checklists).toBeInstanceOf(Array);
-      expect(card.checklists[0]).toBe(ChecklistSchema);
+    });
+
+    describe('obj', () => {
+      const Checklist = card.checklists[0];
+      const checklist = Checklist.obj;
+
+      describe('title', () => {
+        it('is of type String', () => {
+          expect(checklist.title.type).toBe(String);
+        });
+
+        it('is required', () => {
+          expect(checklist.title.required).toBe(true);
+        });
+      });
+
+      describe('items', () => {
+        it('is array', () => {
+          expect(checklist.items).toBeInstanceOf(Array);
+        });
+
+        describe('obj', () => {
+          const obj = checklist.items[0];
+
+          describe('completed', () => {
+            it('is of type Boolean', () => {
+              expect(obj.completed.type).toBe(Boolean);
+            });
+
+            it('items boolean status defaults to false', () => {
+              expect(obj.completed.default).toBe(false);
+            });
+          });
+
+          describe('text', () => {
+            it('is of type String', () => {
+              expect(obj.text.type).toBe(String);
+            });
+            it('is required', () => {
+              expect(obj.text.required).toBe(true);
+            });
+          });
+        });
+      });
     });
   });
 
-  describe('due_date field', () => {
-    it('exists', () => {
-      expect(card.due_date).toBeDefined();
-    });
-
+  describe('due_date', () => {
     it('is of type Date', () => {
       expect(card.due_date.type).toBe(Date);
     });
@@ -95,11 +158,7 @@ describe('Card model', () => {
     });
   });
 
-  describe('archived field', () => {
-    it('exists', () => {
-      expect(card.archived).toBeDefined();
-    });
-
+  describe('archived', () => {
     it('is of type Boolean', () => {
       expect(card.archived.type).toBe(Boolean);
     });

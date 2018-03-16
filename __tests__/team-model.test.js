@@ -1,18 +1,11 @@
 const Team = require('../models/team');
 const User = require('../models/user');
-
-// Schemas
-const BoardSchema = require('../models/board').schema;
-const UserSchema = User.schema;
+const { ObjectId } = require('mongoose').Schema.Types;
 
 describe('Team Model', () => {
   const team = Team.schema.obj;
 
   describe('name', () => {
-    it('exists', () => {
-      expect(team.name).toBeDefined();
-    });
-
     it('is of type String', () => {
       expect(team.name.type).toBe(String);
     });
@@ -25,10 +18,6 @@ describe('Team Model', () => {
   });
 
   describe('shortname', () => {
-    it('exists', () => {
-      expect(team.shortname).toBeDefined();
-    });
-
     it('is of type String', () => {
       expect(team.shortname.type).toBe(String);
     });
@@ -75,7 +64,7 @@ describe('Team Model', () => {
         members: [
           {
             user: new User({
-              username: 'some username',
+              username: 'someone',
               email: 'some@email.com',
             }),
             admin: true,
@@ -87,15 +76,11 @@ describe('Team Model', () => {
     });
 
     it('is unique', () => {
-      expect(team.shortname.unique).toBe(true);
+      expect(team.shortname.unique).toEqual(true);
     });
   });
 
   describe('website', () => {
-    it('exists', () => {
-      expect(team.website).toBeDefined();
-    });
-
     it('is of type String', () => {
       expect(team.website.type).toBe(String);
     });
@@ -127,7 +112,7 @@ describe('Team Model', () => {
         members: [
           {
             user: new User({
-              username: 'some username',
+              username: 'someone',
               email: 'some@email.com',
             }),
             admin: true,
@@ -140,48 +125,57 @@ describe('Team Model', () => {
   });
 
   describe('description', () => {
-    it('exists', () => {
-      expect(team.description).toBeDefined();
-    });
-
     it('is of type String', () => {
       expect(team.description.type).toBe(String);
     });
   });
 
   describe('boards', () => {
-    it('exists', () => {
-      expect(team.boards).toBeDefined();
+    it('is an Array', () => {
+      expect(team.boards).toBeInstanceOf(Array);
     });
 
-    it('is an Array of BoardSchemas', () => {
-      expect(team.boards).toBeInstanceOf(Array);
-      expect(team.boards[0]).toBe(BoardSchema);
+    describe('obj', () => {
+      const obj = team.boards[0];
+
+      it('is of type ObjectId', () => {
+        expect(obj.type).toBe(ObjectId);
+      });
+
+      it('is of ref Board', () => {
+        expect(obj.ref).toEqual('Board');
+      });
     });
   });
 
   describe('members', () => {
-    it('exists', () => {
-      expect(team.members).toBeDefined();
-    });
-
     it('is an Array', () => {
       expect(team.members.type).toBeInstanceOf(Array);
     });
 
-    describe('members object', () => {
+    describe('obj', () => {
       const obj = team.members.type[0];
 
-      it('user field is a UserSchema', () => {
-        expect(obj.user).toBe(UserSchema);
+      describe('user', () => {
+        const user = obj.user;
+        it('is of type ObjectId', () => {
+          expect(user.type).toBe(ObjectId);
+        });
+
+        it('is of ref User', () => {
+          expect(user.ref).toEqual('User');
+        });
       });
 
-      it('admin field is of type Boolean', () => {
-        expect(obj.admin.type).toBe(Boolean);
-      });
+      describe('adim', () => {
+        const admin = obj.admin;
+        it('is of type Boolean', () => {
+          expect(admin.type).toBe(Boolean);
+        });
 
-      it('admin defaults to false', () => {
-        expect(obj.admin.default).toBe(false);
+        it('defaults to false', () => {
+          expect(admin.default).toEqual(false);
+        });
       });
     });
 
@@ -217,7 +211,7 @@ describe('Team Model', () => {
         members: [
           {
             user: new User({
-              username: 'some username',
+              username: 'someone',
               email: 'some@email.com',
             }),
             admin: true,
@@ -230,16 +224,12 @@ describe('Team Model', () => {
   });
 
   describe('public', () => {
-    it('exists', () => {
-      expect(team.public).toBeDefined();
-    });
-
     it('is of type Boolean', () => {
       expect(team.public.type).toBe(Boolean);
     });
 
     it('defaults to true', () => {
-      expect(team.public.default).toBe(true);
+      expect(team.public.default).toEqual(true);
     });
   });
 

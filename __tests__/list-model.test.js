@@ -1,16 +1,10 @@
 const List = require('../models/list');
-
-// Schemas
-const CardSchema = require('../models/card').schema;
+const { ObjectId } = require('mongoose').Schema.Types;
 
 describe('List model', () => {
   const list = List.schema.obj;
 
-  describe('title field', () => {
-    it('exists', () => {
-      expect(list.title).toBeDefined();
-    });
-
+  describe('title', () => {
     it('is of type String', () => {
       expect(list.title.type).toBe(String);
     });
@@ -22,22 +16,25 @@ describe('List model', () => {
     });
   });
 
-  describe('cards field', () => {
-    it('exists', () => {
-      expect(list.cards).toBeDefined();
+  describe('cards', () => {
+    it('is an Array', () => {
+      expect(list.cards).toBeInstanceOf(Array);
     });
 
-    it('is an Array of CardSchemas', () => {
-      expect(list.cards).toBeInstanceOf(Array);
-      expect(list.cards[0]).toBe(CardSchema);
+    describe('obj', () => {
+      const obj = list.cards[0];
+
+      it('is of type ObjectId', () => {
+        expect(obj.type).toBe(ObjectId);
+      });
+
+      it('is of ref Card', () => {
+        expect(obj.ref).toBe('Card');
+      });
     });
   });
 
-  describe('archived field', () => {
-    it('exists', () => {
-      expect(list.archived).toBeDefined();
-    });
-
+  describe('archived', () => {
     it('is of type Boolean', () => {
       expect(list.archived.type).toBe(Boolean);
     });

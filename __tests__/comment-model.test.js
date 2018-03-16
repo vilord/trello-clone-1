@@ -1,9 +1,8 @@
 const Comment = require('../models/comment');
+const Schema = require('mongoose').Schema;
 const User = require('../models/user');
-const emojiCodes = require('../constants/emoji-codes');
 
-// Schemas
-const UserSchema = User.schema;
+const emojiCodes = require('../constants/emoji-codes');
 
 describe('Comment Model', () => {
   const comment = Comment.schema.obj;
@@ -13,29 +12,17 @@ describe('Comment Model', () => {
     expect(comment.createdAt).toBeDefined();
   });
 
-  describe('user field', () => {
-    it('exists', () => {
-      expect(comment.user).toBeDefined();
-    });
-
+  describe('user', () => {
     it('is of type UserSchema', () => {
-      expect(comment.user.type).toBe(UserSchema);
+      expect(comment.user.type).toBe(Schema.Types.ObjectId);
     });
 
-    it('is required', () => {
-      const comment = new Comment({
-        text: 'some comment',
-      });
-      const err = comment.validateSync();
-      expect(err.errors.user).toBeDefined();
+    it('is a ref to User', () => {
+      expect(comment.user.ref).toBe('User');
     });
   });
 
-  describe('text field', () => {
-    it('exists', () => {
-      expect(comment.text).toBeDefined();
-    });
-
+  describe('text', () => {
     it('is required', () => {
       const comment = new Comment();
       const err = comment.validateSync();
@@ -47,60 +34,61 @@ describe('Comment Model', () => {
     });
   });
 
-  describe('emoji_reaction field', () => {
-    it('exists', () => {
-      expect(comment.emoji_reaction).toBeDefined();
-    });
-
-    it('has text_code', () => {
-      expect(comment.emoji_reaction.text_code).toBeDefined();
-    });
-
-    it('text_code must be one of the valid emojiCodes', () => {
-      const comment = new Comment({
-        text: 'some comment',
-        emoji_reaction: {
-          text_code: 'invalid code',
-        },
+  describe('emoji_reaction', () => {
+    describe('text_code', () => {
+      it('fails with an invalid emojiCode', () => {
+        const comment = new Comment({
+          text: 'some comment',
+          emoji_reaction: {
+            text_code: 'invalid code',
+          },
+        });
+        const err = comment.validateSync();
+        expect(err.errors['emoji_reaction.text_code']).toBeDefined();
       });
-      const err = comment.validateSync();
-      expect(err.errors['emoji_reaction.text_code']).toBeDefined();
-    });
 
-    it('text_code passes with a valid emojiCode', () => {
-      const comment = new Comment({
-        user: new User({
-          username: 'pepito',
-          email: 'pepito@perez.com',
-        }),
-        text: 'some comment',
-        emoji_reaction: {
-          text_code: emojiCodes[0],
-          users: [
-            new User({
-              email: 'some email',
-              username: 'some username',
-            }),
-          ],
-        },
+      it('passes with a valid emojiCode', () => {
+        const comment = new Comment({
+          user: new User({
+            username: 'pepito',
+            email: 'pepito@perez.com',
+          }),
+          text: 'some comment',
+          emoji_reaction: {
+            text_code: emojiCodes[0],
+            users: [
+              new User({
+                email: 'pepito@example.com',
+                username: 'someone',
+              }),
+            ],
+          },
+        });
+        const err = comment.validateSync();
+        expect(err).toBeUndefined();
       });
-      const err = comment.validateSync();
-      expect(err).toBeUndefined();
     });
 
-    it('has users', () => {
-      expect(comment.emoji_reaction.users).toBeDefined();
-    });
-
-    it('users is required', () => {
-      const comment = new Comment({
-        text: 'some comment',
-        emoji_reaction: {
-          text_code: emojiCodes[0],
-        },
+    describe('users', () => {
+      const users = comment.emoji_reaction.users;
+      it('is of type ObjectId', () => {
+        expect(users.type[0].type).toBe(Schema.Types.ObjectId);
       });
-      const err = comment.validateSync();
-      expect(err.errors['emoji_reaction.users']).toBeDefined();
+
+      it('is of ref User', () => {
+        expect(users.type[0].ref).toBe('User');
+      });
+
+      it('is required', () => {
+        const comment = new Comment({
+          text: 'some comment',
+          emoji_reaction: {
+            text_code: emojiCodes[0],
+          },
+        });
+        const err = comment.validateSync();
+        expect(err.errors['emoji_reaction.users']).toBeDefined();
+      });
     });
   });
 });

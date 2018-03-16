@@ -1,9 +1,7 @@
 const Board = require('../models/board');
+const { ObjectId } = require('mongoose').Schema.Types;
 
-// Schemas
-const LabelSchema = require('../models/label').schema;
-const ListSchema = require('../models/list').schema;
-const UserSchema = require('../models/user').schema;
+// TODO: Activities
 
 // Constants
 const { BLUE, GREEN } = require('../constants/background-colors');
@@ -11,11 +9,7 @@ const { BLUE, GREEN } = require('../constants/background-colors');
 describe('Board Model', () => {
   const board = Board.schema.obj;
 
-  describe('title field', () => {
-    it('exists', () => {
-      expect(board.title).toBeDefined();
-    });
-
+  describe('title', () => {
     it('is of type String', () => {
       expect(board.title.type).toBe(String);
     });
@@ -27,11 +21,7 @@ describe('Board Model', () => {
     });
   });
 
-  describe('visibility field', () => {
-    it('exists', () => {
-      expect(board.visibility).toBeDefined();
-    });
-
+  describe('visibility', () => {
     it('is of type String', () => {
       expect(board.visibility.type).toBe(String);
     });
@@ -57,133 +47,152 @@ describe('Board Model', () => {
     });
   });
 
-  describe('lists field', () => {
-    it('exists', () => {
-      expect(board.lists).toBeDefined();
-    });
-
-    it('is Array of ListSchemas', () => {
+  describe('lists', () => {
+    it('is Array', () => {
       expect(board.lists).toBeInstanceOf(Array);
-      expect(board.lists[0]).toBe(ListSchema);
+    });
+
+    describe('obj', () => {
+      const obj = board.lists[0];
+      it('is of type ObjectId', () => {
+        expect(obj.type).toBe(ObjectId);
+      });
+
+      it('is of ref List', () => {
+        expect(obj.ref).toBe('List');
+      });
     });
   });
 
-  describe('labels field', () => {
-    it('exists', () => {
-      expect(board.labels).toBeDefined();
-    });
-
-    it('is Array of LabelSchemas', () => {
+  describe('labels', () => {
+    it('is Array', () => {
       expect(board.labels).toBeInstanceOf(Array);
-      expect(board.labels[0]).toBe(LabelSchema);
+    });
+
+    describe('obj', () => {
+      const obj = board.labels[0];
+
+      it('is of type ObjectId', () => {
+        expect(obj.type).toBe(ObjectId);
+      });
+
+      it('is of ref Label', () => {
+        expect(obj.ref).toBe('Label');
+      });
     });
   });
 
-  describe('members field', () => {
-    it('exists', () => {
-      expect(board.members).toBeDefined();
-    });
-
+  describe('members', () => {
     it('is an Array', () => {
       expect(board.members).toBeInstanceOf(Array);
     });
 
-    describe('nested object', () => {
+    describe('obj', () => {
       const obj = board.members[0];
-      it('has a user with a UserSchema', () => {
-        expect(obj.user).toBeDefined();
-        expect(obj.user).toBe(UserSchema);
-      });
 
-      it('has admin field', () => {
-        expect(obj.admin).toBeDefined();
-      });
+      describe('user', () => {
+        const user = obj.user;
 
-      it('admin is of type Boolean', () => {
-        expect(obj.admin.type).toBe(Boolean);
-      });
-
-      it('admin defaults to false', () => {
-        expect(obj.admin.default).toEqual(false);
-      });
-    });
-
-    describe('theme field', () => {
-      const { theme } = board;
-
-      it('exists', () => {
-        expect(theme).toBeDefined();
-      });
-
-      describe('color', () => {
-        it('exists', () => {
-          expect(theme.color).toBeDefined();
+        it('is of type ObjectId', () => {
+          expect(user.type).toBe(ObjectId);
         });
 
-        it('is of Type String', () => {
-          expect(theme.color.type).toBe(String);
-        });
-
-        it('defaults to BLUE background color', () => {
-          expect(theme.color.default).toBe(BLUE);
-        });
-
-        it('fails if not a valid color', () => {
-          const board = new Board({
-            title: 'some title',
-            theme: {
-              color: 'invalid color',
-            },
-          });
-          const err = board.validateSync();
-          expect(err.errors['theme.color']).toBeDefined();
-        });
-
-        it('passes with a valid color', () => {
-          const board = new Board({
-            title: 'some title',
-            theme: {
-              color: GREEN,
-            },
-          });
-          const err = board.validateSync();
-          expect(err).toBeUndefined();
+        it('is of ref User', () => {
+          expect(user.ref).toBe('User');
         });
       });
 
-      describe('picture', () => {
-        it('exists', () => {
-          expect(theme.picture).toBeDefined();
+      describe('admin', () => {
+        const admin = obj.admin;
+        it('is of type Boolean', () => {
+          expect(admin.type).toBe(Boolean);
         });
 
-        it('is of type String', () => {
-          expect(theme.picture.type).toBe(String);
-        });
-
-        it('fails when not a valid URL', () => {
-          const board = new Board({
-            title: 'some title',
-            theme: {
-              picture: 'invalid URL',
-            },
-          });
-          const err = board.validateSync();
-          expect(err.errors['theme.picture']).toBeDefined();
-        });
-
-        it('pass with a valid URL', () => {
-          const board = new Board({
-            title: 'some title',
-            theme: {
-              picture: 'https://images.unsplash.com/photo',
-            },
-          });
-          const err = board.validateSync();
-          expect(err).toBeUndefined();
+        it('defaults to false', () => {
+          expect(admin.default).toEqual(false);
         });
       });
     });
   });
 
-  // TODO: Activities
+  describe('activity', () => {
+    it('is an Array', () => {
+      expect(board.activity).toBeInstanceOf(Array);
+    });
+
+    describe('obj', () => {
+      const obj = board.activity[0];
+      it('is of type ObjectId', () => {
+        expect(obj.type).toBe(ObjectId);
+      });
+
+      it('is of ref Activity', () => {
+        expect(obj.ref).toEqual('Activity');
+      });
+    });
+  });
+
+  describe('theme', () => {
+    const { theme } = board;
+
+    describe('color', () => {
+      it('is of Type String', () => {
+        expect(theme.color.type).toBe(String);
+      });
+
+      it('defaults to BLUE background color', () => {
+        expect(theme.color.default).toBe(BLUE);
+      });
+
+      it('fails if not a valid color', () => {
+        const board = new Board({
+          title: 'some title',
+          theme: {
+            color: 'invalid color',
+          },
+        });
+        const err = board.validateSync();
+        expect(err.errors['theme.color']).toBeDefined();
+      });
+
+      it('passes with a valid color', () => {
+        const board = new Board({
+          title: 'some title',
+          theme: {
+            color: GREEN,
+          },
+        });
+        const err = board.validateSync();
+        expect(err).toBeUndefined();
+      });
+    });
+
+    describe('picture', () => {
+      it('is of type String', () => {
+        expect(theme.picture.type).toBe(String);
+      });
+
+      it('fails when not a valid URL', () => {
+        const board = new Board({
+          title: 'some title',
+          theme: {
+            picture: 'invalid URL',
+          },
+        });
+        const err = board.validateSync();
+        expect(err.errors['theme.picture']).toBeDefined();
+      });
+
+      it('pass with a valid URL', () => {
+        const board = new Board({
+          title: 'some title',
+          theme: {
+            picture: 'https://images.unsplash.com/photo',
+          },
+        });
+        const err = board.validateSync();
+        expect(err).toBeUndefined();
+      });
+    });
+  });
 });

@@ -1,15 +1,12 @@
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
-
-// Schemas
-const UserSchema = require('./user').schema;
-const BoardSchema = require('./board').schema;
-const CardSchema = require('./card').schema;
+const { ObjectId } = Schema.Types;
 
 const Activity = new Schema(
   {
     user: {
-      type: UserSchema,
+      type: ObjectId,
+      ref: 'User',
       required: true,
     },
     text: {
@@ -17,11 +14,19 @@ const Activity = new Schema(
       required: true,
     },
     board: {
-      type: BoardSchema,
-      required: true,
+      type: ObjectId,
+      ref: 'Board',
     },
-    card: CardSchema,
-    mentions: [UserSchema],
+    card: {
+      type: ObjectId,
+      ref: 'Card',
+    },
+    mentions: [
+      {
+        type: ObjectId,
+        ref: 'User',
+      },
+    ],
   },
   {
     timestamps: true,

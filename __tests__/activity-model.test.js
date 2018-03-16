@@ -1,12 +1,6 @@
 const Activity = require('../models/activity');
 const User = require('../models/user');
-const Board = require('../models/board');
-
-// Schemas
-const UserSchema = User.schema;
-const BoardSchema = Board.schema;
-const CardSchema = require('../models/card').schema;
-
+const { ObjectId } = require('mongoose').Schema.Types;
 
 describe('Activity Model', () => {
   const activity = Activity.schema.obj;
@@ -17,14 +11,13 @@ describe('Activity Model', () => {
     expect(activity.updatedAt).toBeDefined();
   });
 
-
-  describe('user field', () => {
-    it('exists', () => {
-      expect(activity.user).toBeDefined();
+  describe('user', () => {
+    it('is of type ObjectId', () => {
+      expect(activity.user.type).toBe(ObjectId);
     });
 
-    it('is of type UserSchema', () => {
-      expect(activity.user.type).toBe(UserSchema);
+    it('is of ref User', () => {
+      expect(activity.user.ref).toEqual('User');
     });
 
     it('is required', () => {
@@ -34,11 +27,7 @@ describe('Activity Model', () => {
     });
   });
 
-  describe('text field', () => {
-    it('exists', () => {
-      expect(activity.text).toBeDefined();
-    });
-
+  describe('text', () => {
     it('is of type String', () => {
       expect(activity.text.type).toBe(String);
     });
@@ -55,45 +44,40 @@ describe('Activity Model', () => {
     });
   });
 
-  describe('board field', () => {
-    it('exists', () => {
-      expect(activity.board).toBeDefined();
+  describe('board', () => {
+    it('is of type ObjectId', () => {
+      expect(activity.board.type).toBe(ObjectId);
     });
 
-    it('is of type BoardSchema', () => {
-      expect(activity.board.type).toBe(BoardSchema);
-    });
-
-    it('is required', () => {
-      const activity = new Activity({
-        user: new User({
-          username: 'some username',
-          email: 'some email',
-        }),
-      });
-      const err = activity.validateSync();
-      expect(err.errors.board).toBeDefined();
+    it('is of ref Board', () => {
+      expect(activity.board.ref).toEqual('Board');
     });
   });
 
-  describe('card field', () => {
-    it('exists', () => {
-      expect(activity.card).toBeDefined();
+  describe('card', () => {
+    it('is of type ObjectId', () => {
+      expect(activity.card.type).toBe(ObjectId);
     });
 
-    it('is of type CardSchema', () => {
-      expect(activity.card).toBe(CardSchema);
+    it('is of ref Card', () => {
+      expect(activity.card.ref).toEqual('Card');
     });
   });
 
-  describe('mentions field', () => {
-    it('exists', () => {
-      expect(activity.mentions).toBeDefined();
-    });
-
-    it('is an Array of type UserSchema', () => {
+  describe('mentions', () => {
+    it('is an Array', () => {
       expect(activity.mentions).toBeInstanceOf(Array);
-      expect(activity.mentions[0]).toBe(UserSchema);
+    });
+
+    describe('obj', () => {
+      const obj = activity.mentions[0];
+      it('is of type ObjectId', () => {
+        expect(obj.type).toBe(ObjectId);
+      });
+
+      it('is of ref User', () => {
+        expect(obj.ref).toEqual('User');
+      });
     });
   });
 });

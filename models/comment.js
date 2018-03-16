@@ -1,13 +1,12 @@
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
-const UserSchema = require('./user').schema;
 const emojiCodes = require('../constants/emoji-codes');
 
 const Comment = new Schema(
   {
     user: {
-      type: UserSchema,
-      required: true,
+      type: Schema.Types.ObjectId,
+      ref: 'User',
     },
     text: {
       type: String,
@@ -19,7 +18,10 @@ const Comment = new Schema(
         enum: emojiCodes,
       },
       users: {
-        type: [UserSchema],
+        type: [{
+          type: Schema.Types.ObjectId,
+          ref: 'User',
+        }],
         validate: {
           validator: function(x) {
             return !this.emoji_reaction.text_code || x.length >= 1;
