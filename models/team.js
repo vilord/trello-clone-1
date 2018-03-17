@@ -7,14 +7,16 @@ const { ObjectId } = Schema.Types;
 const Team = new Schema({
   name: {
     type: String,
+    trim: true,
     required: true,
+    match: /^((?!\s{2,}).)*$/,
   },
   shortname: {
     type: String,
     lowercase: true,
     trim: true,
     required: true,
-    match: /\w{3,}/,
+    match: /^\w{3,}$/,
     unique: true,
   },
   website: {
@@ -28,6 +30,7 @@ const Team = new Schema({
   },
   description: {
     type: String,
+    maxlength: 20000,
     trim: true,
   },
   boards: [

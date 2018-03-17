@@ -1,8 +1,6 @@
 const Board = require('../models/board');
 const { ObjectId } = require('mongoose').Schema.Types;
 
-// TODO: Activities
-
 // Constants
 const { BLUE, GREEN } = require('../constants/background-colors');
 
@@ -18,6 +16,29 @@ describe('Board Model', () => {
       const board = new Board();
       const err = board.validateSync();
       expect(err.errors.title).toBeDefined();
+    });
+
+    it('is trimmed', () => {
+      const board = new Board({
+        title: '  some title  ',
+      });
+      expect(board.title).toEqual('some title');
+    });
+
+    it('disallows consecutive spaces', () => {
+      const board = new Board({
+        title: 'invalid  spaced  title',
+      });
+      const err = board.validateSync();
+      expect(err.errors.title).toBeDefined();
+    });
+
+    it('is valid when correctly spaced', () => {
+      const board = new Board({
+        title: 'valid title',
+      });
+      const err = board.validateSync();
+      expect(err).toBeUndefined();
     });
   });
 

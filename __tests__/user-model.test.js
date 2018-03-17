@@ -104,6 +104,30 @@ describe('User Model', () => {
       });
       expect(user.name.match(isNotTrimmed)).toBeFalsy();
     });
+
+    it('fails on consecutive spaces', () => {
+      const user = new User({
+        email: 'someone@example.com',
+        username: 'someone',
+        name: 'John   Doe',
+      });
+      const err = user.validateSync();
+      expect(err.errors.name).toBeDefined();
+    });
+
+    it('passes when separated by single spaces', () => {
+      const user = new User({
+        email: 'someone@example.com',
+        username: 'someone',
+        name: 'John Doe',
+      });
+      const err = user.validateSync();
+      expect(err).toBeUndefined();
+    });
+
+    it('has maxlength of 70 chars', () => {
+      expect(user.name.maxlength).toEqual(70);
+    });
   });
 
   describe('initials', () => {
@@ -138,6 +162,17 @@ describe('User Model', () => {
       });
       const err = user.validateSync();
       expect(err.errors.initials).toBeDefined();
+    });
+
+    it('fails on whitespace', () => {
+      const user = new User({
+        username: 'someone',
+        email: 'someone@example.com',
+        initials: '  ',
+      });
+      const err = user.validateSync();
+      expect(err.errors.initials).toBeDefined();
+
     });
   });
 

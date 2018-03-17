@@ -11,6 +11,7 @@ const Comment = new Schema(
     text: {
       type: String,
       required: true,
+      maxlength: 20000,
     },
     emoji_reaction: {
       text_code: {

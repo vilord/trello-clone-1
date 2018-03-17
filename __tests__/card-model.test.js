@@ -14,11 +14,22 @@ describe('Card model', () => {
       const err = card.validateSync();
       expect(err.errors.title).toBeDefined();
     });
+
+    it('is trimmed', () => {
+      const card = new Card({
+        title: '  some title  ',
+      });
+      expect(card.title).toEqual('some title');
+    });
   });
 
   describe('description', () => {
     it('is of type String', () => {
-      expect(card.description).toBe(String);
+      expect(card.description.type).toBe(String);
+    });
+
+    it('has maxlength of 20 thousand characters', () => {
+      expect(card.description.maxlength).toEqual(20000);
     });
   });
 

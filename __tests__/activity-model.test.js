@@ -32,6 +32,10 @@ describe('Activity Model', () => {
       expect(activity.text.type).toBe(String);
     });
 
+    it('has maxlength of 500', () => {
+      expect(activity.text.maxlength).toEqual(500);
+    });
+
     it('is required', () => {
       const activity = new Activity({
         user: new User({

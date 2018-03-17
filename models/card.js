@@ -25,6 +25,7 @@ const Card = new Schema({
   title: {
     type: String,
     required: true,
+    trim: true,
   },
   list: {
     type: ObjectId,
@@ -34,7 +35,10 @@ const Card = new Schema({
     type: ObjectId,
     ref: 'Board',
   },
-  description: String,
+  description: {
+    type:String,
+    maxlength: 20000,
+  },
   members: [
     {
       type: ObjectId,

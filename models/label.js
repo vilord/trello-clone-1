@@ -8,7 +8,10 @@ const Label = new Schema({
     enum: Object.values(labelColors),
     required: true,
   },
-  text: String,
+  text: {
+    type: String,
+    maxlength: 35,
+  },
 });
 
 module.exports = mongoose.model('Label', Label);

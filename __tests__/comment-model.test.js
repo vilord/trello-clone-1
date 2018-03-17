@@ -32,6 +32,18 @@ describe('Comment Model', () => {
     it('is of type String', () => {
       expect(comment.text.type).toBe(String);
     });
+
+    it('cannot be empty', () => {
+      const comment = new Comment({
+        text: '',
+      });
+      const err = comment.validateSync();
+      expect(err.errors.text).toBeDefined();
+    });
+
+    it('has maxlength of 20 thousand characters', () => {
+      expect(comment.text.maxlength).toEqual(20000);
+    });
   });
 
   describe('emoji_reaction', () => {

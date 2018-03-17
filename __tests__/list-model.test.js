@@ -9,10 +9,21 @@ describe('List model', () => {
       expect(list.title.type).toBe(String);
     });
 
+    it('has maxlength of 100', () => {
+      expect(list.title.maxlength).toEqual(100);
+    });
+
     it('is required', () => {
       const list = new List();
       const err = list.validateSync();
       expect(err.errors.title).toBeDefined();
+    });
+
+    it('is trimmed', () => {
+      const list = new List({
+        title: '  some title   ',
+      });
+      expect(list.title).toEqual('some title');
     });
   });
 

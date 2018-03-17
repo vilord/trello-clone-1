@@ -5,6 +5,8 @@ const { ObjectId } = Schema.Types;
 const List = new Schema({
   title: {
     type: String,
+    maxlength: 100,
+    trim: true,
     required: true,
   },
   cards: [

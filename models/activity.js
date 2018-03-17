@@ -11,6 +11,7 @@ const Activity = new Schema(
     },
     text: {
       type: String,
+      maxlength: 500,
       required: true,
     },
     board: {

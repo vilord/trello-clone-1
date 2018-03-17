@@ -10,10 +10,7 @@ const User = new Schema(
       required: true,
       unique: true,
       trim: true,
-      validate: {
-        validator: x => !x.match(/.\s+./),
-        message: 'Whitespace is not allowed',
-      },
+      match: /^((?!\s+).)*$/,
     },
     email: {
       type: String,
@@ -29,22 +26,21 @@ const User = new Schema(
     name: {
       type: String,
       trim: true,
+      match: /^((?!\s{2,}).)*$/,
+      maxlength: 70,
     },
     initials: {
       type: String,
       uppercase: true,
-      validate: {
-        validator: x => x.length >= 1 && x.length <= 4,
-        message: 'Initials must contain between 1-4 characters.',
-      },
+      maxlength: 4,
+      minlength: 1,
+      match: /^((?!\s).)*$/,
     },
     bio: {
       type: String,
       trim: true,
-      validate: {
-        validator: x => x.length > 0,
-        message: 'Bio cannot be an empty String.',
-      },
+      minlength: 1,
+      maxlength: 500,
     },
     assigned_cards: [
       {

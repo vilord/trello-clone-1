@@ -11,7 +11,9 @@ const { BLUE } = backgroundColors;
 const Board = new Schema({
   title: {
     type: String,
+    trim: true,
     required: true,
+    match: /^((?!\s{2,}).)*$/,
   },
   visibility: {
     type: String,

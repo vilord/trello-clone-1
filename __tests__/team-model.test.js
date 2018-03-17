@@ -15,6 +15,29 @@ describe('Team Model', () => {
       const err = team.validateSync();
       expect(err.errors.name).toBeDefined();
     });
+
+    it('is trimmed', () => {
+      const team = new Team({
+        name: '  some name  ',
+      });
+      expect(team.name).toEqual('some name');
+    });
+
+    it('disallows consecutive sapces', () => {
+      const team = new Team({
+        name: 'invalid  spaced  name',
+      });
+      const err = team.validateSync();
+      expect(err.errors.name).toBeDefined();
+    });
+
+    it('allows correctly spaced name', () => {
+      const team = new Team({
+        name: 'valid spaced name',
+      });
+      const err = team.validateSync();
+      expect(err.errors.name).toBeUndefined();
+    });
   });
 
   describe('shortname', () => {
@@ -25,15 +48,6 @@ describe('Team Model', () => {
     it('is required', () => {
       const team = new Team({
         name: 'some name',
-        members: [
-          {
-            user: new User({
-              username: 'some username',
-              email: 'some@email.com',
-            }),
-            admin: true,
-          },
-        ],
       });
       const err = team.validateSync();
       expect(err.errors.shortname).toBeDefined();
@@ -43,15 +57,15 @@ describe('Team Model', () => {
       const team = new Team({
         name: 'some name',
         shortname: 'af',
-        members: [
-          {
-            user: new User({
-              username: 'some username',
-              email: 'some@email.com',
-            }),
-            admin: true,
-          },
-        ],
+      });
+      const err = team.validateSync();
+      expect(err.errors.shortname).toBeDefined();
+    });
+
+    it('fails if whitespace is found', () => {
+      const team = new Team({
+        name: 'some name',
+        shortname: 'a f',
       });
       const err = team.validateSync();
       expect(err.errors.shortname).toBeDefined();
@@ -107,7 +121,7 @@ describe('Team Model', () => {
     it('passes with a valid URL', () => {
       const team = new Team({
         name: 'some name',
-        shortname: 'some shortname',
+        shortname: 'shortname',
         website: 'http://example.com',
         members: [
           {
@@ -127,6 +141,14 @@ describe('Team Model', () => {
   describe('description', () => {
     it('is of type String', () => {
       expect(team.description.type).toBe(String);
+    });
+
+    it('is trimmed', () => {
+      expect(team.description.trim).toEqual(true);
+    });
+
+    it('has a maxlength of 20 thousand chars', () => {
+      expect(team.description.maxlength).toEqual(20000);
     });
   });
 

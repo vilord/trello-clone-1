@@ -44,7 +44,11 @@ describe('Label Model', () => {
 
   describe('text', () => {
     it('is of type String', () => {
-      expect(label.text).toBe(String);
+      expect(label.text.type).toBe(String);
+    });
+
+    it('has maxlength of 35 characters', () => {
+      expect(label.text.maxlength).toEqual(35);
     });
   });
 });
