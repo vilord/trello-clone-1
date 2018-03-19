@@ -10,56 +10,6 @@ describe('User Model', () => {
 
   const isNotTrimmed = /(^\s+\w|\w\s+$)/;
 
-  describe('email', () => {
-    it('has email', () => {
-      expect(user.email).toBeDefined();
-    });
-
-    it('requires an email', () => {
-      const user = new User();
-      const err = user.validateSync();
-      expect(err.errors.email).toBeDefined();
-    });
-
-    it('email is unique', () => {
-      expect(user.email.unique).toBe(true);
-    });
-
-    it('fails when passed an invalid email', () => {
-      const user = new User({
-        username: 'someone',
-        email: 'invalid email',
-      });
-      const err = user.validateSync();
-      expect(err.errors.email).toBeDefined();
-    });
-
-    it('passes when a valid email is used', () => {
-      const user = new User({
-        username: 'someone',
-        email: 'username@example.com',
-      });
-      const err = user.validateSync();
-      expect(err).toBeUndefined();
-    });
-
-    it('is lowercased', () => {
-      const user = new User({
-        username: 'someone',
-        email: 'USERNAME@EXAMPLE.COM',
-      });
-      expect(user.email).toEqual('username@example.com');
-    });
-
-    it('is trimmed', () => {
-      const user = new User({
-        username: 'someone',
-        email: '  username@example.com  ',
-      });
-      expect(user.email.match(isNotTrimmed)).toBeFalsy();
-    });
-  });
-
   describe('username', () => {
     it('is required', () => {
       const user = new User({
@@ -88,6 +38,52 @@ describe('User Model', () => {
         username: ' asdf_asdf ',
       });
       expect(user.username.match(isNotTrimmed)).toBeFalsy();
+    });
+  });
+
+  describe('password', () => {
+    it('is of type String', () => {
+      expect(user.password.type).toBe(String);
+    });
+
+    it('is encrypted', () => {
+      expect(user.password.bcrypt).toEqual(true);
+    });
+  });
+
+  describe('email', () => {
+    it('fails when invalid email', () => {
+      const user = new User({
+        username: 'someone',
+        email: 'invalid email',
+      });
+      const err = user.validateSync();
+      expect(err.errors.email).toBeDefined();
+    });
+
+    it('passes when valid email', () => {
+      const user = new User({
+        username: 'someone',
+        email: 'username@example.com',
+      });
+      const err = user.validateSync();
+      expect(err).toBeUndefined();
+    });
+
+    it('is lowercased', () => {
+      const user = new User({
+        username: 'someone',
+        email: 'USERNAME@EXAMPLE.COM',
+      });
+      expect(user.email).toEqual('username@example.com');
+    });
+
+    it('is trimmed', () => {
+      const user = new User({
+        username: 'someone',
+        email: '  username@example.com  ',
+      });
+      expect(user.email.match(isNotTrimmed)).toBeFalsy();
     });
   });
 

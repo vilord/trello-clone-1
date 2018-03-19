@@ -3,7 +3,7 @@ const Schema = mongoose.Schema;
 const { ObjectId } = Schema.Types;
 const isEmail = require('validator/lib/isEmail');
 
-const User = new Schema(
+const UserSchema = new Schema(
   {
     username: {
       type: String,
@@ -12,10 +12,12 @@ const User = new Schema(
       trim: true,
       match: /^((?!\s+).)*$/,
     },
+    password: {
+      type: String,
+      bcrypt: true,
+    },
     email: {
       type: String,
-      required: true,
-      unique: true,
       trim: true,
       lowercase: true,
       validate: {
@@ -76,12 +78,14 @@ const User = new Schema(
   },
 );
 
-User.static('createUser', function(email, username) {
-  return this.create({ email, username });
-});
+UserSchema.plugin(require('mongoose-bcrypt'), { rounds: 8 });
 
-User.static('listUsers', function() {
-  return this.find({});
-});
+// UserSchema.static('createUser', function(email, username) {
+//   return this.create({ email, username });
+// });
 
-module.exports = mongoose.model('User', User);
+// UserSchema.static('listUsers', function() {
+//   return this.find({});
+// });
+
+module.exports = mongoose.model('User', UserSchema);

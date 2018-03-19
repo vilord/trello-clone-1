@@ -32,5 +32,6 @@
     "redux-devtools-extension": "^2.13.2",
     "redux-logger": "^3.0.6",
     "redux-mock-store": "^1.5.1"
-  }
+  },
+  "proxy": "http://localhost:3001"
 }
