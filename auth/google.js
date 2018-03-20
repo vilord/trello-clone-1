@@ -1,7 +1,7 @@
 require('dotenv').config();
 const passport = require('passport');
-const GoogleStrategy = require('passport-google-oauth').Strategy;
-const Users = require('../models/users');
+const GoogleStrategy = require('passport-google-oauth20').Strategy;
+const User = require('../models/user');
 const passportUserSetup = require('./passportUserSetup');
 
 passport.use(
@@ -29,10 +29,7 @@ passport.use(
       };
 
       // update the user if s/he exists or add a new user
-      Users.findOneAndUpdate(searchQuery, updates, options, function(
-        err,
-        user,
-      ) {
+      User.findOneAndUpdate(searchQuery, updates, options, function(err, user) {
         if (err) {
           return done(err);
         } else {

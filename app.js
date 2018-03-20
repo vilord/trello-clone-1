@@ -63,7 +63,6 @@ if (process.env.NODE_ENV === 'production') {
  * Catches 404 Errors
  */
 app.use(function(req, res, next) {
-  console.log(req.flash());
   const err = new Error('Not Found');
   err.status = 404;
   next(err);
