@@ -1,5 +1,11 @@
+# Dependencies directory
 node_modules/
 
+# Editor configuration
 .vscode/
 
+# Configuration variables
 .env
+
+# Tags for vim files
+tags
