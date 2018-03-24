@@ -28,7 +28,7 @@ describe('async actions', () => {
 
   it('should fetch posts', () => {
     const subreddit = 'programming';
-    fetchMock.getOnce(`https://www.reddit.com/r/${subreddit}.json`, {
+    fetchMock.get(`https://www.reddit.com/r/${subreddit}.json`, {
       body: {
         subreddit,
       },

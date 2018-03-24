@@ -1,50 +1,48 @@
 import React, { Component } from 'react';
+
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { toggleShow, fetchPosts } from '../actions';
+import { getUserSession } from '../actions/user';
+
+// Components
+import SignUp from './SignUp';
+import LogIn from './LogIn';
 
 export class App extends Component {
+  componentDidMount() {
+    const { getUserSession } = this.props;
 
-  componentWillMount() {
-    const { fetchPosts } = this.props;
-    fetchPosts('programming');
+    getUserSession();
   }
 
   render() {
-    const { subreddit, toggleShow, show, isFetching } = this.props;
+    const { user } = this.props;
+
+    const host =
+      process.env.NODE_ENV === 'development' ? 'http://localhost:3001' : '';
+    const authURL = `${host}/auth/google`;
 
     return (
       <div className="App">
-        <input type="button" onClick={toggleShow} value="Click Me" />
-        {show ? <p>Showing</p> : null}
-        <p>{isFetching ? 'Fetching' : subreddit}</p>
+        {user.username ? <LogIn /> : <SignUp />}
+        <a href={authURL}>Google</a>
       </div>
     );
   }
 }
 
 App.propTypes = {
-  data: PropTypes.object,
-  isFetching: PropTypes.bool.isRequired,
-  show: PropTypes.bool.isRequired,
-  subreddit: PropTypes.string,
-  toggleShow: PropTypes.func.isRequired,
-  fetchPosts: PropTypes.func.isRequired,
+  user: PropTypes.object,
+  getUserSession: PropTypes.func.isRequired,
 };
 
-const mapStateToProps = ({ show, isFetching, data, subreddit }) => ({
-  data,
-  isFetching,
-  show,
-  subreddit,
+const mapStateToProps = ({ user }) => ({
+  user,
 });
 
 const mapDispatchToProps = dispatch => ({
-  toggleShow: () => {
-    dispatch(toggleShow);
-  },
-  fetchPosts: subreddit => {
-    dispatch(fetchPosts(subreddit));
+  getUserSession: () => {
+    dispatch(getUserSession());
   },
 });
 
