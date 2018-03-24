@@ -3,207 +3,249 @@ const { ObjectId } = mongoose.Schema.Types;
 // const sinon = require('sinon');
 // require('sinon-mongoose');
 
-const User = require('../models/user');
+const User = require('./user');
+
+const genValidUser = () => ({
+  username: 'johndoe',
+  name: 'John Doe',
+  email: 'johndoe@example.com',
+  password: 'abcABC123',
+  google_id: 12345,
+});
 
 describe('User Model', () => {
   const user = User.schema.obj;
 
-  const isNotTrimmed = /(^\s+\w|\w\s+$)/;
+  let validUser;
+  beforeEach(() => {
+    validUser = genValidUser();
+  });
 
   describe('username', () => {
+    const { username } = user;
+
     it('is required', () => {
-      const user = new User({
-        email: 'someone@example.com',
-      });
+      delete validUser.username;
+      const user = new User(validUser);
       const err = user.validateSync();
       expect(err.errors.username).toBeDefined();
     });
 
     it('is unique', () => {
-      expect(user.username.unique).toBe(true);
+      expect(username.unique).toBe(true);
     });
 
     it('does not allow whitespace in between', () => {
-      const user = new User({
-        email: 'someone@example.com',
-        username: ' asdf asdf',
-      });
+      validUser.username = 'john   doe';
+      const user = new User(validUser);
       const err = user.validateSync();
       expect(err.errors.username).toBeDefined();
     });
 
-    it('trims whitespace', () => {
-      const user = new User({
-        email: 'someone@example.com',
-        username: ' asdf_asdf ',
-      });
-      expect(user.username.match(isNotTrimmed)).toBeFalsy();
+    it('is trimmed', () => {
+      expect(username.trim).toBe(true);
     });
   });
 
   describe('password', () => {
+    const { password } = user;
+
     it('is of type String', () => {
-      expect(user.password.type).toBe(String);
+      expect(password.type).toBe(String);
     });
 
     it('is encrypted', () => {
-      expect(user.password.bcrypt).toEqual(true);
+      expect(password.bcrypt).toBe(true);
+    });
+
+    it('is required when google_id not present', () => {
+      delete validUser.password;
+      delete validUser.google_id;
+      const user = new User(validUser);
+      const err = user.validateSync();
+      expect(err.errors.password).toBeDefined();
+    });
+
+    it('is not required when google_id present', () => {
+      delete validUser.password;
+      const user = new User(validUser);
+      const err = user.validateSync();
+      expect(err).toBeUndefined();
+    });
+  });
+
+  describe('google_id', () => {
+    const { google_id } = user;
+
+    it('is of type Number', () => {
+      expect(google_id.type).toBe(Number);
+    });
+
+    it('is required when password not present', () => {
+      delete validUser.google_id;
+      delete validUser.password;
+      const user = new User(validUser);
+      const err = user.validateSync();
+      expect(err.errors.google_id).toBeDefined();
+    });
+
+    it('is not required when password present', () => {
+      delete validUser.google_id;
+      const user = new User(validUser);
+      const err = user.validateSync();
+      expect(err).toBeUndefined();
     });
   });
 
   describe('email', () => {
+    const { email } = user;
+
+    it('is required', () => {
+      delete validUser.email;
+      const user = new User(validUser);
+      const err = user.validateSync();
+      expect(err.errors.email).toBeDefined();
+    });
+
+    it('is unique', () => {
+      expect(email.unique).toBe(true);
+    });
+
     it('fails when invalid email', () => {
-      const user = new User({
-        username: 'someone',
-        email: 'invalid email',
-      });
+      validUser.email = 'invalid email';
+      const user = new User(validUser);
       const err = user.validateSync();
       expect(err.errors.email).toBeDefined();
     });
 
     it('passes when valid email', () => {
-      const user = new User({
-        username: 'someone',
-        email: 'username@example.com',
-      });
+      const user = new User(validUser);
       const err = user.validateSync();
       expect(err).toBeUndefined();
     });
 
     it('is lowercased', () => {
-      const user = new User({
-        username: 'someone',
-        email: 'USERNAME@EXAMPLE.COM',
-      });
-      expect(user.email).toEqual('username@example.com');
+      expect(email.lowercase).toBe(true);
     });
 
     it('is trimmed', () => {
-      const user = new User({
-        username: 'someone',
-        email: '  username@example.com  ',
-      });
-      expect(user.email.match(isNotTrimmed)).toBeFalsy();
+      expect(email.trim).toBe(true);
     });
   });
 
   describe('name', () => {
+    const { name } = user;
+
     it('is of type String', () => {
-      expect(user.name.type).toBe(String);
+      expect(name.type).toBe(String);
+    });
+
+    it('is required', () => {
+      expect(name.required).toBe(true);
     });
 
     it('trims whitespace', () => {
-      const user = new User({
-        email: 'someone@example.com',
-        username: 'someone',
-        name: '   John Doe   ',
-      });
-      expect(user.name.match(isNotTrimmed)).toBeFalsy();
+      expect(name.trim).toBe(true);
     });
 
     it('fails on consecutive spaces', () => {
-      const user = new User({
-        email: 'someone@example.com',
-        username: 'someone',
-        name: 'John   Doe',
-      });
+      validUser.name = ' Invalid  Spaced  Name';
+      const user = new User(validUser);
       const err = user.validateSync();
       expect(err.errors.name).toBeDefined();
     });
 
     it('passes when separated by single spaces', () => {
-      const user = new User({
-        email: 'someone@example.com',
-        username: 'someone',
-        name: 'John Doe',
-      });
+      const user = new User(validUser);
       const err = user.validateSync();
       expect(err).toBeUndefined();
     });
 
     it('has maxlength of 70 chars', () => {
-      expect(user.name.maxlength).toEqual(70);
+      expect(name.maxlength).toBe(70);
     });
   });
 
   describe('initials', () => {
+    const { initials } = user;
+
     it('is of type String', () => {
-      expect(user.initials.type).toBe(String);
+      expect(initials.type).toBe(String);
     });
 
     it('is converted to UpperCase', () => {
-      const user = new User({
-        username: 'someone',
-        email: 'someone@example.com',
-        initials: 'jda',
-      });
-      expect(user.initials).toBe('JDA');
+      expect(initials.uppercase).toBe(true);
     });
 
     it('must have at least 1 characters', () => {
-      const user = new User({
-        username: 'someone',
-        email: 'someone@example.com',
-        initials: '',
-      });
-      const err = user.validateSync();
-      expect(err.errors.initials).toBeDefined();
+      expect(initials.minlength).toBe(1);
     });
 
     it('cannot have more than 4 characters', () => {
-      const user = new User({
-        username: 'someone',
-        email: 'someone@example.com',
-        initials: 'someone',
-      });
-      const err = user.validateSync();
-      expect(err.errors.initials).toBeDefined();
+      expect(initials.maxlength).toBe(4);
     });
 
     it('fails on whitespace', () => {
-      const user = new User({
-        username: 'someone',
-        email: 'someone@example.com',
-        initials: '  ',
-      });
+      validUser.initials = ' J D ';
+      const user = new User(validUser);
       const err = user.validateSync();
       expect(err.errors.initials).toBeDefined();
-
     });
   });
 
   describe('bio', () => {
+    const { bio } = user;
+
     it('is of type String', () => {
-      expect(user.bio.type).toBe(String);
+      expect(bio.type).toBe(String);
     });
 
     it('is trimmed', () => {
-      const user = new User({
-        username: 'someone',
-        email: 'someone@example.com',
-        bio: ' This is my bio    ',
-      });
-      expect(user.bio.match(isNotTrimmed)).toBeFalsy();
+      expect(bio.trim).toBe(true);
     });
 
     it('is not empty', () => {
-      const user = new User({
-        username: 'someone',
-        email: 'someone@example.com',
-        bio: '',
-      });
+      validUser.bio = '';
+      const user = new User(validUser);
       const err = user.validateSync();
       expect(err.errors.bio).toBeDefined();
     });
   });
 
+  describe('avatar', () => {
+    const { avatar } = user;
+
+    it('is of type String', () => {
+      expect(avatar.type).toBe(String);
+    });
+
+    it('is trimmed', () => {
+      expect(avatar.trim).toBe(true);
+    });
+
+    it('fails with an invalid url', () => {
+      validUser.avatar = 'invalid URL';
+      const user = new User(validUser);
+      const err = user.validateSync();
+      expect(err.errors.avatar).toBeDefined();
+    });
+
+    it('passes with a valid url', () => {
+      const user = new User(validUser);
+      const err = user.validateSync();
+      expect(err).toBeUndefined();
+    });
+  });
+
   describe('assigned_cards', () => {
+    const { assigned_cards } = user;
+
     it('is an Array', () => {
-      expect(user.assigned_cards).toBeInstanceOf(Array);
+      expect(assigned_cards).toBeInstanceOf(Array);
     });
 
     describe('obj', () => {
-      const obj = user.assigned_cards[0];
+      const obj = assigned_cards[0];
 
       it('is of type ObjectId', () => {
         expect(obj.type).toBe(ObjectId);
@@ -216,12 +258,14 @@ describe('User Model', () => {
   });
 
   describe('boards', () => {
+    const { boards } = user;
+
     it('is an Array', () => {
-      expect(user.boards).toBeInstanceOf(Array);
+      expect(boards).toBeInstanceOf(Array);
     });
 
     describe('obj', () => {
-      const obj = user.boards[0];
+      const obj = boards[0];
 
       describe('board', () => {
         const board = obj.board;
@@ -267,12 +311,19 @@ describe('User Model', () => {
   });
 
   describe('activity', () => {
-    it('is of type ObjectId', () => {
-      expect(user.activity.type).toBe(ObjectId);
+    it('is an Array', () => {
+      expect(user.activity).toBeInstanceOf(Array);
     });
 
-    it('is of ref Activity', () => {
-      expect(user.activity.ref).toEqual('Activity');
+    describe('obj', () => {
+      const obj = user.activity[0];
+      it('is of type ObjectId', () => {
+        expect(obj.type).toBe(ObjectId);
+      });
+
+      it('is of ref Activity', () => {
+        expect(obj.ref).toBe('Activity');
+      });
     });
   });
 
@@ -284,7 +335,7 @@ describe('User Model', () => {
   //   });
 
   //   it('throws error when invoked without arguments', () => {
-  //     return User.createUser().catch(err => {
+  //     return User.createUser(validUser);.catch(err => {
   //       expect(err).not.toBeNull();
   //     });
   //   });
@@ -299,7 +350,7 @@ describe('User Model', () => {
   //       result => {
   //         UserMock.verify();
   //         UserMock.restore();
-  //         expect(result).toEqual('RESULT');
+  //         expect(result).toBe('RESULT');
   //       },
   //     );
   //   });
@@ -314,7 +365,7 @@ describe('User Model', () => {
   //     return User.listUsers().then(result => {
   //       UserMock.verify();
   //       UserMock.restore();
-  //       expect(result).toEqual('result');
+  //       expect(result).toBe('result');
   //     });
   //   });
   // });

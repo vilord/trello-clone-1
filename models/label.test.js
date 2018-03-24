@@ -1,4 +1,4 @@
-const Label = require('../models/label');
+const Label = require('./label');
 const { GREEN } = require('../constants/label-colors');
 
 describe('Label Model', () => {

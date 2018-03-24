@@ -4,7 +4,7 @@
   "description": "",
   "main": "server.js",
   "scripts": {
-    "server": "nodemon server.js",
+    "server": "nodemon --inspect server.js",
     "client": "node start-client.js",
     "start": "concurrently \"npm run server\" \"npm run client\"",
     "test": "jest --watch"
@@ -24,12 +24,12 @@
   },
   "dependencies": {
     "body-parser": "^1.18.2",
-    "connect-flash": "^0.1.1",
     "connect-mongo": "^2.0.1",
     "cookie-parser": "^1.4.3",
     "dotenv": "^4.0.0",
     "express": "^4.16.2",
     "express-session": "^1.15.6",
+    "helmet": "^3.12.0",
     "mongoose": "^5.0.9",
     "mongoose-bcrypt": "^1.5.0",
     "morgan": "^1.9.0",
@@ -47,8 +47,9 @@
   },
   "nodemonConfig": {
     "ignore": [
-      "client/*"
+      "client/*",
+      "*.test.js"
     ],
-    "delay": "2500"
+    "delay": "1000"
   }
 }

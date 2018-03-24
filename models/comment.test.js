@@ -1,6 +1,6 @@
-const Comment = require('../models/comment');
+const Comment = require('./comment');
 const Schema = require('mongoose').Schema;
-const User = require('../models/user');
+const User = require('./user');
 
 const emojiCodes = require('../constants/emoji-codes');
 

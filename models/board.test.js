@@ -1,4 +1,4 @@
-const Board = require('../models/board');
+const Board = require('./board');
 const { ObjectId } = require('mongoose').Schema.Types;
 
 // Constants

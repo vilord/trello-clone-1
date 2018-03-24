@@ -1,5 +1,5 @@
-const Team = require('../models/team');
-const User = require('../models/user');
+const Team = require('./team');
+const User = require('./user');
 const { ObjectId } = require('mongoose').Schema.Types;
 
 describe('Team Model', () => {

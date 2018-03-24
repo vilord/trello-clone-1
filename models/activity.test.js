@@ -1,5 +1,5 @@
-const Activity = require('../models/activity');
-const User = require('../models/user');
+const Activity = require('./activity');
+const User = require('./user');
 const { ObjectId } = require('mongoose').Schema.Types;
 
 describe('Activity Model', () => {

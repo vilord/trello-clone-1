@@ -1,4 +1,4 @@
-const Card = require('../models/card');
+const Card = require('./card');
 const { ObjectId } = require('mongoose').Schema.Types;
 
 describe('Card model', () => {

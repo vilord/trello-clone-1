@@ -4,9 +4,9 @@ const logger = require('morgan');
 const favicon = require('serve-favicon');
 const cookieParser = require('cookie-parser');
 const bodyParser = require('body-parser');
-const flash = require('connect-flash');
 const passport = require('passport');
 const session = require('express-session');
+const helmet = require('helmet');
 const mongoose = require('mongoose');
 const MongoStore = require('connect-mongo')(session);
 
@@ -19,6 +19,7 @@ const app = express();
  * Applying Middleware
  */
 const sessionSecret = process.env.SESSION_SECRET || 'mySecret';
+app.use(helmet());
 app.use(logger('dev'));
 app.use(bodyParser.json());
 app.use(bodyParser.text());
@@ -33,7 +34,6 @@ app.use(
     store: new MongoStore({ mongooseConnection: mongoose.connection }),
   }),
 );
-app.use(flash());
 app.use(passport.initialize());
 app.use(passport.session());
 
@@ -71,8 +71,7 @@ app.use(function(req, res, next) {
 /**
  * Error Handler
  */
-app.use(function(err, req, res, next) {
-  res.status(err.status || 500).send(err.toString());
-});
+const errorHandler = require('./middleware/errorHandler');
+app.use(errorHandler);
 
 module.exports = app;

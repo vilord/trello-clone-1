@@ -12,15 +12,13 @@ passport.use(
       callbackURL: process.env.GOOGLE_CALLBACK_URL,
     },
     function(accessToken, refreshToken, profile, done) {
-      const searchQuery = {
-        id: profile.id,
-      };
+      const email = profile.emails[0].value;
 
-      // Customize your User
       const updates = {
-        username: profile.name.givenName,
         name: profile.displayName,
-        id: profile.id,
+        google_id: profile.id,
+        email,
+        avatar: profile.photos[0].value,
       };
 
       const options = {
@@ -28,14 +26,9 @@ passport.use(
         setDefaultsOnInsert: true,
       };
 
-      // update the user if s/he exists or add a new user
-      User.findOneAndUpdate(searchQuery, updates, options, function(err, user) {
-        if (err) {
-          return done(err);
-        } else {
-          return done(null, user);
-        }
-      });
+      User.findOneAndUpdate({ email }, updates, options, (err, user) =>
+        done(err, user),
+      );
     },
   ),
 );

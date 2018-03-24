@@ -1,6 +1,9 @@
 # Dependencies directory
 node_modules/
 
+# Logs
+*.log
+
 # Editor configuration
 .vscode/
 

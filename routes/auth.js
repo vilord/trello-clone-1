@@ -1,62 +1,43 @@
-const path = require('path');
 const express = require('express');
 const auth = express.Router();
 const passportLocal = require('../auth/local');
 const passportGoogle = require('../auth/google');
 const User = require('../models/user');
 const verifyUser = require('../middleware/verifyUser');
+const addLoginUsername = require('../middleware/addLoginUsername');
 
-/*
-  Local Strategy
-*/
+/**
+ * Local Strategy
+ */
 auth.post('/signup', async (req, res, next) => {
-  const { username, password } = req.body;
-
-  if (!username || !password) {
-    const err = new Error(
-      'You must provide a username and password to sign up',
-    );
-    err.status = 401;
-    next(err);
-  }
-
   try {
-    if (await User.findOne({ username })) {
-      const err = new Error('username already exists.');
-      err.status = 401;
-      return next(err);
-    }
+    const { name, email, password } = req.body;
 
-    let newUser = new User({
-      username,
+    const user = await User.create({
+      name,
+      email,
       password,
     });
 
-    const user = await newUser.save();
-
+    // Login the user
     req.login(user, function(err) {
       if (err) throw err;
-      // TODO: Start user session.
-
       res.json({
         user,
-        message: 'username correctly created.',
       });
     });
   } catch (err) {
-    return next(err);
+    next(err);
   }
 });
 
 auth.post(
   '/login',
-  passportLocal.authenticate('local', {
-    failureFlash: true,
-    successFlash: true,
-  }),
-  function(req, res) {
+  addLoginUsername,
+  passportLocal.authenticate('local'),
+  (req, res) => {
     res.json({
-      message: 'User logged in.',
+      user: req.user,
     });
   },
 );
@@ -74,48 +55,25 @@ auth.post('/logout', verifyUser, function(req, res) {
  */
 auth.get(
   '/google',
-  passportGoogle.authenticate('google', { scope: ['profile'] }),
+  passportGoogle.authenticate('google', { scope: ['profile', 'email'] }),
 );
 
-auth.get('/google/callback', passportGoogle.authenticate('google'), function(
-  req,
-  res,
-) {
-  if (req.user) {
-    const popUpCloser = path.resolve('../auth/popup-closer.html');
-    res.sendFile(popUpCloser);
-  } else {
-    res.json({
-      message: 'Not users found',
-    });
-  }
-});
+const hostURL =
+  process.env.NODE_ENV === 'development' ? 'http://localhost:3000' : '';
+auth.get(
+  '/google/callback',
+  passportGoogle.authenticate('google', {
+    successRedirect: hostURL + '/',
+    failureRedirect: '/login',
+  }),
+);
 
 /**
  * ALL
  */
-auth.get('/user-session', verifyUser, function(req, res) {
-  // TODO: set user session.
-
-  // User.findById(
-  //   { _id: req.user._id },
-  //   {
-  //     _id: false,
-  //     __v: false,
-  //     updatedAt: false,
-  //     createdAt: false,
-  //     password: false,
-  //   },
-  //   function(err, user) {
-  //     if (err) throw err;
-  //     res.json({
-  //       user,
-  //     });
-  //   },
-  // );
-
+auth.get('/user-session', verifyUser, async (req, res, next) => {
   res.json({
-    message: 'User authenticated',
+    user: req.user,
   });
 });
 

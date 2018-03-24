@@ -1,4 +1,4 @@
-const List = require('../models/list');
+const List = require('./list');
 const { ObjectId } = require('mongoose').Schema.Types;
 
 describe('List model', () => {
