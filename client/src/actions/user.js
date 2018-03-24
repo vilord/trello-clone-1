@@ -1,6 +1,6 @@
 import * as types from '../constants/actionTypes';
 
-/**
+/*
  * Signup User
  */
 export const signupUserRequest = () => ({
@@ -69,17 +69,15 @@ export const signupUser = (newUser, history) => async dispatch => {
       body: JSON.stringify(newUser),
     });
 
-    if (res.status !== 200) throw new Error('userSignup failure');
+    const { user, error } = await res.json();
 
-    const { user } = await res.json();
-
-    return dispatch(loginUserSuccess(user));
-  } catch (err) {
-    if (process.env.NODE_ENV === 'development') {
-      console.log(err);
+    if (res.status === 200 && user) {
+      return dispatch(loginUserSuccess(user));
     }
 
-    dispatch(signupUserFailure(err));
+    return dispatch(signupUserFailure(error));
+  } catch (err) {
+    console.log(err);
   }
 };
 
@@ -96,17 +94,15 @@ export const loginUser = (userLoginInfo, history) => async dispatch => {
       credentials: 'include',
     });
 
-    if (res.status !== 200) throw new Error('loginUser failure');
+    const { user, error } = await res.json();
 
-    const { user } = await res.json();
-
-    dispatch(loginUserSuccess(user));
-  } catch (err) {
-    if (process.env.NODE_ENV === 'development') {
-      console.log(err);
+    if (res.status === 200 && user) {
+      return dispatch(loginUserSuccess(user));
     }
 
-    dispatch(loginUserFailure(err));
+    return dispatch(loginUserFailure(error));
+  } catch (err) {
+    console.log(err);
   }
 };
 
@@ -119,17 +115,15 @@ export const getUserSession = () => async dispatch => {
       },
     });
 
-    if (res.status !== 200) throw new Error('getUserSession failure');
+    const { user } = await res.json();
 
-    const user = await res.json();
-
-    return dispatch(loginUserSuccess(user));
-  } catch (err) {
-    if (process.env.NODE_ENV === 'development') {
-      console.log(err);
+    if (res.status === 200 && user) {
+      return dispatch(loginUserSuccess(user));
     }
 
-    dispatch(logoutUser());
+    return dispatch(logoutUser());
+  } catch (err) {
+    console.log(err);
   }
 };
 
@@ -140,12 +134,9 @@ export const sendLogoutUser = () => async dispatch => {
       credentials: 'inlude',
     });
 
-    if (res.status !== 200) throw new Error('sendLogoutUser failure');
-
+    if (res.status !== 200) throw new Error(await res.json());
   } catch (err) {
-    if (process.env.NODE_ENV === 'development') {
-      console.log(err);
-    }
+    console.log(err);
   }
 
   dispatch(logoutUser());

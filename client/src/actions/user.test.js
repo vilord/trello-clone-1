@@ -10,6 +10,13 @@ const mockStore = configureStore(middleware);
 
 describe('user actions', () => {
   describe('Action Creators', () => {
+    describe('Logout User', () => {
+      it('creates a LOGOUT_USER action', () => {
+        const expected = { type: types.LOGOUT_USER };
+        expect(actions.logoutUser()).toEqual(expected);
+      });
+    });
+
     describe('Signup User', () => {
       it('creates a SIGNUP_USER_REQUEST', () => {
         const expected = { type: types.SIGNUP_USER_REQUEST };
@@ -38,23 +45,6 @@ describe('user actions', () => {
         const error = new Error('Login user failure');
         const expected = { type: types.LOGIN_USER_FAILURE, error };
         expect(actions.loginUserFailure(error)).toEqual(expected);
-      });
-    });
-
-    describe('Logout User', () => {
-      it('creates a LOGOUT_USER_REQUEST action', () => {
-        const expected = { type: types.LOGOUT_USER_REQUEST };
-        expect(actions.logoutUserRequest()).toEqual(expected);
-      });
-
-      it('creates a LOGOUT_USER_SUCCESS action', () => {
-        const expected = { type: types.LOGOUT_USER_SUCCESS };
-        expect(actions.logoutUserSuccess()).toEqual(expected);
-      });
-
-      it('creates a LOGOUT_USER_FAILURE action', () => {
-        const expected = { type: types.LOGOUT_USER_FAILURE };
-        expect(actions.logoutUserFailure()).toEqual(expected);
       });
     });
 
@@ -106,14 +96,17 @@ describe('user actions', () => {
       });
 
       it('on failure', () => {
-        const error = new Error('Signup failure');
+        const res = {
+          error: 'Signup failure.',
+        };
         fetchMock.post('/auth/signup', {
-          throws: error,
+          status: 409,
+          body: res,
         });
 
         const expected = [
           { type: types.SIGNUP_USER_REQUEST },
-          { type: types.SIGNUP_USER_FAILURE, error },
+          { type: types.SIGNUP_USER_FAILURE, error: res.error },
         ];
 
         const store = mockStore({});
@@ -146,15 +139,18 @@ describe('user actions', () => {
       });
 
       it('on failure', () => {
-        const error = new Error('loginUser failure');
+        const res = {
+          error: 'loginUser failure.',
+        };
 
         fetchMock.post('/auth/login', {
-          throws: error,
+          status: 400,
+          body: res,
         });
 
         const expected = [
           { type: types.LOGIN_USER_REQUEST },
-          { type: types.LOGIN_USER_FAILURE, error },
+          { type: types.LOGIN_USER_FAILURE, error: res.error },
         ];
 
         const store = mockStore({});
@@ -175,7 +171,9 @@ describe('user actions', () => {
 
         fetchMock.get('/auth/user-session', {
           headers: { 'content-type': 'application/json' },
-          body: user,
+          body: {
+            user,
+          },
         });
 
         const expected = [{ type: types.LOGIN_USER_SUCCESS, user }];
@@ -188,13 +186,14 @@ describe('user actions', () => {
       });
 
       it('on failure', () => {
-        const error = new Error('getUserSession failure');
-
         fetchMock.get('/auth/user-session', {
-          throws: error,
+          status: 400,
+          body: {
+            error: 'getUserSession failure.',
+          },
         });
 
-        const expected = [{ type: types.LOGOUT_USER_SUCCESS }];
+        const expected = [{ type: types.LOGOUT_USER }];
 
         const store = mockStore({});
 
@@ -204,18 +203,15 @@ describe('user actions', () => {
       });
     });
 
-    describe('logoutUser', () => {
+    describe('sendLogoutUser', () => {
       it('on success', () => {
         fetchMock.post('/auth/logout', {});
 
-        const expected = [
-          { type: types.LOGOUT_USER_REQUEST },
-          { type: types.LOGOUT_USER_SUCCESS },
-        ];
+        const expected = [{ type: types.LOGOUT_USER }];
 
         const store = mockStore({});
 
-        return store.dispatch(actions.logoutUser()).then(() => {
+        return store.dispatch(actions.sendLogoutUser()).then(() => {
           expect(store.getActions()).toEqual(expected);
         });
       });
