@@ -3,7 +3,6 @@ module.exports = function(err, req, res, next) {
     console.log(err.stack);
   }
 
-
   if (err.name === 'ValidationError') {
     err.status = 400;
   }
@@ -19,6 +18,7 @@ module.exports = function(err, req, res, next) {
     err.message = `Can't create record with duplicate: ${dupVal}`;
   }
 
-
-  res.status(err.status || 500).send(err.message);
+  res.status(err.status || 500).json({
+    error: err.message,
+  });
 };
