@@ -7,7 +7,7 @@ module.exports = function(err, req, res, next) {
     err.status = 400;
   }
 
-  if (err.name === 'BulkWriteError' && err.code === 11000) {
+  if (err.code === 11000) {
     // Trying to write a duplicate unique key. (username, email)
     err.status = 409;
     const dupVal = err.message.substring(

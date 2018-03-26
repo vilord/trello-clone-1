@@ -9,28 +9,6 @@ const addLoginUsername = require('../middleware/addLoginUsername');
 /**
  * Local Strategy
  */
-auth.post('/signup', async (req, res, next) => {
-  try {
-    const { name, email, password } = req.body;
-
-    const user = await User.create({
-      name,
-      email,
-      password,
-    });
-
-    // Login the user
-    req.login(user, function(err) {
-      if (err) throw err;
-      res.json({
-        user,
-      });
-    });
-  } catch (err) {
-    next(err);
-  }
-});
-
 auth.post(
   '/login',
   addLoginUsername,
