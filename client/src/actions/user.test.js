@@ -72,11 +72,11 @@ describe('user actions', () => {
       fetchMock.restore();
     });
 
-    describe('signUpUser', () => {
+    describe('signupUser', () => {
       const user = { username: 'johndoe' };
 
       it('on success', () => {
-        fetchMock.post('/auth/signup', {
+        fetchMock.post('/users', {
           headers: { 'content-type': 'application/json' },
           body: {
             user,
@@ -99,7 +99,7 @@ describe('user actions', () => {
         const res = {
           error: 'Signup failure.',
         };
-        fetchMock.post('/auth/signup', {
+        fetchMock.post('/users', {
           status: 409,
           body: res,
         });
@@ -212,6 +212,57 @@ describe('user actions', () => {
         const store = mockStore({});
 
         return store.dispatch(actions.sendLogoutUser()).then(() => {
+          expect(store.getActions()).toEqual(expected);
+        });
+      });
+    });
+
+    describe('setUserProfile', () => {
+      it('on success', () => {
+        const profile = {
+          name: 'John Doe',
+          username: 'johndoe',
+          initials: 'JD',
+          bio: 'Web Developer',
+          avatar: 'https://example.com/profile_pic',
+        };
+
+        fetchMock.put('/users/profile', {
+          headers: { 'content-type': 'application/json' },
+          body: {
+            profile,
+          },
+        });
+
+        const expected = [
+          { type: types.SET_USER_PROFILE_REQUEST },
+          { type: types.SET_USER_PROFILE_SUCCESS, profile },
+        ];
+
+        const store = mockStore({});
+
+        return store.dispatch(actions.setUserProfile(profile)).then(() => {
+          expect(store.getActions()).toEqual(expected);
+        });
+      });
+
+      it('on failure', () => {
+        const  error= 'setUserProfile failure.';
+
+        fetchMock.put('/users/profile', {
+          status: 400,
+          body: { error }
+        });
+
+        const expected = [
+          { type: types.SET_USER_PROFILE_REQUEST },
+          { type: types.SET_USER_PROFILE_FAILURE, error },
+        ];
+
+        const store = mockStore({});
+
+        const profile = { username: 'johndoe' };
+        return store.dispatch(actions.setUserProfile(profile)).then(() => {
           expect(store.getActions()).toEqual(expected);
         });
       });

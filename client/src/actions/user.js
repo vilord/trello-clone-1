@@ -60,7 +60,7 @@ export const signupUser = (newUser, history) => async dispatch => {
   dispatch(signupUserRequest());
 
   try {
-    const res = await fetch(`/auth/signup`, {
+    const res = await fetch(`/users`, {
       method: 'POST',
       credentials: 'include',
       headers: {
@@ -140,4 +140,28 @@ export const sendLogoutUser = () => async dispatch => {
   }
 
   dispatch(logoutUser());
+};
+
+export const setUserProfile = newProfile => async dispatch => {
+  dispatch(setUserProfileRequest());
+
+  try {
+    const res = await fetch('/users/profile', {
+      method: 'PUT',
+      credentials: 'include',
+      body: {
+        profile: newProfile,
+      },
+    });
+
+    const { profile, error } = await res.json();
+
+    if (res.status === 200 && profile) {
+      return dispatch(setUserProfileSuccess(profile));
+    }
+
+    return dispatch(setUserProfileFailure(error));
+  } catch (err) {
+    console.log(err);
+  }
 };

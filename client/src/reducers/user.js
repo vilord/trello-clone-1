@@ -1,4 +1,3 @@
-// import * as actions from '../actions/user';
 import * as types from '../constants/actionTypes';
 
 const userReducer = (state = {}, action) => {
@@ -11,7 +10,7 @@ const userReducer = (state = {}, action) => {
     case types.SET_USER_PROFILE_SUCCESS:
       return {
         ...state,
-        profile: action.profile,
+        ...action.profile,
       };
     default:
       return state;

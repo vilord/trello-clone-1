@@ -1,3 +1,6 @@
+/**
+ * USER Action Types
+ */
 export const SIGNUP_USER_REQUEST = 'SIGNUP_USER_REQUEST';
 export const SIGNUP_USER_FAILURE = 'SIGNUP_USER_FAILURE';
 
@@ -10,3 +13,16 @@ export const LOGOUT_USER = 'LOGOUT_USER';
 export const SET_USER_PROFILE_REQUEST = 'SET_USER_PROFILE_REQUEST';
 export const SET_USER_PROFILE_SUCCESS = 'SET_USER_PROFILE_SUCCESS';
 export const SET_USER_PROFILE_FAILURE = 'SET_USER_PROFILE_FAILURE';
+
+/**
+ * UI Action Types
+ */
+export const SHOW_MAIN_MENU = 'SHOW_MAIN_MENU';
+export const HIDE_MAIN_MENU = 'HIDE_MAIN_MENU';
+
+export const SHOW_BOARDS_MENU = 'SHOW_BOARDS_MENU';
+export const HIDE_BOARDS_MENU = 'HIDE_BOARDS_MENU';
+
+export const SHOW_USER_MENU = 'SHOW_USER_MENU';
+export const HIDE_USER_MENU = 'HIDE_USER_MENU';
+
