@@ -89,10 +89,16 @@ describe('user actions', () => {
         ];
 
         const store = mockStore({});
+        const historyMock = {
+          push: jest.fn(),
+        };
 
-        return store.dispatch(actions.signupUser(user)).then(() => {
-          expect(store.getActions()).toEqual(expected);
-        });
+        return store
+          .dispatch(actions.signupUser(user, historyMock))
+          .then(() => {
+            expect(historyMock.push.mock.calls[0][0]).toBe('/');
+            expect(store.getActions()).toEqual(expected);
+          });
       });
 
       it('on failure', () => {
@@ -132,8 +138,12 @@ describe('user actions', () => {
         ];
 
         const store = mockStore({});
+        const historyMock = {
+          push: jest.fn(),
+        };
 
-        return store.dispatch(actions.loginUser(user)).then(() => {
+        return store.dispatch(actions.loginUser(user, historyMock)).then(() => {
+          expect(historyMock.push.mock.calls[0][0]).toBe('/');
           expect(store.getActions()).toEqual(expected);
         });
       });
@@ -176,11 +186,18 @@ describe('user actions', () => {
           },
         });
 
-        const expected = [{ type: types.LOGIN_USER_SUCCESS, user }];
+        const expected = [
+          { type: types.LOGIN_USER_REQUEST },
+          { type: types.LOGIN_USER_SUCCESS, user },
+        ];
 
         const store = mockStore({ user });
+        const historyMock = {
+          push: jest.fn(),
+        };
 
-        return store.dispatch(actions.getUserSession()).then(() => {
+        return store.dispatch(actions.getUserSession(historyMock)).then(() => {
+          expect(historyMock.push.mock.calls[0][0]).toBe('/');
           expect(store.getActions()).toEqual(expected);
         });
       });
@@ -193,11 +210,18 @@ describe('user actions', () => {
           },
         });
 
-        const expected = [{ type: types.LOGOUT_USER }];
+        const expected = [
+          { type: types.LOGIN_USER_REQUEST },
+          { type: types.LOGOUT_USER },
+        ];
 
         const store = mockStore({});
+        const historyMock = {
+          push: jest.fn(),
+        };
 
-        return store.dispatch(actions.getUserSession()).then(() => {
+        return store.dispatch(actions.getUserSession(historyMock)).then(() => {
+          expect(historyMock.push.mock.calls[0][0]).toBe('/login');
           expect(store.getActions()).toEqual(expected);
         });
       });
@@ -247,11 +271,11 @@ describe('user actions', () => {
       });
 
       it('on failure', () => {
-        const  error= 'setUserProfile failure.';
+        const error = 'setUserProfile failure.';
 
         fetchMock.put('/users/profile', {
           status: 400,
-          body: { error }
+          body: { error },
         });
 
         const expected = [

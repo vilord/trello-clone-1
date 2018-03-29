@@ -7,6 +7,11 @@ const initState = {
 
 const uiReducer = (state = initState, action) => {
   switch (action.type) {
+    case types.SIGNUP_USER_FAILURE:
+      return {
+        ...state,
+        userExists: true,
+      };
     case types.LOGIN_USER_REQUEST:
       return {
         ...state,

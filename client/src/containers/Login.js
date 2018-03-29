@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import { loginUser } from '../actions/user';
 import isEmail from 'validator/lib/isEmail';
 
-class LogIn extends Component {
+class Login extends Component {
   constructor(props) {
     super(props);
 
@@ -23,7 +23,7 @@ class LogIn extends Component {
     if (isEmail(this.emailOrUsername.value)) {
       user.email = this.emailOrUsername.value;
     } else {
-      user.username = this.emailOrUsernamename.value;
+      user.username = this.emailOrUsername.value;
     }
 
     loginUser(user, history);
@@ -59,9 +59,9 @@ class LogIn extends Component {
 }
 
 const mapDispatchToProps = dispatch => ({
-  loginUser: user => {
-    dispatch(loginUser(user));
+  loginUser: (user, history) => {
+    dispatch(loginUser(user, history));
   },
 });
 
-export default connect(null, mapDispatchToProps)(LogIn);
+export default connect(null, mapDispatchToProps)(Login);

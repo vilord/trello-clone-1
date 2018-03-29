@@ -72,6 +72,7 @@ export const signupUser = (newUser, history) => async dispatch => {
     const { user, error } = await res.json();
 
     if (res.status === 200 && user) {
+      history.push('/');
       return dispatch(loginUserSuccess(user));
     }
 
@@ -97,6 +98,7 @@ export const loginUser = (userLoginInfo, history) => async dispatch => {
     const { user, error } = await res.json();
 
     if (res.status === 200 && user) {
+      history.push('/');
       return dispatch(loginUserSuccess(user));
     }
 
@@ -106,7 +108,9 @@ export const loginUser = (userLoginInfo, history) => async dispatch => {
   }
 };
 
-export const getUserSession = () => async dispatch => {
+export const getUserSession = history => async dispatch => {
+  dispatch(loginUserRequest());
+
   try {
     const res = await fetch('/auth/user-session', {
       credentials: 'include',
@@ -118,9 +122,11 @@ export const getUserSession = () => async dispatch => {
     const { user } = await res.json();
 
     if (res.status === 200 && user) {
+      history.push("/");
       return dispatch(loginUserSuccess(user));
     }
 
+    history.push("/login");
     return dispatch(logoutUser());
   } catch (err) {
     console.log(err);

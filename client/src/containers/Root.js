@@ -1,14 +1,23 @@
-import React from 'react';
-import { Provider } from 'react-redux';
-import { BrowserRouter as Router, Route } from 'react-router-dom';
-import App from './App';
+import React, { Component } from 'react';
+import { Route } from 'react-router-dom';
 
-const Root = ({ store }) => (
-  <Provider store={store}>
-    <Router>
-      <Route path="/" render={App} />
-    </Router>
-  </Provider>
-);
+import './Root.css';
+
+// Components
+import App from './App';
+import Signup from './Signup';
+import Login from './Login';
+
+class Root extends Component {
+  render() {
+    return (
+      <div className="Root">
+        <Route exact path="/" component={App} />
+        <Route path="/signup" component={Signup} />
+        <Route path="/login" component={Login} />
+      </div>
+    );
+  }
+}
 
 export default Root;

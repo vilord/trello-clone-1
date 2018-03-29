@@ -23,6 +23,20 @@ export const HIDE_MAIN_MENU = 'HIDE_MAIN_MENU';
 export const SHOW_BOARDS_MENU = 'SHOW_BOARDS_MENU';
 export const HIDE_BOARDS_MENU = 'HIDE_BOARDS_MENU';
 
+export const SHOW_SEARCH_MENU = 'SHOW_SEARCH_MENU';
+export const HIDE_SEARCH_MENU = 'HIDE_SEARCH_MENU';
+
+export const SHOW_CREATE_MENU = 'SHOW_CREATE_MENU';
+export const HIDE_CREATE_MENU = 'HIDE_CREATE_MENU';
+
 export const SHOW_USER_MENU = 'SHOW_USER_MENU';
 export const HIDE_USER_MENU = 'HIDE_USER_MENU';
+
+
+// Cards
+export const SHOW_CARD_DETAIL = 'SHOW_CARD_DETAIL ';
+export const HIDE_CARD_DETAIL = 'HIDE_CARD_DETAIL ';
+
+export const SHOW_LABEL_TEXT = 'SHOW_LABEL_TEXT';
+export const HIDE_LABEL_TEXT = 'HIDE_LABEL_TEXT';
 

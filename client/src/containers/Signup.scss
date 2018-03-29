@@ -1,0 +1,49 @@
+.Signup {
+  display: flex;
+  flex-direction: column;
+
+  width: 350px;
+
+  h1 {
+    font-size: 3em;
+
+    margin-bottom: 0;
+  }
+
+  p {
+    font-size: 16px;
+  }
+}
+
+.Signup-form {
+  margin-top: 20px;
+}
+
+.Signup-google {
+  font-family: 'Roboto', sans-serif;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  width: 100%;
+  height: 46px;
+  margin-top: 20px;
+
+  color: grey;
+  border: 2px solid lightgrey;
+  border-radius: 5px;
+
+  img {
+    height: 70%;
+    margin-right: 20px;
+  }
+
+  &:hover {
+    color: grey;
+  }
+
+  &:active {
+    background-color: lightgray;
+  }
+}

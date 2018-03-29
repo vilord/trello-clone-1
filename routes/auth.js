@@ -2,7 +2,6 @@ const express = require('express');
 const auth = express.Router();
 const passportLocal = require('../auth/local');
 const passportGoogle = require('../auth/google');
-const User = require('../models/user');
 const verifyUser = require('../middleware/verifyUser');
 const addLoginUsername = require('../middleware/addLoginUsername');
 
