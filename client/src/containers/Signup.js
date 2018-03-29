@@ -1,9 +1,11 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import { setUiError, resetUiError } from '../actions/ui';
 import { signupUser, loginUser } from '../actions/user';
 import { Link } from 'react-router-dom';
 import { Form, Button, Message } from 'semantic-ui-react';
 import isEmail from 'validator/lib/isEmail';
+import * as errors from '../constants/errors';
 
 import './Signup.css';
 import gLogo from '../assets/G-logo.svg';
@@ -16,10 +18,7 @@ class Signup extends Component {
       name: '',
       email: '',
       password: '',
-      emailError: false,
-      passwordError: false,
-      errorHeader: 'Header',
-      errorMessage: 'Message',
+      sent: false,
     };
 
     // Bidings
@@ -28,26 +27,21 @@ class Signup extends Component {
     this.handleSubmit = this.handleSubmit.bind(this);
   }
 
-  componentWillReceiveProps(nextProps) {
-    if (nextProps.userExists) {
-      this.setState({
-        errorHeader: 'User already exists!',
-        errorMessage:
-          'Email already in use by another account. You can use log in or use the forgot password page to reset your password.',
-      });
+  verifyEmail() {
+    const { email } = this.state;
+    const { emailError, setInvalidEmail, resetError } = this.props;
+    if (email && !isEmail(email)) {
+      setInvalidEmail();
+    } else if (emailError) {
+      resetError();
     }
   }
 
-  verifyEmail() {
-    const { email } = this.state;
-    this.setState({
-      emailError: !isEmail(email),
-      errorHeader: 'Verify your email!',
-      errorMessage: "That doesn't look like an email address…",
-    });
-  }
-
   handleChange(e, { name, value }) {
+    const { emailError, resetError } = this.props;
+    if (emailError) {
+      resetError();
+    }
     this.setState({ [name]: value });
   }
 
@@ -55,14 +49,10 @@ class Signup extends Component {
     event.preventDefault();
 
     const { name, email, password } = this.state;
+    const { setShortPasswordError } = this.props;
 
     if (password.length < 8) {
-      this.setState({
-        passwordError: true,
-        errorHeader: 'Password is to short!',
-        errorMessage: 'Your password must be at least 8 characters.',
-      });
-      return;
+      return setShortPasswordError();
     }
 
     const newUser = {
@@ -70,23 +60,24 @@ class Signup extends Component {
       email,
       password,
     };
+
     const { signupUser, history } = this.props;
     signupUser(newUser, history);
   }
 
   render() {
+    const { name, email, password } = this.state;
     const {
-      name,
-      email,
-      password,
+      header,
+      message,
       emailError,
       passwordError,
-      errorHeader,
-      errorMessage,
-    } = this.state;
-    const { userExists } = this.props;
+      userError,
+      sending,
+    } = this.props;
 
-    const signupDisabled = !name || !email || !password || emailError;
+    const signupDisabled =
+      !name || !email || !password || emailError || sending;
 
     const host =
       process.env.NODE_ENV === 'development' ? 'http://localhost:3001' : '';
@@ -102,7 +93,7 @@ class Signup extends Component {
           className="Signup-form"
           size="big"
           onSubmit={this.handleSubmit}
-          error={emailError || passwordError || userExists}
+          error={emailError || passwordError || userError}
         >
           <Form.Input
             autoFocus
@@ -121,7 +112,7 @@ class Signup extends Component {
             placeholder="e.g., hermioneg@example.com"
             onBlur={this.verifyEmail}
             onChange={this.handleChange}
-            error={emailError}
+            error={emailError || userError}
           />
           <Form.Input
             label="Password"
@@ -132,7 +123,11 @@ class Signup extends Component {
             onChange={this.handleChange}
             error={passwordError}
           />
-          <Message error header={errorHeader} content={errorMessage} />
+          <Message
+            error
+            header={header || 'Header'}
+            content={message || 'Message'}
+          />
           <Button
             className="Signup-button"
             size="large"
@@ -153,17 +148,27 @@ class Signup extends Component {
   }
 }
 
-const mapStateToProps = state => ({
-  userExists: state.ui.userExists,
-});
+const mapStateToProps = state => {
+  const { kind, header, message } = state.ui.error;
+  const emailError = kind === errors.invalidEmail.kind;
+  const passwordError = kind === errors.shortPassword.kind;
+  const userError = kind === errors.userExists.kind;
+  return {
+    header,
+    message,
+    emailError,
+    passwordError,
+    userError,
+    sending: state.ui.fetching.signup,
+  };
+};
 
 const mapDispatchToProps = dispatch => ({
-  signupUser: newUser => {
-    dispatch(signupUser(newUser));
-  },
-  loginUser: user => {
-    dispatch(loginUser(user));
-  },
+  setInvalidEmail: () => dispatch(setUiError(errors.invalidEmail)),
+  setShortPasswordError: () => dispatch(setUiError(errors.shortPassword)),
+  resetError: () => dispatch(resetUiError()),
+  signupUser: (newUser, history) => dispatch(signupUser(newUser, history)),
+  loginUser: user => dispatch(loginUser(user)),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(Signup);

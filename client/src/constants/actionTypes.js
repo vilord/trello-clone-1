@@ -2,7 +2,7 @@
  * USER Action Types
  */
 export const SIGNUP_USER_REQUEST = 'SIGNUP_USER_REQUEST';
-export const SIGNUP_USER_FAILURE = 'SIGNUP_USER_FAILURE';
+export const SIGNUP_USER_ANSWER = 'SIGNUP_USER_ANSWER';
 
 export const LOGIN_USER_REQUEST = 'LOGIN_USER_REQUEST';
 export const LOGIN_USER_SUCCESS = 'LOGIN_USER_SUCCESS';
@@ -17,6 +17,9 @@ export const SET_USER_PROFILE_FAILURE = 'SET_USER_PROFILE_FAILURE';
 /**
  * UI Action Types
  */
+export const SET_UI_ERROR = 'SET_UI_ERROR';
+export const RESET_UI_ERROR = 'RESET_UI_ERROR';
+
 export const SHOW_MAIN_MENU = 'SHOW_MAIN_MENU';
 export const HIDE_MAIN_MENU = 'HIDE_MAIN_MENU';
 

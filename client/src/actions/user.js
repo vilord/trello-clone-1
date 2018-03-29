@@ -1,4 +1,6 @@
 import * as types from '../constants/actionTypes';
+import * as errors from '../constants/errors';
+import { setUiError } from './ui';
 
 /*
  * Signup User
@@ -7,9 +9,8 @@ export const signupUserRequest = () => ({
   type: types.SIGNUP_USER_REQUEST,
 });
 
-export const signupUserFailure = error => ({
-  type: types.SIGNUP_USER_FAILURE,
-  error,
+export const signupUserAnswer = () => ({
+  type: types.SIGNUP_USER_ANSWER,
 });
 
 /**
@@ -70,14 +71,21 @@ export const signupUser = (newUser, history) => async dispatch => {
     });
 
     const { user, error } = await res.json();
+    dispatch(signupUserAnswer());
 
     if (res.status === 200 && user) {
       history.push('/');
       return dispatch(loginUserSuccess(user));
     }
 
-    return dispatch(signupUserFailure(error));
+    if (res.status === 409 && error) {
+      return dispatch(setUiError(errors.userExists))
+    }
+
+    return dispatch(setUiError(errors.serverError));
   } catch (err) {
+    dispatch(signupUserAnswer());
+    dispatch(setUiError(errors.serverError))
     console.log(err);
   }
 };

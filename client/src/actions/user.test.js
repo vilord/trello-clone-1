@@ -4,6 +4,7 @@ import fetchMock from 'fetch-mock';
 
 import * as actions from './user';
 import * as types from '../constants/actionTypes';
+import * as errors from '../constants/errors';
 
 const middleware = [thunk];
 const mockStore = configureStore(middleware);
@@ -23,9 +24,9 @@ describe('user actions', () => {
         expect(actions.signupUserRequest()).toEqual(expected);
       });
 
-      it('creates a SIGNUP_USER_FAILURE action', () => {
-        const expected = { type: types.SIGNUP_USER_FAILURE };
-        expect(actions.signupUserFailure()).toEqual(expected);
+      it('creates a SIGNUP_USER_ANSWER', () => {
+        const expected = { type: types.SIGNUP_USER_ANSWER };
+        expect(actions.signupUserAnswer()).toEqual(expected);
       });
     });
 
@@ -85,6 +86,7 @@ describe('user actions', () => {
 
         const expected = [
           { type: types.SIGNUP_USER_REQUEST },
+          { type: types.SIGNUP_USER_ANSWER },
           { type: types.LOGIN_USER_SUCCESS, user },
         ];
 
@@ -101,7 +103,7 @@ describe('user actions', () => {
           });
       });
 
-      it('on failure', () => {
+      it('failure -> user already exists', () => {
         const res = {
           error: 'Signup failure.',
         };
@@ -112,7 +114,30 @@ describe('user actions', () => {
 
         const expected = [
           { type: types.SIGNUP_USER_REQUEST },
-          { type: types.SIGNUP_USER_FAILURE, error: res.error },
+          { type: types.SIGNUP_USER_ANSWER },
+          { type: types.SET_UI_ERROR, error: errors.userExists },
+        ];
+
+        const store = mockStore({});
+
+        return store.dispatch(actions.signupUser(user)).then(() => {
+          expect(store.getActions()).toEqual(expected);
+        });
+      });
+
+      it('failure -> unknown server error', () => {
+        const res = {
+          error: 'Signup failure.',
+        };
+        fetchMock.post('/users', {
+          status: 500,
+          body: res,
+        });
+
+        const expected = [
+          { type: types.SIGNUP_USER_REQUEST },
+          { type: types.SIGNUP_USER_ANSWER },
+          { type: types.SET_UI_ERROR, error: errors.serverError },
         ];
 
         const store = mockStore({});

@@ -1,16 +1,37 @@
 import * as types from '../constants/actionTypes';
-
-const initState = {
-  // error: '',
-  isFetching: false,
-};
+import initState from './initUiState';
 
 const uiReducer = (state = initState, action) => {
   switch (action.type) {
-    case types.SIGNUP_USER_FAILURE:
+    case types.SET_UI_ERROR:
       return {
         ...state,
-        userExists: true,
+        error: action.error,
+      };
+    case types.RESET_UI_ERROR:
+      return {
+        ...state,
+        error: {
+          kind: '',
+          header: '',
+          message: '',
+        },
+      };
+    case types.SIGNUP_USER_REQUEST:
+      return {
+        ...state,
+        fetching: {
+          ...state.fetching,
+          signup: true,
+        },
+      };
+    case types.SIGNUP_USER_ANSWER:
+      return {
+        ...state,
+        fetching: {
+          ...state.fetching,
+          signup: false,
+        }
       };
     case types.LOGIN_USER_REQUEST:
       return {
