@@ -1,0 +1,138 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`UI Reducer Login User handles LOGIN_USER_FAILURE action 1`] = `
+Object {
+  "error": Object {
+    "header": "Something wrong!",
+    "kind": "wrongCredentials",
+    "message": "Incorrect email (username) or password.",
+  },
+  "fetching": Object {
+    "activity": false,
+    "login": false,
+    "signup": false,
+  },
+  "isFetching": true,
+}
+`;
+
+exports[`UI Reducer Login User handles LOGIN_USER_REQUEST action 1`] = `
+Object {
+  "error": Object {
+    "header": "",
+    "kind": "",
+    "message": "",
+  },
+  "fetching": Object {
+    "activity": false,
+    "login": true,
+    "signup": false,
+  },
+}
+`;
+
+exports[`UI Reducer Login User handles LOGIN_USER_SUCCESS action 1`] = `
+Object {
+  "error": Object {
+    "header": "",
+    "kind": "",
+    "message": "",
+  },
+  "fetching": Object {
+    "activity": false,
+    "login": false,
+    "signup": false,
+  },
+  "isFetching": true,
+}
+`;
+
+exports[`UI Reducer Logout User handles LOGOUT_USER action 1`] = `
+Object {
+  "error": Object {
+    "header": "",
+    "kind": "",
+    "message": "",
+  },
+  "fetching": Object {
+    "activity": false,
+    "login": false,
+    "signup": false,
+  },
+}
+`;
+
+exports[`UI Reducer Signup User handles SIGNUP_USER_FAILURE action 1`] = `
+Object {
+  "error": Object {
+    "header": "Unknown Server Error!",
+    "kind": "serverError",
+    "message": "Our server may be down. Please retry later!",
+  },
+  "fetching": Object {
+    "activity": false,
+    "login": false,
+    "signup": false,
+  },
+}
+`;
+
+exports[`UI Reducer Signup User handles SIGNUP_USER_REQUEST action 1`] = `
+Object {
+  "error": Object {
+    "header": "",
+    "kind": "",
+    "message": "",
+  },
+  "fetching": Object {
+    "activity": false,
+    "login": false,
+    "signup": true,
+  },
+}
+`;
+
+exports[`UI Reducer Signup User handles SIGNUP_USER_SUCCESS action 1`] = `
+Object {
+  "error": Object {
+    "header": "",
+    "kind": "",
+    "message": "",
+  },
+  "fetching": Object {
+    "activity": false,
+    "login": false,
+    "signup": false,
+  },
+}
+`;
+
+exports[`UI Reducer UI Errors RESET_UI_ERROR 1`] = `
+Object {
+  "error": Object {
+    "header": "",
+    "kind": "",
+    "message": "",
+  },
+  "fetching": Object {
+    "activity": false,
+    "login": false,
+    "signup": false,
+  },
+}
+`;
+
+exports[`UI Reducer UI Errors handles SET_UI_ERROR action 1`] = `
+Object {
+  "error": Object {
+    "header": "Verify email!",
+    "kind": "invalidEmail",
+    "message": "That doesn't look like an email address…",
+  },
+  "fetching": Object {
+    "activity": false,
+    "login": false,
+    "signup": false,
+  },
+}
+`;

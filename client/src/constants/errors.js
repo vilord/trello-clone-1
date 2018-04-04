@@ -16,6 +16,12 @@ export const userExists = {
   message: 'Email is already in use by another account.'
 };
 
+export const wrongCredentials ={
+  kind: 'wrongCredentials',
+  header: 'Something wrong!',
+  message: 'Incorrect email (username) or password.'
+};
+
 export const serverError = {
   kind: 'serverError',
   header: 'Unknown Server Error!',

@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { setUiError, resetUiError } from '../actions/ui';
-import { signupUser, loginUser } from '../actions/user';
+import { signupUser } from '../actions/user';
 import { Link } from 'react-router-dom';
 import { Form, Button, Message } from 'semantic-ui-react';
 import isEmail from 'validator/lib/isEmail';
@@ -11,14 +12,14 @@ import './Signup.css';
 import gLogo from '../assets/G-logo.svg';
 
 // TODO: Placeholder random fictional character API.
-class Signup extends Component {
+// TODO: Add sending Spinner.
+export class Signup extends Component {
   constructor(props) {
     super(props);
     this.state = {
       name: '',
       email: '',
       password: '',
-      sent: false,
     };
 
     // Bidings
@@ -29,17 +30,19 @@ class Signup extends Component {
 
   verifyEmail() {
     const { email } = this.state;
-    const { emailError, setInvalidEmail, resetError } = this.props;
+    const { emailError, setEmailError, resetError } = this.props;
     if (email && !isEmail(email)) {
-      setInvalidEmail();
+      setEmailError();
     } else if (emailError) {
       resetError();
     }
   }
 
   handleChange(e, { name, value }) {
-    const { emailError, resetError } = this.props;
-    if (emailError) {
+    const { resetError, emailError, passwordError } = this.props;
+    if (name === 'email' && emailError) {
+      resetError();
+    } else if (name === 'password' && passwordError) {
       resetError();
     }
     this.setState({ [name]: value });
@@ -47,21 +50,11 @@ class Signup extends Component {
 
   handleSubmit(event) {
     event.preventDefault();
-
-    const { name, email, password } = this.state;
-    const { setShortPasswordError } = this.props;
-
-    if (password.length < 8) {
-      return setShortPasswordError();
+    const { signupUser, history, setPasswordError } = this.props;
+    const newUser = { ...this.state };
+    if (newUser.password.length < 8) {
+      return setPasswordError();
     }
-
-    const newUser = {
-      name,
-      email,
-      password,
-    };
-
-    const { signupUser, history } = this.props;
     signupUser(newUser, history);
   }
 
@@ -103,6 +96,7 @@ class Signup extends Component {
             value={name}
             placeholder="e.g., Hermione Granger"
             onChange={this.handleChange}
+            disabled={sending}
           />
           <Form.Input
             label="Email"
@@ -113,6 +107,7 @@ class Signup extends Component {
             onBlur={this.verifyEmail}
             onChange={this.handleChange}
             error={emailError || userError}
+            disabled={sending}
           />
           <Form.Input
             label="Password"
@@ -122,6 +117,7 @@ class Signup extends Component {
             placeholder="e.g., ••••••••••"
             onChange={this.handleChange}
             error={passwordError}
+            disabled={sending}
           />
           <Message
             error
@@ -148,6 +144,28 @@ class Signup extends Component {
   }
 }
 
+Signup.propTypes = {
+  header: PropTypes.string,
+  message: PropTypes.string,
+  emailError: PropTypes.bool,
+  passwordError: PropTypes.bool,
+  userError: PropTypes.bool,
+  sending: PropTypes.bool,
+  setEmailError: PropTypes.func.isRequired,
+  setPasswordError: PropTypes.func.isRequired,
+  resetError: PropTypes.func.isRequired,
+  signupUser: PropTypes.func.isRequired,
+};
+
+Signup.defaultProps = {
+  header: '',
+  message: '',
+  emailError: false,
+  passwordError: false,
+  userError: false,
+  sending: false,
+};
+
 const mapStateToProps = state => {
   const { kind, header, message } = state.ui.error;
   const emailError = kind === errors.invalidEmail.kind;
@@ -164,11 +182,10 @@ const mapStateToProps = state => {
 };
 
 const mapDispatchToProps = dispatch => ({
-  setInvalidEmail: () => dispatch(setUiError(errors.invalidEmail)),
-  setShortPasswordError: () => dispatch(setUiError(errors.shortPassword)),
+  setEmailError: () => dispatch(setUiError(errors.invalidEmail)),
+  setPasswordError: () => dispatch(setUiError(errors.shortPassword)),
   resetError: () => dispatch(resetUiError()),
   signupUser: (newUser, history) => dispatch(signupUser(newUser, history)),
-  loginUser: user => dispatch(loginUser(user)),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(Signup);

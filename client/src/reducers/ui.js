@@ -25,23 +25,57 @@ const uiReducer = (state = initState, action) => {
           signup: true,
         },
       };
-    case types.SIGNUP_USER_ANSWER:
+    case types.SIGNUP_USER_SUCCESS:
       return {
         ...state,
         fetching: {
           ...state.fetching,
           signup: false,
-        }
+        },
+      };
+    case types.SIGNUP_USER_FAILURE:
+      return {
+        ...state,
+        error: action.error,
+        fetching: {
+          ...state.fetching,
+          signup: false,
+        },
       };
     case types.LOGIN_USER_REQUEST:
+    case types.GET_USER_SESSION_REQUEST:
       return {
         ...state,
-        isFetching: true,
+        fetching: {
+          ...state.fetching,
+          login: true,
+        },
       };
     case types.LOGIN_USER_SUCCESS:
+    case types.GET_USER_SESSION_SUCCESS:
       return {
         ...state,
-        isFetching: false,
+        fetching: {
+          ...state.fetching,
+          login: false,
+        },
+      };
+    case types.LOGIN_USER_FAILURE:
+      return {
+        ...state,
+        error: action.error,
+        fetching: {
+          ...state.fetching,
+          login: false,
+        },
+      };
+    case types.LOGOUT_USER:
+      return {
+        ...state,
+        fetching: {
+          ...state.fetching,
+          login: false,
+        },
       };
     default:
       return state;

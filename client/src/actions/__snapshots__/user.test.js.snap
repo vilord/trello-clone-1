@@ -1,0 +1,244 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`User Actions Action Creators Login User creates a LOGIN_USER_FAILURE action 1`] = `
+Object {
+  "error": Object {
+    "header": "Something wrong!",
+    "kind": "wrongCredentials",
+    "message": "Incorrect email (username) or password.",
+  },
+  "type": "LOGIN_USER_FAILURE",
+}
+`;
+
+exports[`User Actions Action Creators Login User creates a LOGIN_USER_REQUEST action 1`] = `
+Object {
+  "type": "LOGIN_USER_REQUEST",
+}
+`;
+
+exports[`User Actions Action Creators Login User creates a LOGIN_USER_SUCCESS action 1`] = `
+Object {
+  "type": "LOGIN_USER_SUCCESS",
+  "user": Object {
+    "email": "johndoe@example.com",
+    "username": "johndoe",
+  },
+}
+`;
+
+exports[`User Actions Action Creators Logout User creates a LOGOUT_USER action 1`] = `
+Object {
+  "type": "LOGOUT_USER",
+}
+`;
+
+exports[`User Actions Action Creators Set User Profile creates a SET_USER_PROFILE_FAILURE action 1`] = `
+Object {
+  "error": Object {
+    "header": "Unknown Server Error!",
+    "kind": "serverError",
+    "message": "Our server may be down. Please retry later!",
+  },
+  "type": "SET_USER_PROFILE_FAILURE",
+}
+`;
+
+exports[`User Actions Action Creators Set User Profile creates a SET_USER_PROFILE_REQUEST action 1`] = `
+Object {
+  "type": "SET_USER_PROFILE_REQUEST",
+}
+`;
+
+exports[`User Actions Action Creators Set User Profile creates a SET_USER_PROFILE_SUCCESS action 1`] = `
+Object {
+  "profile": Object {
+    "initials": "JD",
+    "name": "John Doe",
+  },
+  "type": "SET_USER_PROFILE_SUCCESS",
+}
+`;
+
+exports[`User Actions Action Creators Signup User creates a SIGNUP_USER_FAILURE 1`] = `
+Object {
+  "error": Object {
+    "header": "Unknown Server Error!",
+    "kind": "serverError",
+    "message": "Our server may be down. Please retry later!",
+  },
+  "type": "SIGNUP_USER_FAILURE",
+}
+`;
+
+exports[`User Actions Action Creators Signup User creates a SIGNUP_USER_REQUEST 1`] = `
+Object {
+  "type": "SIGNUP_USER_REQUEST",
+}
+`;
+
+exports[`User Actions Action Creators Signup User creates a SIGNUP_USER_SUCCESS 1`] = `
+Object {
+  "type": "SIGNUP_USER_SUCCESS",
+  "user": Object {
+    "email": "johndoe@example.com",
+    "username": "johndoe",
+  },
+}
+`;
+
+exports[`User Actions Async Actions getUserSession on failure 1`] = `"/login"`;
+
+exports[`User Actions Async Actions getUserSession on failure 2`] = `
+Array [
+  Object {
+    "type": "GET_USER_SESSION_REQUEST",
+  },
+  Object {
+    "type": "LOGOUT_USER",
+  },
+]
+`;
+
+exports[`User Actions Async Actions getUserSession on success 1`] = `"/"`;
+
+exports[`User Actions Async Actions getUserSession on success 2`] = `
+Array [
+  Object {
+    "type": "GET_USER_SESSION_REQUEST",
+  },
+  Object {
+    "type": "GET_USER_SESSION_SUCCESS",
+    "user": Object {
+      "email": "johndoe@example.com",
+      "name": "johndoe",
+    },
+  },
+]
+`;
+
+exports[`User Actions Async Actions loginUser on failure 1`] = `
+Array [
+  Object {
+    "type": "LOGIN_USER_REQUEST",
+  },
+  Object {
+    "error": Object {
+      "header": "Something wrong!",
+      "kind": "wrongCredentials",
+      "message": "Incorrect email (username) or password.",
+    },
+    "type": "LOGIN_USER_FAILURE",
+  },
+]
+`;
+
+exports[`User Actions Async Actions loginUser on success 1`] = `"/"`;
+
+exports[`User Actions Async Actions loginUser on success 2`] = `
+Array [
+  Object {
+    "type": "LOGIN_USER_REQUEST",
+  },
+  Object {
+    "type": "LOGIN_USER_SUCCESS",
+    "user": Object {
+      "email": "johndoe@example.com",
+      "password": "123abc",
+      "username": "johndoe",
+    },
+  },
+]
+`;
+
+exports[`User Actions Async Actions sendLogoutUser on success 1`] = `
+Array [
+  Object {
+    "type": "LOGOUT_USER",
+  },
+]
+`;
+
+exports[`User Actions Async Actions setUserProfile on failure 1`] = `
+Array [
+  Object {
+    "type": "SET_USER_PROFILE_REQUEST",
+  },
+  Object {
+    "error": Object {
+      "header": "Unknown Server Error!",
+      "kind": "serverError",
+      "message": "Our server may be down. Please retry later!",
+    },
+    "type": "SET_USER_PROFILE_FAILURE",
+  },
+]
+`;
+
+exports[`User Actions Async Actions setUserProfile on success 1`] = `
+Array [
+  Object {
+    "type": "SET_USER_PROFILE_REQUEST",
+  },
+  Object {
+    "profile": Object {
+      "avatar": "https://example.com/profile_pic",
+      "bio": "Web Developer",
+      "initials": "JD",
+      "name": "John Doe",
+      "username": "johndoe",
+    },
+    "type": "SET_USER_PROFILE_SUCCESS",
+  },
+]
+`;
+
+exports[`User Actions Async Actions signupUser failure -> unknown server error 1`] = `
+Array [
+  Object {
+    "type": "SIGNUP_USER_REQUEST",
+  },
+  Object {
+    "error": Object {
+      "header": "Unknown Server Error!",
+      "kind": "serverError",
+      "message": "Our server may be down. Please retry later!",
+    },
+    "type": "SIGNUP_USER_FAILURE",
+  },
+]
+`;
+
+exports[`User Actions Async Actions signupUser failure -> user already exists 1`] = `
+Array [
+  Object {
+    "type": "SIGNUP_USER_REQUEST",
+  },
+  Object {
+    "error": Object {
+      "header": "User already exists!",
+      "kind": "userExists",
+      "message": "Email is already in use by another account.",
+    },
+    "type": "SIGNUP_USER_FAILURE",
+  },
+]
+`;
+
+exports[`User Actions Async Actions signupUser on success 1`] = `"/"`;
+
+exports[`User Actions Async Actions signupUser on success 2`] = `
+Array [
+  Object {
+    "type": "SIGNUP_USER_REQUEST",
+  },
+  Object {
+    "type": "SIGNUP_USER_SUCCESS",
+    "user": Object {
+      "email": "johndoe@example.com",
+      "name": "John Doe",
+      "password": "123abc",
+    },
+  },
+]
+`;

@@ -1,0 +1,100 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Login Component matches snapshot 1`] = `
+<div
+  className="Login"
+>
+  <h1>
+    Login in to Trello
+  </h1>
+  <p>
+    or 
+    <Link
+      replace={false}
+      to="/signup"
+    >
+      create an account
+    </Link>
+  </p>
+  <Form
+    as="form"
+    className="Login-form"
+    error={false}
+    onSubmit={[Function]}
+    size="big"
+  >
+    <FormInput
+      as={[Function]}
+      autoFocus={true}
+      control={[Function]}
+      disabled={false}
+      error={false}
+      label={
+        <label
+          className="emailLabel"
+        >
+          Email 
+          <span>
+            (or username)
+          </span>
+        </label>
+      }
+      name="email"
+      onChange={[Function]}
+      placeholder="e.g., hermioneg@example.com"
+      type="text"
+      value=""
+    />
+    <FormInput
+      as={[Function]}
+      control={[Function]}
+      disabled={false}
+      error={false}
+      label="Password"
+      name="password"
+      onChange={[Function]}
+      placeholder="e.g., ••••••••••"
+      type="password"
+      value=""
+    />
+    <Message
+      content="Message"
+      error={true}
+      header="Header"
+    />
+    <Button
+      as="button"
+      className="Signup-button"
+      disabled={true}
+      fluid={true}
+      primary={false}
+      size="large"
+      type="submit"
+    >
+      Log In
+    </Button>
+  </Form>
+  <a
+    className="Login-google"
+    href="/auth/google"
+  >
+    <img
+      alt=""
+      src="G-logo.svg"
+    />
+    <p>
+      Log in with Google
+    </p>
+  </a>
+  <Dimmer
+    active={false}
+    inverted={true}
+  >
+    <Loader
+      content="Loading"
+      inverted={true}
+      size="large"
+    />
+  </Dimmer>
+</div>
+`;

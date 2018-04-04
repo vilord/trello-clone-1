@@ -3,14 +3,14 @@ const auth = express.Router();
 const passportLocal = require('../auth/local');
 const passportGoogle = require('../auth/google');
 const verifyUser = require('../middleware/verifyUser');
-const addLoginUsername = require('../middleware/addLoginUsername');
+const addLoginEmail = require('../middleware/addLoginEmail');
 
 /**
  * Local Strategy
  */
 auth.post(
   '/login',
-  addLoginUsername,
+  addLoginEmail,
   passportLocal.authenticate('local'),
   (req, res) => {
     res.json({

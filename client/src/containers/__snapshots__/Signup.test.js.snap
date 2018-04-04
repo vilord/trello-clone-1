@@ -1,0 +1,185 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Signup Component matches snapshot 1`] = `
+<div
+  className="Signup"
+>
+  <h1>
+    Create an Account
+  </h1>
+  <p>
+    or 
+    <Link
+      replace={false}
+      to="/login"
+    >
+      sign in to your account
+    </Link>
+  </p>
+  <Form
+    as="form"
+    className="Signup-form"
+    error={false}
+    onSubmit={[Function]}
+    size="big"
+  >
+    <FormInput
+      as={[Function]}
+      autoFocus={true}
+      control={[Function]}
+      disabled={false}
+      label="Name"
+      name="name"
+      onChange={[Function]}
+      placeholder="e.g., Hermione Granger"
+      type="text"
+      value=""
+    />
+    <FormInput
+      as={[Function]}
+      control={[Function]}
+      disabled={false}
+      error={false}
+      label="Email"
+      name="email"
+      onBlur={[Function]}
+      onChange={[Function]}
+      placeholder="e.g., hermioneg@example.com"
+      type="email"
+      value=""
+    />
+    <FormInput
+      as={[Function]}
+      control={[Function]}
+      disabled={false}
+      error={false}
+      label="Password"
+      name="password"
+      onChange={[Function]}
+      placeholder="e.g., ••••••••••"
+      type="password"
+      value=""
+    />
+    <Message
+      content="Message"
+      error={true}
+      header="Header"
+    />
+    <Button
+      as="button"
+      className="Signup-button"
+      disabled={true}
+      fluid={true}
+      primary={false}
+      size="large"
+      type="submit"
+    >
+      Create New Account
+    </Button>
+  </Form>
+  <a
+    className="Signup-google"
+    href="/auth/google"
+  >
+    <img
+      alt=""
+      src="G-logo.svg"
+    />
+    <p>
+      Sign up with Google
+    </p>
+  </a>
+</div>
+`;
+
+exports[`Signup Component sets the values of inputs based on state (controlled component) 1`] = `
+<div
+  className="Signup"
+>
+  <h1>
+    Create an Account
+  </h1>
+  <p>
+    or 
+    <Link
+      replace={false}
+      to="/login"
+    >
+      sign in to your account
+    </Link>
+  </p>
+  <Form
+    as="form"
+    className="Signup-form"
+    error={false}
+    onSubmit={[Function]}
+    size="big"
+  >
+    <FormInput
+      as={[Function]}
+      autoFocus={true}
+      control={[Function]}
+      disabled={false}
+      label="Name"
+      name="name"
+      onChange={[Function]}
+      placeholder="e.g., Hermione Granger"
+      type="text"
+      value="John Doe"
+    />
+    <FormInput
+      as={[Function]}
+      control={[Function]}
+      disabled={false}
+      error={false}
+      label="Email"
+      name="email"
+      onBlur={[Function]}
+      onChange={[Function]}
+      placeholder="e.g., hermioneg@example.com"
+      type="email"
+      value="johndoe@example.com"
+    />
+    <FormInput
+      as={[Function]}
+      control={[Function]}
+      disabled={false}
+      error={false}
+      label="Password"
+      name="password"
+      onChange={[Function]}
+      placeholder="e.g., ••••••••••"
+      type="password"
+      value="1234abcd"
+    />
+    <Message
+      content="Message"
+      error={true}
+      header="Header"
+    />
+    <Button
+      as="button"
+      className="Signup-button"
+      disabled={false}
+      fluid={true}
+      primary={true}
+      size="large"
+      type="submit"
+    >
+      Create New Account
+    </Button>
+  </Form>
+  <a
+    className="Signup-google"
+    href="/auth/google"
+  >
+    <img
+      alt=""
+      src="G-logo.svg"
+    />
+    <p>
+      Sign up with Google
+    </p>
+  </a>
+</div>
+`;

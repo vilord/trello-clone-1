@@ -1,7 +1,14 @@
 import * as types from '../constants/actionTypes';
+import initUserState from './initUserState';
 
-const userReducer = (state = {}, action) => {
+const userReducer = (state = initUserState, action) => {
   switch (action.type) {
+    case types.SIGNUP_USER_SUCCESS:
+      return {
+        ...state,
+        ...action.user,
+      };
+    case types.GET_USER_SESSION_SUCCESS:
     case types.LOGIN_USER_SUCCESS:
       return {
         ...state,

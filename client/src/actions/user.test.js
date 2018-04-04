@@ -9,24 +9,38 @@ import * as errors from '../constants/errors';
 const middleware = [thunk];
 const mockStore = configureStore(middleware);
 
-describe('user actions', () => {
-  describe('Action Creators', () => {
-    describe('Logout User', () => {
-      it('creates a LOGOUT_USER action', () => {
-        const expected = { type: types.LOGOUT_USER };
-        expect(actions.logoutUser()).toEqual(expected);
-      });
-    });
+describe('User Actions', () => {
+  beforeAll(() => {
+    console.error = err => {
+      throw new Error(err);
+    };
+  });
 
+  describe('Action Creators', () => {
     describe('Signup User', () => {
       it('creates a SIGNUP_USER_REQUEST', () => {
         const expected = { type: types.SIGNUP_USER_REQUEST };
         expect(actions.signupUserRequest()).toEqual(expected);
+        expect(actions.signupUserRequest()).toMatchSnapshot();
       });
 
-      it('creates a SIGNUP_USER_ANSWER', () => {
-        const expected = { type: types.SIGNUP_USER_ANSWER };
-        expect(actions.signupUserAnswer()).toEqual(expected);
+      it('creates a SIGNUP_USER_SUCCESS', () => {
+        const user = {
+          username: 'johndoe',
+          email: 'johndoe@example.com',
+        };
+        const expected = { type: types.SIGNUP_USER_SUCCESS, user };
+        expect(actions.signupUserSuccess(user)).toEqual(expected);
+        expect(actions.signupUserSuccess(user)).toMatchSnapshot();
+      });
+
+      it('creates a SIGNUP_USER_FAILURE', () => {
+        const expected = {
+          type: types.SIGNUP_USER_FAILURE,
+          error: errors.serverError,
+        };
+        expect(actions.signupUserFailure(errors.serverError)).toEqual(expected);
+        expect(actions.signupUserFailure(errors.serverError)).toMatchSnapshot();
       });
     });
 
@@ -34,18 +48,35 @@ describe('user actions', () => {
       it('creates a LOGIN_USER_REQUEST action', () => {
         const expected = { type: types.LOGIN_USER_REQUEST };
         expect(actions.loginUserRequest()).toEqual(expected);
+        expect(actions.loginUserRequest()).toMatchSnapshot();
       });
 
       it('creates a LOGIN_USER_SUCCESS action', () => {
-        const user = { username: 'juanito' };
+        const user = {
+          username: 'johndoe',
+          email: 'johndoe@example.com',
+        };
         const expected = { type: types.LOGIN_USER_SUCCESS, user };
         expect(actions.loginUserSuccess(user)).toEqual(expected);
+        expect(actions.loginUserSuccess(user)).toMatchSnapshot();
       });
 
       it('creates a LOGIN_USER_FAILURE action', () => {
-        const error = new Error('Login user failure');
-        const expected = { type: types.LOGIN_USER_FAILURE, error };
+        const error = errors.wrongCredentials;
+        const expected = {
+          type: types.LOGIN_USER_FAILURE,
+          error,
+        };
         expect(actions.loginUserFailure(error)).toEqual(expected);
+        expect(actions.loginUserFailure(error)).toMatchSnapshot();
+      });
+    });
+
+    describe('Logout User', () => {
+      it('creates a LOGOUT_USER action', () => {
+        const expected = { type: types.LOGOUT_USER };
+        expect(actions.logoutUser()).toEqual(expected);
+        expect(actions.logoutUser()).toMatchSnapshot();
       });
     });
 
@@ -53,16 +84,30 @@ describe('user actions', () => {
       it('creates a SET_USER_PROFILE_REQUEST action', () => {
         const expected = { type: types.SET_USER_PROFILE_REQUEST };
         expect(actions.setUserProfileRequest()).toEqual(expected);
+        expect(actions.setUserProfileRequest()).toMatchSnapshot();
       });
 
       it('creates a SET_USER_PROFILE_SUCCESS action', () => {
-        const expected = { type: types.SET_USER_PROFILE_SUCCESS };
-        expect(actions.setUserProfileSuccess()).toEqual(expected);
+        const profile = {
+          name: 'John Doe',
+          initials: 'JD',
+        };
+        const expected = {
+          type: types.SET_USER_PROFILE_SUCCESS,
+          profile,
+        };
+        expect(actions.setUserProfileSuccess(profile)).toEqual(expected);
+        expect(actions.setUserProfileSuccess(profile)).toMatchSnapshot();
       });
 
       it('creates a SET_USER_PROFILE_FAILURE action', () => {
-        const expected = { type: types.SET_USER_PROFILE_FAILURE };
-        expect(actions.setUserProfileFailure()).toEqual(expected);
+        const error = errors.serverError;
+        const expected = {
+          type: types.SET_USER_PROFILE_FAILURE,
+          error,
+        };
+        expect(actions.setUserProfileFailure(error)).toEqual(expected);
+        expect(actions.setUserProfileFailure(error)).toMatchSnapshot();
       });
     });
   });
@@ -74,7 +119,11 @@ describe('user actions', () => {
     });
 
     describe('signupUser', () => {
-      const user = { username: 'johndoe' };
+      const user = {
+        name: 'John Doe',
+        email: 'johndoe@example.com',
+        password: '123abc',
+      };
 
       it('on success', () => {
         fetchMock.post('/users', {
@@ -86,8 +135,7 @@ describe('user actions', () => {
 
         const expected = [
           { type: types.SIGNUP_USER_REQUEST },
-          { type: types.SIGNUP_USER_ANSWER },
-          { type: types.LOGIN_USER_SUCCESS, user },
+          { type: types.SIGNUP_USER_SUCCESS, user },
         ];
 
         const store = mockStore({});
@@ -100,56 +148,60 @@ describe('user actions', () => {
           .then(() => {
             expect(historyMock.push.mock.calls[0][0]).toBe('/');
             expect(store.getActions()).toEqual(expected);
+            expect(historyMock.push.mock.calls[0][0]).toMatchSnapshot();
+            expect(store.getActions()).toMatchSnapshot();
           });
       });
 
       it('failure -> user already exists', () => {
-        const res = {
-          error: 'Signup failure.',
-        };
         fetchMock.post('/users', {
           status: 409,
-          body: res,
+          body: {
+            error: 'Signup failure.',
+          },
         });
 
         const expected = [
           { type: types.SIGNUP_USER_REQUEST },
-          { type: types.SIGNUP_USER_ANSWER },
-          { type: types.SET_UI_ERROR, error: errors.userExists },
+          { type: types.SIGNUP_USER_FAILURE, error: errors.userExists },
         ];
 
         const store = mockStore({});
 
         return store.dispatch(actions.signupUser(user)).then(() => {
           expect(store.getActions()).toEqual(expected);
+          expect(store.getActions()).toMatchSnapshot();
         });
       });
 
       it('failure -> unknown server error', () => {
-        const res = {
-          error: 'Signup failure.',
-        };
         fetchMock.post('/users', {
           status: 500,
-          body: res,
+          body: {
+            error: 'Signup failure.',
+          },
         });
 
         const expected = [
           { type: types.SIGNUP_USER_REQUEST },
-          { type: types.SIGNUP_USER_ANSWER },
-          { type: types.SET_UI_ERROR, error: errors.serverError },
+          { type: types.SIGNUP_USER_FAILURE, error: errors.serverError },
         ];
 
         const store = mockStore({});
 
         return store.dispatch(actions.signupUser(user)).then(() => {
           expect(store.getActions()).toEqual(expected);
+          expect(store.getActions()).toMatchSnapshot();
         });
       });
     });
 
     describe('loginUser', () => {
-      const user = { username: 'johndoe' };
+      const user = {
+        username: 'johndoe',
+        email: 'johndoe@example.com',
+        password: '123abc',
+      };
 
       it('on success', () => {
         fetchMock.post('/auth/login', {
@@ -170,28 +222,29 @@ describe('user actions', () => {
         return store.dispatch(actions.loginUser(user, historyMock)).then(() => {
           expect(historyMock.push.mock.calls[0][0]).toBe('/');
           expect(store.getActions()).toEqual(expected);
+          expect(historyMock.push.mock.calls[0][0]).toMatchSnapshot();
+          expect(store.getActions()).toMatchSnapshot();
         });
       });
 
       it('on failure', () => {
-        const res = {
-          error: 'loginUser failure.',
-        };
-
         fetchMock.post('/auth/login', {
           status: 400,
-          body: res,
+          body: {
+            error: 'loginUser failure.',
+          },
         });
 
         const expected = [
           { type: types.LOGIN_USER_REQUEST },
-          { type: types.LOGIN_USER_FAILURE, error: res.error },
+          { type: types.LOGIN_USER_FAILURE, error: errors.wrongCredentials },
         ];
 
         const store = mockStore({});
 
         return store.dispatch(actions.loginUser(user)).then(() => {
           expect(store.getActions()).toEqual(expected);
+          expect(store.getActions()).toMatchSnapshot();
         });
       });
     });
@@ -199,9 +252,8 @@ describe('user actions', () => {
     describe('getUserSession', () => {
       it('on success', () => {
         const user = {
-          name: 'John Doe',
+          name: 'johndoe',
           email: 'johndoe@example.com',
-          password: '0notJohnDoe',
         };
 
         fetchMock.get('/auth/user-session', {
@@ -212,8 +264,8 @@ describe('user actions', () => {
         });
 
         const expected = [
-          { type: types.LOGIN_USER_REQUEST },
-          { type: types.LOGIN_USER_SUCCESS, user },
+          { type: types.GET_USER_SESSION_REQUEST },
+          { type: types.GET_USER_SESSION_SUCCESS, user },
         ];
 
         const store = mockStore({ user });
@@ -224,6 +276,8 @@ describe('user actions', () => {
         return store.dispatch(actions.getUserSession(historyMock)).then(() => {
           expect(historyMock.push.mock.calls[0][0]).toBe('/');
           expect(store.getActions()).toEqual(expected);
+          expect(historyMock.push.mock.calls[0][0]).toMatchSnapshot();
+          expect(store.getActions()).toMatchSnapshot();
         });
       });
 
@@ -236,7 +290,7 @@ describe('user actions', () => {
         });
 
         const expected = [
-          { type: types.LOGIN_USER_REQUEST },
+          { type: types.GET_USER_SESSION_REQUEST },
           { type: types.LOGOUT_USER },
         ];
 
@@ -248,6 +302,8 @@ describe('user actions', () => {
         return store.dispatch(actions.getUserSession(historyMock)).then(() => {
           expect(historyMock.push.mock.calls[0][0]).toBe('/login');
           expect(store.getActions()).toEqual(expected);
+          expect(historyMock.push.mock.calls[0][0]).toMatchSnapshot();
+          expect(store.getActions()).toMatchSnapshot();
         });
       });
     });
@@ -262,6 +318,7 @@ describe('user actions', () => {
 
         return store.dispatch(actions.sendLogoutUser()).then(() => {
           expect(store.getActions()).toEqual(expected);
+          expect(store.getActions()).toMatchSnapshot();
         });
       });
     });
@@ -292,20 +349,21 @@ describe('user actions', () => {
 
         return store.dispatch(actions.setUserProfile(profile)).then(() => {
           expect(store.getActions()).toEqual(expected);
+          expect(store.getActions()).toMatchSnapshot();
         });
       });
 
       it('on failure', () => {
-        const error = 'setUserProfile failure.';
-
         fetchMock.put('/users/profile', {
           status: 400,
-          body: { error },
+          body: {
+            error: errors.serverError,
+          },
         });
 
         const expected = [
           { type: types.SET_USER_PROFILE_REQUEST },
-          { type: types.SET_USER_PROFILE_FAILURE, error },
+          { type: types.SET_USER_PROFILE_FAILURE, error: errors.serverError },
         ];
 
         const store = mockStore({});
@@ -313,6 +371,7 @@ describe('user actions', () => {
         const profile = { username: 'johndoe' };
         return store.dispatch(actions.setUserProfile(profile)).then(() => {
           expect(store.getActions()).toEqual(expected);
+          expect(store.getActions()).toMatchSnapshot();
         });
       });
     });

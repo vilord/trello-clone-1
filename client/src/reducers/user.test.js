@@ -1,12 +1,23 @@
 import userReducer from './user';
+import initUserState from './initUserState';
 
 import * as actions from '../actions/user';
 // import * as types from '../constants/actionTypes';
 
 describe('User Reducer', () => {
-  const initState = {};
+  beforeAll(() => {
+    console.error = err => {
+      throw new Error(err);
+    };
+  });
 
-  it('returns the initial state', () => {
+  let initState;
+
+  beforeEach(() => {
+    initState = { ...initUserState };
+  });
+
+  it('returns init state when state arg is undefined', () => {
     expect(userReducer(undefined, {})).toEqual(initState);
   });
 
@@ -19,48 +30,52 @@ describe('User Reducer', () => {
       avatar: 'http://example.com/prfile_pic',
     };
 
-    const nextState = { ...user };
+    const nextState = {
+      ...initState,
+      ...user,
+    };
 
     expect(userReducer(initState, actions.loginUserSuccess(user))).toEqual(
       nextState,
     );
+    expect(
+      userReducer(initState, actions.loginUserSuccess(user)),
+    ).toMatchSnapshot();
   });
 
   it('handles LOGOUT_USER', () => {
-    const state = {
+    const currState = {
       name: 'John Doe',
       username: 'johndoe',
-      initials: 'JD',
-      bio: 'Web Developer',
-      avatar: 'http://example.com/prfile_pic',
     };
 
-    expect(userReducer(state, actions.logoutUser())).toEqual(initState);
+    expect(userReducer(currState, actions.logoutUser())).toEqual(initState);
+    expect(userReducer(currState, actions.logoutUser())).toMatchSnapshot();
   });
 
   it('handles SET_USER_PROFILE_SUCCESS', () => {
-    const state = {
+    initState = {
+      ...initState,
       name: 'John Doe',
       username: 'johndoe',
-      initials: 'JD',
-      bio: 'Web Developer',
-      avatar: 'http://example.com/prfile_pic',
     };
 
     const profile = {
       name: 'John Doe Simpson',
       username: 'johndoes',
       initials: 'JDS',
-      bio: 'Web Developer, Comedian',
     };
 
     const nextState = {
-      ...state,
+      ...initState,
       ...profile,
     };
 
-    expect(userReducer(state, actions.setUserProfileSuccess(profile))).toEqual(
-      nextState,
-    );
+    expect(
+      userReducer(initState, actions.setUserProfileSuccess(profile)),
+    ).toEqual(nextState);
+    expect(
+      userReducer(initState, actions.setUserProfileSuccess(profile)),
+    ).toMatchSnapshot();
   });
 });

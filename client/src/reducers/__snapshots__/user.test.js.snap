@@ -1,0 +1,45 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`User Reducer handles LOGIN_USER_SUCCESS 1`] = `
+Object {
+  "activity": Array [],
+  "assigned_cards": Array [],
+  "avatar": "http://example.com/prfile_pic",
+  "bio": "Web Developer",
+  "boards": Array [],
+  "email": "",
+  "initials": "JD",
+  "name": "John Doe",
+  "teams": Array [],
+  "username": "johndoe",
+}
+`;
+
+exports[`User Reducer handles LOGOUT_USER 1`] = `
+Object {
+  "activity": Array [],
+  "assigned_cards": Array [],
+  "avatar": "",
+  "bio": "",
+  "boards": Array [],
+  "email": "",
+  "name": "",
+  "teams": Array [],
+  "username": "",
+}
+`;
+
+exports[`User Reducer handles SET_USER_PROFILE_SUCCESS 1`] = `
+Object {
+  "activity": Array [],
+  "assigned_cards": Array [],
+  "avatar": "",
+  "bio": "",
+  "boards": Array [],
+  "email": "",
+  "initials": "JDS",
+  "name": "John Doe Simpson",
+  "teams": Array [],
+  "username": "johndoes",
+}
+`;

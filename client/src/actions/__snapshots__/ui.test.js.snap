@@ -1,0 +1,42 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`ui actions Action Creators Boards Menu creates a HIDE_BOARDS_MENU action 1`] = `
+Object {
+  "type": "HIDE_BOARDS_MENU",
+}
+`;
+
+exports[`ui actions Action Creators Boards Menu creates a SHOW_BOARDS_MENU action 1`] = `
+Object {
+  "type": "SHOW_BOARDS_MENU",
+}
+`;
+
+exports[`ui actions Action Creators Main Menu creates a HIDE_MAIN_MENU action 1`] = `
+Object {
+  "type": "HIDE_MAIN_MENU",
+}
+`;
+
+exports[`ui actions Action Creators Main Menu creates a SHOW_MAIN_MENU action 1`] = `
+Object {
+  "type": "SHOW_MAIN_MENU",
+}
+`;
+
+exports[`ui actions Action Creators UI Errors creates a RESET_UI_ERROR action 1`] = `
+Object {
+  "type": "RESET_UI_ERROR",
+}
+`;
+
+exports[`ui actions Action Creators UI Errors creates a SET_UI_ERROR action 1`] = `
+Object {
+  "error": Object {
+    "header": "Verify email!",
+    "kind": "invalidEmail",
+    "message": "That doesn't look like an email address…",
+  },
+  "type": "SET_UI_ERROR",
+}
+`;
