@@ -22,17 +22,17 @@ describe('ui actions', () => {
       });
     });
 
-    describe('Board Menu', () => {
-      it('creates a SHOW_BOARD_MENU action', () => {
-        const expected = { type: types.SHOW_BOARD_MENU };
-        expect(actions.showBoardMenu()).toEqual(expected);
-        expect(actions.showBoardMenu()).toMatchSnapshot();
+    describe('Boards Explorer', () => {
+      it('creates a SHOW_BOARDS_EXPLORER action', () => {
+        const expected = { type: types.SHOW_BOARDS_EXPLORER };
+        expect(actions.showBoardsExplorer()).toEqual(expected);
+        expect(actions.showBoardsExplorer()).toMatchSnapshot();
       });
 
-      it('creates a HIDE_BOARD_MENU action', () => {
-        const expected = { type: types.HIDE_BOARD_MENU };
-        expect(actions.hideBoardMenu()).toEqual(expected);
-        expect(actions.hideBoardMenu()).toMatchSnapshot();
+      it('creates a HIDE_BOARDS_EXPLORER action', () => {
+        const expected = { type: types.HIDE_BOARDS_EXPLORER };
+        expect(actions.hideBoardsExplorer()).toEqual(expected);
+        expect(actions.hideBoardsExplorer()).toMatchSnapshot();
       });
     });
 
@@ -50,17 +50,59 @@ describe('ui actions', () => {
       });
     });
 
-    describe('Boards Explorer', () => {
-      it('creates a SHOW_BOARDS_EXPLORER action', () => {
-        const expected = { type: types.SHOW_BOARDS_EXPLORER };
-        expect(actions.showBoardsExplorer()).toEqual(expected);
-        expect(actions.showBoardsExplorer()).toMatchSnapshot();
+    describe('Create Menu', () => {
+      it('creates a SHOW_CREATE_MENU action', () => {
+        const expected = { type: types.SHOW_CREATE_MENU };
+        expect(actions.showCreateMenu()).toEqual(expected);
+        expect(actions.showCreateMenu()).toMatchSnapshot();
+      })
+
+      it('creates a HIDE_CREATE_MENU action', () => {
+        const expected = { type: types.HIDE_CREATE_MENU };
+        expect(actions.hideCreateMenu()).toEqual(expected);
+        expect(actions.hideCreateMenu()).toMatchSnapshot();
+      })
+    });
+
+    describe('Notifications', () => {
+      it('creates a SHOW_NOTIFICATIONS action', () => {
+        const expected = { type: types.SHOW_NOTIFICATIONS };
+        expect(actions.showNotifications()).toEqual(expected);
+        expect(actions.showNotifications()).toMatchSnapshot();
+      })
+
+      it('creates a HIDE_NOTIFICATIONS action', () => {
+        const expected = { type: types.HIDE_NOTIFICATIONS };
+        expect(actions.hideNotifications()).toEqual(expected);
+        expect(actions.hideNotifications()).toMatchSnapshot();
+      })
+    });
+
+    describe('User Menu', () => {
+      it('creates a SHOW_USER_MENU action', () => {
+        const expected = { type: types.SHOW_USER_MENU };
+        expect(actions.showUserMenu()).toEqual(expected);
+        expect(actions.showUserMenu()).toMatchSnapshot();
+      })
+
+      it('creates a HIDE_USER_MENU action', () => {
+        const expected = { type: types.HIDE_USER_MENU };
+        expect(actions.hideUserMenu()).toEqual(expected);
+        expect(actions.hideUserMenu()).toMatchSnapshot();
+      })
+    });
+
+    describe('Board Menu', () => {
+      it('creates a SHOW_BOARD_MENU action', () => {
+        const expected = { type: types.SHOW_BOARD_MENU };
+        expect(actions.showBoardMenu()).toEqual(expected);
+        expect(actions.showBoardMenu()).toMatchSnapshot();
       });
 
-      it('creates a HIDE_BOARDS_EXPLORER action', () => {
-        const expected = { type: types.HIDE_BOARDS_EXPLORER };
-        expect(actions.hideBoardsExplorer()).toEqual(expected);
-        expect(actions.hideBoardsExplorer()).toMatchSnapshot();
+      it('creates a HIDE_BOARD_MENU action', () => {
+        const expected = { type: types.HIDE_BOARD_MENU };
+        expect(actions.hideBoardMenu()).toEqual(expected);
+        expect(actions.hideBoardMenu()).toMatchSnapshot();
       });
     });
   });

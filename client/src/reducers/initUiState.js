@@ -1,6 +1,9 @@
 export default {
   activeMenus: {
     boardsExplorer: false,
+    create: false,
+    notifications: false,
+    user: false,
   },
   // Focus options [ 'search' ]
   focus: '',

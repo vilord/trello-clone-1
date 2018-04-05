@@ -107,6 +107,108 @@ describe('UI Reducer', () => {
     });
   });
 
+  describe('Create Menu', () => {
+    it('handles SHOW_CREATE_MENU action', () => {
+      const newState = {
+        ...initState,
+        activeMenus: {
+          ...initState.activeMenus,
+          create: true,
+        },
+      };
+      expect(uiReducer(initState, uiActions.showCreateMenu())).toEqual(
+        newState,
+      );
+      expect(
+        uiReducer(initState, uiActions.showCreateMenu()),
+      ).toMatchSnapshot();
+    });
+
+    it('handles HIDE_CREATE_MENU action', () => {
+      const state = {
+        ...initState,
+        activeMenus: {
+          ...initState.activeMenus,
+          create: true,
+        },
+      };
+      expect(uiReducer(state, uiActions.hideCreateMenu())).toEqual(
+        initState,
+      );
+      expect(
+        uiReducer(initState, uiActions.hideCreateMenu()),
+      ).toMatchSnapshot();
+    });
+  });
+
+  describe('Notifications', () => {
+    it('handles SHOW_NOTIFICATIONS action', () => {
+      const newState = {
+        ...initState,
+        activeMenus: {
+          ...initState.activeMenus,
+          notifications: true,
+        },
+      };
+      expect(uiReducer(initState, uiActions.showNotifications())).toEqual(
+        newState,
+      );
+      expect(
+        uiReducer(initState, uiActions.showNotifications()),
+      ).toMatchSnapshot();
+    });
+
+    it('handles HIDE_NOTIFICATIONS action', () => {
+      const state = {
+        ...initState,
+        activeMenus: {
+          ...initState.activeMenus,
+          notifications: true,
+        },
+      };
+      expect(uiReducer(state, uiActions.hideNotifications())).toEqual(
+        initState,
+      );
+      expect(
+        uiReducer(initState, uiActions.hideNotifications()),
+      ).toMatchSnapshot();
+    });
+  });
+
+  describe('User Menu', () => {
+    it('handles SHOW_USER_MENU action', () => {
+      const newState = {
+        ...initState,
+        activeMenus: {
+          ...initState.activeMenus,
+          user: true,
+        },
+      };
+      expect(uiReducer(initState, uiActions.showUserMenu())).toEqual(
+        newState,
+      );
+      expect(
+        uiReducer(initState, uiActions.showUserMenu()),
+      ).toMatchSnapshot();
+    });
+
+    it('handles HIDE_USER_MENU action', () => {
+      const state = {
+        ...initState,
+        activeMenus: {
+          ...initState.activeMenus,
+          user: true,
+        },
+      };
+      expect(uiReducer(state, uiActions.hideUserMenu())).toEqual(
+        initState,
+      );
+      expect(
+        uiReducer(initState, uiActions.hideUserMenu()),
+      ).toMatchSnapshot();
+    });
+  });
+
   describe('Signup User', () => {
     it('handles SIGNUP_USER_REQUEST action', () => {
       const newState = {

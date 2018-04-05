@@ -24,6 +24,18 @@ Object {
 }
 `;
 
+exports[`ui actions Action Creators Create Menu creates a HIDE_CREATE_MENU action 1`] = `
+Object {
+  "type": "HIDE_CREATE_MENU",
+}
+`;
+
+exports[`ui actions Action Creators Create Menu creates a SHOW_CREATE_MENU action 1`] = `
+Object {
+  "type": "SHOW_CREATE_MENU",
+}
+`;
+
 exports[`ui actions Action Creators Header Search creates a BLUR_HEADER_SEARCH action 1`] = `
 Object {
   "type": "BLUR_HEADER_SEARCH",
@@ -33,6 +45,18 @@ Object {
 exports[`ui actions Action Creators Header Search creates a FOCUS_HEADER_SEARCH action 1`] = `
 Object {
   "type": "FOCUS_HEADER_SEARCH",
+}
+`;
+
+exports[`ui actions Action Creators Notifications creates a HIDE_NOTIFICATIONS action 1`] = `
+Object {
+  "type": "HIDE_NOTIFICATIONS",
+}
+`;
+
+exports[`ui actions Action Creators Notifications creates a SHOW_NOTIFICATIONS action 1`] = `
+Object {
+  "type": "SHOW_NOTIFICATIONS",
 }
 `;
 
@@ -50,5 +74,17 @@ Object {
     "message": "That doesn't look like an email address…",
   },
   "type": "SET_UI_ERROR",
+}
+`;
+
+exports[`ui actions Action Creators User Menu creates a HIDE_USER_MENU action 1`] = `
+Object {
+  "type": "HIDE_USER_MENU",
+}
+`;
+
+exports[`ui actions Action Creators User Menu creates a SHOW_USER_MENU action 1`] = `
+Object {
+  "type": "SHOW_USER_MENU",
 }
 `;

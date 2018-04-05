@@ -17,16 +17,6 @@ const uiReducer = (state = initState, action) => {
           message: '',
         },
       };
-    case types.FOCUS_HEADER_SEARCH:
-      return {
-        ...state,
-        focus: 'search',
-      };
-    case types.BLUR_HEADER_SEARCH:
-      return {
-        ...state,
-        focus: '',
-      };
     case types.SHOW_BOARDS_EXPLORER:
       return {
         ...state,
@@ -41,6 +31,64 @@ const uiReducer = (state = initState, action) => {
         activeMenus: {
           ...state.activeMenus,
           boardsExplorer: false,
+        },
+      };
+    case types.FOCUS_HEADER_SEARCH:
+      return {
+        ...state,
+        focus: 'search',
+      };
+    case types.BLUR_HEADER_SEARCH:
+      return {
+        ...state,
+        focus: '',
+      };
+    case types.SHOW_CREATE_MENU:
+      return {
+        ...state,
+        activeMenus: {
+          ...state.activeMenus,
+          create: true,
+        },
+      };
+    case types.HIDE_CREATE_MENU:
+      return {
+        ...state,
+        activeMenus: {
+          ...state.activeMenus,
+          create: false,
+        },
+      };
+    case types.SHOW_NOTIFICATIONS:
+      return {
+        ...state,
+        activeMenus: {
+          ...state.activeMenus,
+          notifications: true,
+        },
+      };
+    case types.HIDE_NOTIFICATIONS:
+      return {
+        ...state,
+        activeMenus: {
+          ...state.activeMenus,
+          notifications: false,
+        },
+      };
+    case types.SHOW_USER_MENU:
+      return {
+        ...state,
+        activeMenus: {
+          ...state.activeMenus,
+          user: true,
+        },
+      };
+    case types.HIDE_USER_MENU:
+      return {
+        ...state,
+        activeMenus: {
+          ...state.activeMenus,
+          user: false,
         },
       };
     case types.SIGNUP_USER_REQUEST:
