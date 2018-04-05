@@ -132,9 +132,7 @@ describe('UI Reducer', () => {
           create: true,
         },
       };
-      expect(uiReducer(state, uiActions.hideCreateMenu())).toEqual(
-        initState,
-      );
+      expect(uiReducer(state, uiActions.hideCreateMenu())).toEqual(initState);
       expect(
         uiReducer(initState, uiActions.hideCreateMenu()),
       ).toMatchSnapshot();
@@ -184,12 +182,8 @@ describe('UI Reducer', () => {
           user: true,
         },
       };
-      expect(uiReducer(initState, uiActions.showUserMenu())).toEqual(
-        newState,
-      );
-      expect(
-        uiReducer(initState, uiActions.showUserMenu()),
-      ).toMatchSnapshot();
+      expect(uiReducer(initState, uiActions.showUserMenu())).toEqual(newState);
+      expect(uiReducer(initState, uiActions.showUserMenu())).toMatchSnapshot();
     });
 
     it('handles HIDE_USER_MENU action', () => {
@@ -200,12 +194,126 @@ describe('UI Reducer', () => {
           user: true,
         },
       };
-      expect(uiReducer(state, uiActions.hideUserMenu())).toEqual(
+      expect(uiReducer(state, uiActions.hideUserMenu())).toEqual(initState);
+      expect(uiReducer(initState, uiActions.hideUserMenu())).toMatchSnapshot();
+    });
+  });
+
+  describe('Rename Board', () => {
+    it('handles SHOW_RENAME_BOARD action', () => {
+      const newState = {
+        ...initState,
+        activeMenus: {
+          ...initState.activeMenus,
+          renameBoard: true,
+        },
+      };
+      expect(uiReducer(initState, uiActions.showRenameBoard())).toEqual(
+        newState,
+      );
+      expect(
+        uiReducer(initState, uiActions.showRenameBoard()),
+      ).toMatchSnapshot();
+    });
+
+    it('handles HIDE_RENAME_BOARD action', () => {
+      const state = {
+        ...initState,
+        activeMenus: {
+          ...initState.activeMenus,
+          renameBoard: true,
+        },
+      };
+      expect(uiReducer(state, uiActions.hideRenameBoard())).toEqual(initState);
+      expect(
+        uiReducer(initState, uiActions.hideRenameBoard()),
+      ).toMatchSnapshot();
+    });
+  });
+
+  describe('Add to Team', () => {
+    it('handles SHOW_ADD_TO_TEAM action', () => {
+      const newState = {
+        ...initState,
+        activeMenus: {
+          ...initState.activeMenus,
+          addToTeam: true,
+        },
+      };
+      expect(uiReducer(initState, uiActions.showAddToTeam())).toEqual(newState);
+      expect(uiReducer(initState, uiActions.showAddToTeam())).toMatchSnapshot();
+    });
+
+    it('handles HIDE_ADD_TO_TEAM action', () => {
+      const state = {
+        ...initState,
+        activeMenus: {
+          ...initState.activeMenus,
+          addToTeam: true,
+        },
+      };
+      expect(uiReducer(state, uiActions.hideAddToTeam())).toEqual(initState);
+      expect(uiReducer(initState, uiActions.hideAddToTeam())).toMatchSnapshot();
+    });
+  });
+
+  describe('Visibility Menu', () => {
+    it('handles SHOW_VISIBILITY_MENU action', () => {
+      const newState = {
+        ...initState,
+        activeMenus: {
+          ...initState.activeMenus,
+          visibility: true,
+        },
+      };
+      expect(uiReducer(initState, uiActions.showVisibilityMenu())).toEqual(
+        newState,
+      );
+      expect(
+        uiReducer(initState, uiActions.showVisibilityMenu()),
+      ).toMatchSnapshot();
+    });
+
+    it('handles HIDE_VISIBILITY_MENU action', () => {
+      const state = {
+        ...initState,
+        activeMenus: {
+          ...initState.activeMenus,
+          visibility: true,
+        },
+      };
+      expect(uiReducer(state, uiActions.hideVisibilityMenu())).toEqual(
         initState,
       );
       expect(
-        uiReducer(initState, uiActions.hideUserMenu()),
+        uiReducer(initState, uiActions.hideVisibilityMenu()),
       ).toMatchSnapshot();
+    });
+  });
+
+  describe('Board Menu', () => {
+    it('handles SHOW_BOARD_MENU action', () => {
+      const newState = {
+        ...initState,
+        activeMenus: {
+          ...initState.activeMenus,
+          board: true,
+        },
+      };
+      expect(uiReducer(initState, uiActions.showBoardMenu())).toEqual(newState);
+      expect(uiReducer(initState, uiActions.showBoardMenu())).toMatchSnapshot();
+    });
+
+    it('handles HIDE_BOARD_MENU action', () => {
+      const state = {
+        ...initState,
+        activeMenus: {
+          ...initState.activeMenus,
+          board: true,
+        },
+      };
+      expect(uiReducer(state, uiActions.hideBoardMenu())).toEqual(initState);
+      expect(uiReducer(initState, uiActions.hideBoardMenu())).toMatchSnapshot();
     });
   });
 

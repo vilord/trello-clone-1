@@ -4,6 +4,10 @@ export default {
     create: false,
     notifications: false,
     user: false,
+    renameBoard: false,
+    addToTeam: false,
+    visibility: false,
+    board: false,
   },
   // Focus options [ 'search' ]
   focus: '',

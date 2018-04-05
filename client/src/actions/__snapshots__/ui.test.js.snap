@@ -1,5 +1,17 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
+exports[`ui actions Action Creators Add to Team creates a HIDE_ADD_TO_TEAM action 1`] = `
+Object {
+  "type": "HIDE_ADD_TO_TEAM",
+}
+`;
+
+exports[`ui actions Action Creators Add to Team creates a SHOW_ADD_TO_TEAM action 1`] = `
+Object {
+  "type": "SHOW_ADD_TO_TEAM",
+}
+`;
+
 exports[`ui actions Action Creators Board Menu creates a HIDE_BOARD_MENU action 1`] = `
 Object {
   "type": "HIDE_BOARD_MENU",
@@ -60,6 +72,18 @@ Object {
 }
 `;
 
+exports[`ui actions Action Creators Rename Board creates a HIDE_RENAME_BOARD action 1`] = `
+Object {
+  "type": "HIDE_RENAME_BOARD",
+}
+`;
+
+exports[`ui actions Action Creators Rename Board creates a SHOW_RENAME_BOARD action 1`] = `
+Object {
+  "type": "SHOW_RENAME_BOARD",
+}
+`;
+
 exports[`ui actions Action Creators UI Errors creates a RESET_UI_ERROR action 1`] = `
 Object {
   "type": "RESET_UI_ERROR",
@@ -86,5 +110,17 @@ Object {
 exports[`ui actions Action Creators User Menu creates a SHOW_USER_MENU action 1`] = `
 Object {
   "type": "SHOW_USER_MENU",
+}
+`;
+
+exports[`ui actions Action Creators Visibility Menu creates a HIDE_VISIBILITY_MENU action 1`] = `
+Object {
+  "type": "HIDE_VISIBILITY_MENU",
+}
+`;
+
+exports[`ui actions Action Creators Visibility Menu creates a SHOW_VISIBILITY_MENU action 1`] = `
+Object {
+  "type": "SHOW_VISIBILITY_MENU",
 }
 `;

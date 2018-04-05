@@ -1,12 +1,120 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`UI Reducer Boards Explorer handles HIDE_BOARDS_EXPLORER action 1`] = `
+exports[`UI Reducer Add to Team handles HIDE_ADD_TO_TEAM action 1`] = `
 Object {
   "activeMenus": Object {
+    "addToTeam": false,
+    "board": false,
     "boardsExplorer": false,
     "create": false,
     "notifications": false,
+    "renameBoard": false,
     "user": false,
+    "visibility": false,
+  },
+  "error": Object {
+    "header": "",
+    "kind": "",
+    "message": "",
+  },
+  "fetching": Object {
+    "activity": false,
+    "login": false,
+    "signup": false,
+  },
+  "focus": "",
+}
+`;
+
+exports[`UI Reducer Add to Team handles SHOW_ADD_TO_TEAM action 1`] = `
+Object {
+  "activeMenus": Object {
+    "addToTeam": true,
+    "board": false,
+    "boardsExplorer": false,
+    "create": false,
+    "notifications": false,
+    "renameBoard": false,
+    "user": false,
+    "visibility": false,
+  },
+  "error": Object {
+    "header": "",
+    "kind": "",
+    "message": "",
+  },
+  "fetching": Object {
+    "activity": false,
+    "login": false,
+    "signup": false,
+  },
+  "focus": "",
+}
+`;
+
+exports[`UI Reducer Board Menu handles HIDE_BOARD_MENU action 1`] = `
+Object {
+  "activeMenus": Object {
+    "addToTeam": false,
+    "board": false,
+    "boardsExplorer": false,
+    "create": false,
+    "notifications": false,
+    "renameBoard": false,
+    "user": false,
+    "visibility": false,
+  },
+  "error": Object {
+    "header": "",
+    "kind": "",
+    "message": "",
+  },
+  "fetching": Object {
+    "activity": false,
+    "login": false,
+    "signup": false,
+  },
+  "focus": "",
+}
+`;
+
+exports[`UI Reducer Board Menu handles SHOW_BOARD_MENU action 1`] = `
+Object {
+  "activeMenus": Object {
+    "addToTeam": false,
+    "board": true,
+    "boardsExplorer": false,
+    "create": false,
+    "notifications": false,
+    "renameBoard": false,
+    "user": false,
+    "visibility": false,
+  },
+  "error": Object {
+    "header": "",
+    "kind": "",
+    "message": "",
+  },
+  "fetching": Object {
+    "activity": false,
+    "login": false,
+    "signup": false,
+  },
+  "focus": "",
+}
+`;
+
+exports[`UI Reducer Boards Explorer handles HIDE_BOARDS_EXPLORER action 1`] = `
+Object {
+  "activeMenus": Object {
+    "addToTeam": false,
+    "board": false,
+    "boardsExplorer": false,
+    "create": false,
+    "notifications": false,
+    "renameBoard": false,
+    "user": false,
+    "visibility": false,
   },
   "error": Object {
     "header": "",
@@ -25,10 +133,14 @@ Object {
 exports[`UI Reducer Boards Explorer handles SHOW_BOARDS_EXPLORER action 1`] = `
 Object {
   "activeMenus": Object {
+    "addToTeam": false,
+    "board": false,
     "boardsExplorer": true,
     "create": false,
     "notifications": false,
+    "renameBoard": false,
     "user": false,
+    "visibility": false,
   },
   "error": Object {
     "header": "",
@@ -47,10 +159,14 @@ Object {
 exports[`UI Reducer Create Menu handles HIDE_CREATE_MENU action 1`] = `
 Object {
   "activeMenus": Object {
+    "addToTeam": false,
+    "board": false,
     "boardsExplorer": false,
     "create": false,
     "notifications": false,
+    "renameBoard": false,
     "user": false,
+    "visibility": false,
   },
   "error": Object {
     "header": "",
@@ -69,10 +185,14 @@ Object {
 exports[`UI Reducer Create Menu handles SHOW_CREATE_MENU action 1`] = `
 Object {
   "activeMenus": Object {
+    "addToTeam": false,
+    "board": false,
     "boardsExplorer": false,
     "create": true,
     "notifications": false,
+    "renameBoard": false,
     "user": false,
+    "visibility": false,
   },
   "error": Object {
     "header": "",
@@ -91,10 +211,14 @@ Object {
 exports[`UI Reducer Header Search handles BLUR_HEADER_SEARCH action 1`] = `
 Object {
   "activeMenus": Object {
+    "addToTeam": false,
+    "board": false,
     "boardsExplorer": false,
     "create": false,
     "notifications": false,
+    "renameBoard": false,
     "user": false,
+    "visibility": false,
   },
   "error": Object {
     "header": "",
@@ -113,10 +237,14 @@ Object {
 exports[`UI Reducer Header Search handles FOCUS_HEADER_SEARCH action 1`] = `
 Object {
   "activeMenus": Object {
+    "addToTeam": false,
+    "board": false,
     "boardsExplorer": false,
     "create": false,
     "notifications": false,
+    "renameBoard": false,
     "user": false,
+    "visibility": false,
   },
   "error": Object {
     "header": "",
@@ -135,10 +263,14 @@ Object {
 exports[`UI Reducer Login User handles LOGIN_USER_FAILURE action 1`] = `
 Object {
   "activeMenus": Object {
+    "addToTeam": false,
+    "board": false,
     "boardsExplorer": false,
     "create": false,
     "notifications": false,
+    "renameBoard": false,
     "user": false,
+    "visibility": false,
   },
   "error": Object {
     "header": "Something wrong!",
@@ -158,10 +290,14 @@ Object {
 exports[`UI Reducer Login User handles LOGIN_USER_REQUEST action 1`] = `
 Object {
   "activeMenus": Object {
+    "addToTeam": false,
+    "board": false,
     "boardsExplorer": false,
     "create": false,
     "notifications": false,
+    "renameBoard": false,
     "user": false,
+    "visibility": false,
   },
   "error": Object {
     "header": "",
@@ -180,10 +316,14 @@ Object {
 exports[`UI Reducer Login User handles LOGIN_USER_SUCCESS action 1`] = `
 Object {
   "activeMenus": Object {
+    "addToTeam": false,
+    "board": false,
     "boardsExplorer": false,
     "create": false,
     "notifications": false,
+    "renameBoard": false,
     "user": false,
+    "visibility": false,
   },
   "error": Object {
     "header": "",
@@ -203,10 +343,14 @@ Object {
 exports[`UI Reducer Logout User handles LOGOUT_USER action 1`] = `
 Object {
   "activeMenus": Object {
+    "addToTeam": false,
+    "board": false,
     "boardsExplorer": false,
     "create": false,
     "notifications": false,
+    "renameBoard": false,
     "user": false,
+    "visibility": false,
   },
   "error": Object {
     "header": "",
@@ -225,10 +369,14 @@ Object {
 exports[`UI Reducer Notifications handles HIDE_NOTIFICATIONS action 1`] = `
 Object {
   "activeMenus": Object {
+    "addToTeam": false,
+    "board": false,
     "boardsExplorer": false,
     "create": false,
     "notifications": false,
+    "renameBoard": false,
     "user": false,
+    "visibility": false,
   },
   "error": Object {
     "header": "",
@@ -247,10 +395,66 @@ Object {
 exports[`UI Reducer Notifications handles SHOW_NOTIFICATIONS action 1`] = `
 Object {
   "activeMenus": Object {
+    "addToTeam": false,
+    "board": false,
     "boardsExplorer": false,
     "create": false,
     "notifications": true,
+    "renameBoard": false,
     "user": false,
+    "visibility": false,
+  },
+  "error": Object {
+    "header": "",
+    "kind": "",
+    "message": "",
+  },
+  "fetching": Object {
+    "activity": false,
+    "login": false,
+    "signup": false,
+  },
+  "focus": "",
+}
+`;
+
+exports[`UI Reducer Rename Board handles HIDE_RENAME_BOARD action 1`] = `
+Object {
+  "activeMenus": Object {
+    "addToTeam": false,
+    "board": false,
+    "boardsExplorer": false,
+    "create": false,
+    "notifications": false,
+    "renameBoard": false,
+    "user": false,
+    "visibility": false,
+  },
+  "error": Object {
+    "header": "",
+    "kind": "",
+    "message": "",
+  },
+  "fetching": Object {
+    "activity": false,
+    "login": false,
+    "signup": false,
+  },
+  "focus": "",
+}
+`;
+
+exports[`UI Reducer Rename Board handles SHOW_RENAME_BOARD action 1`] = `
+Object {
+  "activeMenus": Object {
+    "addToTeam": false,
+    "board": false,
+    "boardsExplorer": false,
+    "create": false,
+    "notifications": false,
+    "renameBoard": true,
+    "user": false,
+    "visibility": false,
   },
   "error": Object {
     "header": "",
@@ -269,10 +473,14 @@ Object {
 exports[`UI Reducer Signup User handles SIGNUP_USER_FAILURE action 1`] = `
 Object {
   "activeMenus": Object {
+    "addToTeam": false,
+    "board": false,
     "boardsExplorer": false,
     "create": false,
     "notifications": false,
+    "renameBoard": false,
     "user": false,
+    "visibility": false,
   },
   "error": Object {
     "header": "Unknown Server Error!",
@@ -291,10 +499,14 @@ Object {
 exports[`UI Reducer Signup User handles SIGNUP_USER_REQUEST action 1`] = `
 Object {
   "activeMenus": Object {
+    "addToTeam": false,
+    "board": false,
     "boardsExplorer": false,
     "create": false,
     "notifications": false,
+    "renameBoard": false,
     "user": false,
+    "visibility": false,
   },
   "error": Object {
     "header": "",
@@ -313,10 +525,14 @@ Object {
 exports[`UI Reducer Signup User handles SIGNUP_USER_SUCCESS action 1`] = `
 Object {
   "activeMenus": Object {
+    "addToTeam": false,
+    "board": false,
     "boardsExplorer": false,
     "create": false,
     "notifications": false,
+    "renameBoard": false,
     "user": false,
+    "visibility": false,
   },
   "error": Object {
     "header": "",
@@ -335,10 +551,14 @@ Object {
 exports[`UI Reducer UI Errors RESET_UI_ERROR 1`] = `
 Object {
   "activeMenus": Object {
+    "addToTeam": false,
+    "board": false,
     "boardsExplorer": false,
     "create": false,
     "notifications": false,
+    "renameBoard": false,
     "user": false,
+    "visibility": false,
   },
   "error": Object {
     "header": "",
@@ -357,10 +577,14 @@ Object {
 exports[`UI Reducer UI Errors handles SET_UI_ERROR action 1`] = `
 Object {
   "activeMenus": Object {
+    "addToTeam": false,
+    "board": false,
     "boardsExplorer": false,
     "create": false,
     "notifications": false,
+    "renameBoard": false,
     "user": false,
+    "visibility": false,
   },
   "error": Object {
     "header": "Verify email!",
@@ -379,10 +603,14 @@ Object {
 exports[`UI Reducer User Menu handles HIDE_USER_MENU action 1`] = `
 Object {
   "activeMenus": Object {
+    "addToTeam": false,
+    "board": false,
     "boardsExplorer": false,
     "create": false,
     "notifications": false,
+    "renameBoard": false,
     "user": false,
+    "visibility": false,
   },
   "error": Object {
     "header": "",
@@ -401,10 +629,66 @@ Object {
 exports[`UI Reducer User Menu handles SHOW_USER_MENU action 1`] = `
 Object {
   "activeMenus": Object {
+    "addToTeam": false,
+    "board": false,
     "boardsExplorer": false,
     "create": false,
     "notifications": false,
+    "renameBoard": false,
     "user": true,
+    "visibility": false,
+  },
+  "error": Object {
+    "header": "",
+    "kind": "",
+    "message": "",
+  },
+  "fetching": Object {
+    "activity": false,
+    "login": false,
+    "signup": false,
+  },
+  "focus": "",
+}
+`;
+
+exports[`UI Reducer Visibility Menu handles HIDE_VISIBILITY_MENU action 1`] = `
+Object {
+  "activeMenus": Object {
+    "addToTeam": false,
+    "board": false,
+    "boardsExplorer": false,
+    "create": false,
+    "notifications": false,
+    "renameBoard": false,
+    "user": false,
+    "visibility": false,
+  },
+  "error": Object {
+    "header": "",
+    "kind": "",
+    "message": "",
+  },
+  "fetching": Object {
+    "activity": false,
+    "login": false,
+    "signup": false,
+  },
+  "focus": "",
+}
+`;
+
+exports[`UI Reducer Visibility Menu handles SHOW_VISIBILITY_MENU action 1`] = `
+Object {
+  "activeMenus": Object {
+    "addToTeam": false,
+    "board": false,
+    "boardsExplorer": false,
+    "create": false,
+    "notifications": false,
+    "renameBoard": false,
+    "user": false,
+    "visibility": true,
   },
   "error": Object {
     "header": "",

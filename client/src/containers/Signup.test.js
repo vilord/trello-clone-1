@@ -4,7 +4,12 @@ import { Signup } from './Signup';
 import { Form } from 'semantic-ui-react';
 
 describe('Signup Component', () => {
-  let component;
+  beforeAll(() => {
+    console.error = error => {
+      throw new Error(error);
+    };
+  });
+
   const minProps = {
     setEmailError: jest.fn(),
     setPasswordError: jest.fn(),
@@ -18,12 +23,7 @@ describe('Signup Component', () => {
     password: '1234abcd',
   };
 
-  beforeAll(() => {
-    console.error = error => {
-      throw new Error(error);
-    };
-  });
-
+  let component;
   beforeEach(() => {
     component = shallow(<Signup {...minProps} />);
   });

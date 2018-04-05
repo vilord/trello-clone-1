@@ -91,6 +91,70 @@ const uiReducer = (state = initState, action) => {
           user: false,
         },
       };
+    case types.SHOW_RENAME_BOARD:
+      return {
+        ...state,
+        activeMenus: {
+          ...state.activeMenus,
+          renameBoard: true,
+        },
+      };
+    case types.HIDE_RENAME_BOARD:
+      return {
+        ...state,
+        activeMenus: {
+          ...state.activeMenus,
+          renameBoard: false,
+        },
+      };
+    case types.SHOW_ADD_TO_TEAM:
+      return {
+        ...state,
+        activeMenus: {
+          ...state.activeMenus,
+          addToTeam: true,
+        },
+      };
+    case types.HIDE_ADD_TO_TEAM:
+      return {
+        ...state,
+        activeMenus: {
+          ...state.activeMenus,
+          addToTeam: false,
+        },
+      };
+    case types.SHOW_VISIBILITY_MENU:
+      return {
+        ...state,
+        activeMenus: {
+          ...state.activeMenus,
+          visibility: true,
+        },
+      };
+    case types.HIDE_VISIBILITY_MENU:
+      return {
+        ...state,
+        activeMenus: {
+          ...state.activeMenus,
+          visibility: false,
+        },
+      };
+    case types.SHOW_BOARD_MENU:
+      return {
+        ...state,
+        activeMenus: {
+          ...state.activeMenus,
+          board: true,
+        },
+      };
+    case types.HIDE_BOARD_MENU:
+      return {
+        ...state,
+        activeMenus: {
+          ...state.activeMenus,
+          board: false,
+        },
+      };
     case types.SIGNUP_USER_REQUEST:
       return {
         ...state,

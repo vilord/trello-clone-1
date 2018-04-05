@@ -68,6 +68,39 @@ export const hideUserMenu = () => ({
 });
 
 /**
+ * Rename Board
+ */
+export const showRenameBoard = () => ({
+  type: types.SHOW_RENAME_BOARD,
+});
+
+export const hideRenameBoard = () => ({
+  type: types.HIDE_RENAME_BOARD,
+});
+
+/**
+ * Add to Team
+ */
+export const showAddToTeam = () => ({
+  type: types.SHOW_ADD_TO_TEAM,
+});
+
+export const hideAddToTeam = () => ({
+  type: types.HIDE_ADD_TO_TEAM,
+});
+
+/**
+ * Visibility Menu
+ */
+export const showVisibilityMenu = () => ({
+  type: types.SHOW_VISIBILITY_MENU,
+});
+
+export const hideVisibilityMenu = () => ({
+  type: types.HIDE_VISIBILITY_MENU,
+});
+
+/**
  * Board Menu
  */
 export const showBoardMenu = () => ({
