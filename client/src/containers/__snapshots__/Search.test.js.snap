@@ -1,0 +1,22 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Search Component matches snapshot 1`] = `
+<Input
+  className="Search"
+  icon={
+    <Icon
+      as="i"
+      flipped="horizontally"
+      name="search"
+      style={
+        Object {
+          "color": "white",
+        }
+      }
+    />
+  }
+  onBlur={[Function]}
+  onFocus={[Function]}
+  type="text"
+/>
+`;

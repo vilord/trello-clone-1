@@ -37,6 +37,7 @@ Search.propTypes = {
 const mapStateToProps = state => ({
   focused: state.ui.focus === 'search',
 });
+
 const mapDispatchToProps = dispatch => ({
   focusHeaderSearch: () => dispatch(focusHeaderSearch()),
   blurHeaderSearch: () => dispatch(blurHeaderSearch()),
