@@ -9,20 +9,12 @@ export const resetUiError = () => ({
   type: types.RESET_UI_ERROR,
 });
 
-export const showMainMenu = () => ({
-  type: types.SHOW_MAIN_MENU,
+export const showBoardMenu = () => ({
+  type: types.SHOW_BOARD_MENU,
 });
 
-export const hideMainMenu = () => ({
-  type: types.HIDE_MAIN_MENU,
-});
-
-export const showBoardsMenu = () => ({
-  type: types.SHOW_BOARDS_MENU,
-});
-
-export const hideBoardsMenu = () => ({
-  type: types.HIDE_BOARDS_MENU,
+export const hideBoardMenu = () => ({
+  type: types.HIDE_BOARD_MENU,
 });
 
 export const focusHeaderSearch = () => ({
@@ -31,4 +23,12 @@ export const focusHeaderSearch = () => ({
 
 export const blurHeaderSearch = () => ({
   type: types.BLUR_HEADER_SEARCH,
+});
+
+export const showBoardsExplorer = () => ({
+  type: types.SHOW_BOARDS_EXPLORER,
+});
+
+export const hideBoardsExplorer = () => ({
+  type: types.HIDE_BOARDS_EXPLORER,
 });

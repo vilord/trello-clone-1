@@ -1,4 +1,8 @@
 export default {
+  activeMenus: {
+    boardsExplorer: false,
+  },
+  // Focus options [ 'search' ]
   focus: '',
   fetching: {
     signup: false,

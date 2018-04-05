@@ -1,7 +1,86 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
+exports[`UI Reducer Boards Explorer handles HIDE_BOARDS_EXPLORER action 1`] = `
+Object {
+  "activeMenus": Object {
+    "boardsExplorer": false,
+  },
+  "error": Object {
+    "header": "",
+    "kind": "",
+    "message": "",
+  },
+  "fetching": Object {
+    "activity": false,
+    "login": false,
+    "signup": false,
+  },
+  "focus": "",
+}
+`;
+
+exports[`UI Reducer Boards Explorer handles SHOW_BOARDS_EXPLORER action 1`] = `
+Object {
+  "activeMenus": Object {
+    "boardsExplorer": true,
+  },
+  "error": Object {
+    "header": "",
+    "kind": "",
+    "message": "",
+  },
+  "fetching": Object {
+    "activity": false,
+    "login": false,
+    "signup": false,
+  },
+  "focus": "",
+}
+`;
+
+exports[`UI Reducer Header Search handles BLUR_HEADER_SEARCH action 1`] = `
+Object {
+  "activeMenus": Object {
+    "boardsExplorer": false,
+  },
+  "error": Object {
+    "header": "",
+    "kind": "",
+    "message": "",
+  },
+  "fetching": Object {
+    "activity": false,
+    "login": false,
+    "signup": false,
+  },
+  "focus": "",
+}
+`;
+
+exports[`UI Reducer Header Search handles FOCUS_HEADER_SEARCH action 1`] = `
+Object {
+  "activeMenus": Object {
+    "boardsExplorer": false,
+  },
+  "error": Object {
+    "header": "",
+    "kind": "",
+    "message": "",
+  },
+  "fetching": Object {
+    "activity": false,
+    "login": false,
+    "signup": false,
+  },
+  "focus": "search",
+}
+`;
+
 exports[`UI Reducer Login User handles LOGIN_USER_FAILURE action 1`] = `
 Object {
+  "activeMenus": Object {
+    "boardsExplorer": false,
+  },
   "error": Object {
     "header": "Something wrong!",
     "kind": "wrongCredentials",
@@ -19,6 +98,9 @@ Object {
 
 exports[`UI Reducer Login User handles LOGIN_USER_REQUEST action 1`] = `
 Object {
+  "activeMenus": Object {
+    "boardsExplorer": false,
+  },
   "error": Object {
     "header": "",
     "kind": "",
@@ -35,6 +117,9 @@ Object {
 
 exports[`UI Reducer Login User handles LOGIN_USER_SUCCESS action 1`] = `
 Object {
+  "activeMenus": Object {
+    "boardsExplorer": false,
+  },
   "error": Object {
     "header": "",
     "kind": "",
@@ -52,6 +137,9 @@ Object {
 
 exports[`UI Reducer Logout User handles LOGOUT_USER action 1`] = `
 Object {
+  "activeMenus": Object {
+    "boardsExplorer": false,
+  },
   "error": Object {
     "header": "",
     "kind": "",
@@ -68,6 +156,9 @@ Object {
 
 exports[`UI Reducer Signup User handles SIGNUP_USER_FAILURE action 1`] = `
 Object {
+  "activeMenus": Object {
+    "boardsExplorer": false,
+  },
   "error": Object {
     "header": "Unknown Server Error!",
     "kind": "serverError",
@@ -84,6 +175,9 @@ Object {
 
 exports[`UI Reducer Signup User handles SIGNUP_USER_REQUEST action 1`] = `
 Object {
+  "activeMenus": Object {
+    "boardsExplorer": false,
+  },
   "error": Object {
     "header": "",
     "kind": "",
@@ -100,6 +194,9 @@ Object {
 
 exports[`UI Reducer Signup User handles SIGNUP_USER_SUCCESS action 1`] = `
 Object {
+  "activeMenus": Object {
+    "boardsExplorer": false,
+  },
   "error": Object {
     "header": "",
     "kind": "",
@@ -116,6 +213,9 @@ Object {
 
 exports[`UI Reducer UI Errors RESET_UI_ERROR 1`] = `
 Object {
+  "activeMenus": Object {
+    "boardsExplorer": false,
+  },
   "error": Object {
     "header": "",
     "kind": "",
@@ -132,6 +232,9 @@ Object {
 
 exports[`UI Reducer UI Errors handles SET_UI_ERROR action 1`] = `
 Object {
+  "activeMenus": Object {
+    "boardsExplorer": false,
+  },
   "error": Object {
     "header": "Verify email!",
     "kind": "invalidEmail",

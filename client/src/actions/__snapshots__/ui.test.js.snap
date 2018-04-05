@@ -1,14 +1,26 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`ui actions Action Creators Boards Menu creates a HIDE_BOARDS_MENU action 1`] = `
+exports[`ui actions Action Creators Board Menu creates a HIDE_BOARD_MENU action 1`] = `
 Object {
-  "type": "HIDE_BOARDS_MENU",
+  "type": "HIDE_BOARD_MENU",
 }
 `;
 
-exports[`ui actions Action Creators Boards Menu creates a SHOW_BOARDS_MENU action 1`] = `
+exports[`ui actions Action Creators Board Menu creates a SHOW_BOARD_MENU action 1`] = `
 Object {
-  "type": "SHOW_BOARDS_MENU",
+  "type": "SHOW_BOARD_MENU",
+}
+`;
+
+exports[`ui actions Action Creators Boards Explorer creates a HIDE_BOARDS_EXPLORER action 1`] = `
+Object {
+  "type": "HIDE_BOARDS_EXPLORER",
+}
+`;
+
+exports[`ui actions Action Creators Boards Explorer creates a SHOW_BOARDS_EXPLORER action 1`] = `
+Object {
+  "type": "SHOW_BOARDS_EXPLORER",
 }
 `;
 
@@ -21,18 +33,6 @@ Object {
 exports[`ui actions Action Creators Header Search creates a FOCUS_HEADER_SEARCH action 1`] = `
 Object {
   "type": "FOCUS_HEADER_SEARCH",
-}
-`;
-
-exports[`ui actions Action Creators Main Menu creates a HIDE_MAIN_MENU action 1`] = `
-Object {
-  "type": "HIDE_MAIN_MENU",
-}
-`;
-
-exports[`ui actions Action Creators Main Menu creates a SHOW_MAIN_MENU action 1`] = `
-Object {
-  "type": "SHOW_MAIN_MENU",
 }
 `;
 

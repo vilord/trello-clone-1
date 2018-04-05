@@ -27,6 +27,22 @@ const uiReducer = (state = initState, action) => {
         ...state,
         focus: '',
       };
+    case types.SHOW_BOARDS_EXPLORER:
+      return {
+        ...state,
+        activeMenus: {
+          ...state.activeMenus,
+          boardsExplorer: true,
+        },
+      };
+    case types.HIDE_BOARDS_EXPLORER:
+      return {
+        ...state,
+        activeMenus: {
+          ...state.activeMenus,
+          boardsExplorer: false,
+        },
+      };
     case types.SIGNUP_USER_REQUEST:
       return {
         ...state,

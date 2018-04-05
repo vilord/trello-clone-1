@@ -7,12 +7,6 @@ import * as errors from '../constants/errors';
 import uiReducer from './ui';
 
 describe('UI Reducer', () => {
-  beforeAll(() => {
-    console.error = err => {
-      throw new Error(err);
-    };
-  });
-
   let initState;
   beforeEach(() => {
     initState = { ...initUiState };
@@ -51,6 +45,40 @@ describe('UI Reducer', () => {
     });
   });
 
+  describe('Boards Explorer', () => {
+    it('handles SHOW_BOARDS_EXPLORER action', () => {
+      const newState = {
+        ...initState,
+        activeMenus: {
+          ...initState.activeMenus,
+          boardsExplorer: true,
+        },
+      };
+      expect(uiReducer(initState, uiActions.showBoardsExplorer())).toEqual(
+        newState,
+      );
+      expect(
+        uiReducer(initState, uiActions.showBoardsExplorer()),
+      ).toMatchSnapshot();
+    });
+
+    it('handles HIDE_BOARDS_EXPLORER action', () => {
+      const state = {
+        ...initState,
+        activeMenus: {
+          ...initState.activeMenus,
+          boardsExplorer: true,
+        },
+      };
+      expect(uiReducer(state, uiActions.hideBoardsExplorer())).toEqual(
+        initState,
+      );
+      expect(
+        uiReducer(state, uiActions.hideBoardsExplorer()),
+      ).toMatchSnapshot();
+    });
+  });
+
   describe('Header Search', () => {
     it('handles FOCUS_HEADER_SEARCH action', () => {
       const newState = {
@@ -60,6 +88,9 @@ describe('UI Reducer', () => {
       expect(uiReducer(initState, uiActions.focusHeaderSearch())).toEqual(
         newState,
       );
+      expect(
+        uiReducer(initState, uiActions.focusHeaderSearch()),
+      ).toMatchSnapshot();
     });
 
     it('handles BLUR_HEADER_SEARCH action', () => {
@@ -70,6 +101,9 @@ describe('UI Reducer', () => {
       expect(uiReducer(newState, uiActions.blurHeaderSearch())).toEqual(
         initState,
       );
+      expect(
+        uiReducer(newState, uiActions.blurHeaderSearch()),
+      ).toMatchSnapshot();
     });
   });
 
