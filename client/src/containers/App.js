@@ -4,6 +4,9 @@ import { connect } from 'react-redux';
 import { getUserSession } from '../actions/user';
 
 import Header from './Header';
+import Board from './Board';
+
+import './App.css';
 
 export class App extends Component {
   componentDidMount() {
@@ -19,6 +22,7 @@ export class App extends Component {
     const App = (
       <div className="App">
         <Header />
+        <Board />
       </div>
     );
 

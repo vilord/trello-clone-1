@@ -1,0 +1,43 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`BoardHeader Component matches snapshot 1`] = `
+<div
+  className="BoardHeader"
+>
+  <div>
+    <h3
+      onClick={[Function]}
+    >
+      Trello Clone
+    </h3>
+    <Icon
+      as="i"
+      name="empty star"
+      style={null}
+    />
+    <p
+      onClick={[Function]}
+    >
+      Personal
+    </p>
+    <p
+      onClick={[Function]}
+    >
+      <Icon
+        as="i"
+        name="lock"
+      />
+      Private
+    </p>
+  </div>
+  <p
+    onClick={[Function]}
+  >
+    <Icon
+      as="i"
+      name="ellipsis horizontal"
+    />
+    Show Menu
+  </p>
+</div>
+`;
