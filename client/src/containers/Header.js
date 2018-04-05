@@ -1,6 +1,12 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
+import {
+  showBoardsExplorer,
+  showCreateMenu,
+  showNotifications,
+  showUserMenu,
+} from '../actions/ui';
 import { Route, Link } from 'react-router-dom';
 
 import { Icon, Image } from 'semantic-ui-react';
@@ -11,6 +17,12 @@ import './Header.css';
 
 export class Header extends Component {
   render() {
+    const {
+      showBoardsExplorer,
+      showCreateMenu,
+      showNotifications,
+      showUserMenu,
+    } = this.props;
     return (
       <div className="Header">
         <div className="Header-left">
@@ -22,7 +34,11 @@ export class Header extends Component {
               </Link>
             )}
           />
-          <ButtonIcon icon="trello" label="Boards" />
+          <ButtonIcon
+            icon="trello"
+            label="Boards"
+            onClick={showBoardsExplorer}
+          />
           <Search />
         </div>
         <div className="Header-title">
@@ -32,25 +48,34 @@ export class Header extends Component {
           </Link>
         </div>
         <div className="Header-right">
-          <ButtonIcon icon="plus" />
-          <ButtonIcon icon="bell" />
-          <Image src={this.props.avatar} avatar />
+          <ButtonIcon icon="plus" onClick={showCreateMenu} />
+          <ButtonIcon icon="bell" onClick={showNotifications} />
+          <Image src={this.props.avatar} avatar onClick={showUserMenu} />
         </div>
       </div>
     );
   }
 }
 
-Header.defaultProps = {
+Header.defaultProps = {};
+
+Header.propTypes = {
+  showBoardsExplorer: PropTypes.func.isRequired,
+  showCreateMenu: PropTypes.func.isRequired,
+  showNotifications: PropTypes.func.isRequired,
+  showUserMenu: PropTypes.func.isRequired,
   avatar: PropTypes.string,
 };
-
-Header.propTypes = {};
 
 const mapStateToProps = state => ({
   avatar: state.user.avatar,
 });
 
-const mapDispatchToProps = dispatch => ({});
+const mapDispatchToProps = dispatch => ({
+  showBoardsExplorer: () => dispatch(showBoardsExplorer()),
+  showCreateMenu: () => dispatch(showCreateMenu()),
+  showNotifications: () => dispatch(showNotifications()),
+  showUserMenu: () => dispatch(showUserMenu()),
+});
 
 export default connect(mapStateToProps, mapDispatchToProps)(Header);

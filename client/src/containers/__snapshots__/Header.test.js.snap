@@ -7,76 +7,49 @@ exports[`Header Component matches snapshot 1`] = `
   <div
     className="Header-left"
   >
-    <Button
-      as="button"
-      icon={true}
-    >
-      <Icon
-        as="i"
-        name="arrow left"
-      />
-    </Button>
-    <Button
-      as="button"
-      icon={true}
-      labelPosition="left"
-    >
-      <Icon
-        as="i"
-        name="trello"
-      />
-      Boards
-    </Button>
-    <div
-      className="Header-search"
-    >
-      <Search
-        fluid={true}
-        icon="search"
-        input="text"
-        loading={false}
-        minCharacters={1}
-        noResultsMessage="No results found."
-        showNoResults={true}
-      />
-    </div>
+    <Route
+      path="/"
+      render={[Function]}
+    />
+    <ButtonIcon
+      icon="trello"
+      label="Boards"
+      onClick={[Function]}
+    />
+    <Connect(Search) />
   </div>
   <div
     className="Header-title"
   >
-    <Icon
-      as="i"
-      name="trello"
-      size="large"
-    />
-    <h2>
-      Trello
-    </h2>
+    <Link
+      replace={false}
+      to="/"
+    >
+      <Icon
+        as="i"
+        name="trello"
+        size="large"
+      />
+      <h2>
+        Trello
+      </h2>
+    </Link>
   </div>
   <div
     className="Header-right"
   >
-    <Button
-      as="button"
-      icon={true}
-    >
-      <Icon
-        as="i"
-        name="plus"
-      />
-    </Button>
-    <Button
-      as="button"
-      icon={true}
-    >
-      <Icon
-        as="i"
-        name="bell"
-      />
-    </Button>
+    <ButtonIcon
+      icon="plus"
+      onClick={[Function]}
+    />
+    <ButtonIcon
+      icon="bell"
+      onClick={[Function]}
+    />
     <Image
       as="img"
       avatar={true}
+      onClick={[Function]}
       ui={true}
     />
   </div>
