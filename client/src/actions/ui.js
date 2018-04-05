@@ -24,3 +24,11 @@ export const showBoardsMenu = () => ({
 export const hideBoardsMenu = () => ({
   type: types.HIDE_BOARDS_MENU,
 });
+
+export const focusHeaderSearch = () => ({
+  type: types.FOCUS_HEADER_SEARCH,
+});
+
+export const blurHeaderSearch = () => ({
+  type: types.BLUR_HEADER_SEARCH,
+});

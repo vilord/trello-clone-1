@@ -17,6 +17,16 @@ const uiReducer = (state = initState, action) => {
           message: '',
         },
       };
+    case types.FOCUS_HEADER_SEARCH:
+      return {
+        ...state,
+        focus: 'search',
+      };
+    case types.BLUR_HEADER_SEARCH:
+      return {
+        ...state,
+        focus: '',
+      };
     case types.SIGNUP_USER_REQUEST:
       return {
         ...state,

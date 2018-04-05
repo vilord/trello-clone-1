@@ -39,6 +39,9 @@ export const HIDE_CREATE_MENU = 'HIDE_CREATE_MENU';
 export const SHOW_USER_MENU = 'SHOW_USER_MENU';
 export const HIDE_USER_MENU = 'HIDE_USER_MENU';
 
+export const FOCUS_HEADER_SEARCH = 'FOCUS_HEADER_SEARCH';
+export const BLUR_HEADER_SEARCH = 'BLUR_HEADER_SEARCH';
+
 /**
  * Cards
  */

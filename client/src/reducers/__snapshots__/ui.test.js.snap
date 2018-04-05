@@ -12,6 +12,7 @@ Object {
     "login": false,
     "signup": false,
   },
+  "focus": "",
   "isFetching": true,
 }
 `;
@@ -28,6 +29,7 @@ Object {
     "login": true,
     "signup": false,
   },
+  "focus": "",
 }
 `;
 
@@ -43,6 +45,7 @@ Object {
     "login": false,
     "signup": false,
   },
+  "focus": "",
   "isFetching": true,
 }
 `;
@@ -59,6 +62,7 @@ Object {
     "login": false,
     "signup": false,
   },
+  "focus": "",
 }
 `;
 
@@ -74,6 +78,7 @@ Object {
     "login": false,
     "signup": false,
   },
+  "focus": "",
 }
 `;
 
@@ -89,6 +94,7 @@ Object {
     "login": false,
     "signup": true,
   },
+  "focus": "",
 }
 `;
 
@@ -104,6 +110,7 @@ Object {
     "login": false,
     "signup": false,
   },
+  "focus": "",
 }
 `;
 
@@ -119,6 +126,7 @@ Object {
     "login": false,
     "signup": false,
   },
+  "focus": "",
 }
 `;
 
@@ -134,5 +142,6 @@ Object {
     "login": false,
     "signup": false,
   },
+  "focus": "",
 }
 `;

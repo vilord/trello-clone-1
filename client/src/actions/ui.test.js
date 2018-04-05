@@ -55,5 +55,19 @@ describe('ui actions', () => {
         expect(actions.hideBoardsMenu()).toMatchSnapshot();
       });
     });
+
+    describe('Header Search', () => {
+      it('creates a FOCUS_HEADER_SEARCH action', () => {
+        const expected = { type: types.FOCUS_HEADER_SEARCH };
+        expect(actions.focusHeaderSearch()).toEqual(expected);
+        expect(actions.focusHeaderSearch()).toMatchSnapshot();
+      });
+
+      it('creates a BLUR_HEADER_SEARCH action', () => {
+        const expected = { type: types.BLUR_HEADER_SEARCH };
+        expect(actions.blurHeaderSearch()).toEqual(expected);
+        expect(actions.blurHeaderSearch()).toMatchSnapshot();
+      });
+    });
   });
 });

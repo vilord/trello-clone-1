@@ -51,6 +51,28 @@ describe('UI Reducer', () => {
     });
   });
 
+  describe('Header Search', () => {
+    it('handles FOCUS_HEADER_SEARCH action', () => {
+      const newState = {
+        ...initState,
+        focus: 'search',
+      };
+      expect(uiReducer(initState, uiActions.focusHeaderSearch())).toEqual(
+        newState,
+      );
+    });
+
+    it('handles BLUR_HEADER_SEARCH action', () => {
+      const newState = {
+        ...initState,
+        focus: 'search',
+      };
+      expect(uiReducer(newState, uiActions.blurHeaderSearch())).toEqual(
+        initState,
+      );
+    });
+  });
+
   describe('Signup User', () => {
     it('handles SIGNUP_USER_REQUEST action', () => {
       const newState = {

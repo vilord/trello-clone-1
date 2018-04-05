@@ -1,4 +1,5 @@
 export default {
+  focus: '',
   fetching: {
     signup: false,
     login: false,

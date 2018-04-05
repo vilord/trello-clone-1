@@ -12,6 +12,18 @@ Object {
 }
 `;
 
+exports[`ui actions Action Creators Header Search creates a BLUR_HEADER_SEARCH action 1`] = `
+Object {
+  "type": "BLUR_HEADER_SEARCH",
+}
+`;
+
+exports[`ui actions Action Creators Header Search creates a FOCUS_HEADER_SEARCH action 1`] = `
+Object {
+  "type": "FOCUS_HEADER_SEARCH",
+}
+`;
+
 exports[`ui actions Action Creators Main Menu creates a HIDE_MAIN_MENU action 1`] = `
 Object {
   "type": "HIDE_MAIN_MENU",
