@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Route } from 'react-router-dom';
+import { Route, Switch } from 'react-router-dom';
 
 import './Root.css';
 
@@ -12,9 +12,11 @@ class Root extends Component {
   render() {
     return (
       <div className="Root">
-        <Route exact path="/" component={App} />
-        <Route path="/signup" component={Signup} />
-        <Route path="/login" component={Login} />
+        <Switch>
+          <Route path="/signup" component={Signup} />
+          <Route path="/login" component={Login} />
+          <Route path="/" component={App} />
+        </Switch>
       </div>
     );
   }
