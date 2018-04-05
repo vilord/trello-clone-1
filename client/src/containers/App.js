@@ -14,7 +14,7 @@ export class App extends Component {
   }
 
   render() {
-    const { fetching, user } = this.props;
+    const { fetching } = this.props;
     const Fetching = <div>Fetching</div>;
     const App = (
       <div className="App">

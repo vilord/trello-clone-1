@@ -1,0 +1,84 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Header Component matches snapshot 1`] = `
+<div
+  className="Header"
+>
+  <div
+    className="Header-left"
+  >
+    <Button
+      as="button"
+      icon={true}
+    >
+      <Icon
+        as="i"
+        name="arrow left"
+      />
+    </Button>
+    <Button
+      as="button"
+      icon={true}
+      labelPosition="left"
+    >
+      <Icon
+        as="i"
+        name="trello"
+      />
+      Boards
+    </Button>
+    <div
+      className="Header-search"
+    >
+      <Search
+        fluid={true}
+        icon="search"
+        input="text"
+        loading={false}
+        minCharacters={1}
+        noResultsMessage="No results found."
+        showNoResults={true}
+      />
+    </div>
+  </div>
+  <div
+    className="Header-title"
+  >
+    <Icon
+      as="i"
+      name="trello"
+      size="large"
+    />
+    <h2>
+      Trello
+    </h2>
+  </div>
+  <div
+    className="Header-right"
+  >
+    <Button
+      as="button"
+      icon={true}
+    >
+      <Icon
+        as="i"
+        name="plus"
+      />
+    </Button>
+    <Button
+      as="button"
+      icon={true}
+    >
+      <Icon
+        as="i"
+        name="bell"
+      />
+    </Button>
+    <Image
+      as="img"
+      avatar={true}
+      ui={true}
+    />
+  </div>
+</div>
+`;

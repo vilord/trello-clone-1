@@ -1,0 +1,41 @@
+.Search {
+  display: flex;
+  overflow: visible;
+  align-items: center;
+
+  margin: auto 4px;
+
+  input {
+    height: 30px;
+    width: 180px;
+
+    transition: width .1s ease-out !important;
+
+    border: none !important;
+    outline: none;
+    background-color: #5395c0 !important;
+
+    &:hover {
+      background-color: #6ba4c9 !important;
+    }
+
+    &:focus {
+      width: 360px;
+
+      color: black !important;
+      background-color: white !important;
+    }
+  }
+
+  i {
+    cursor: pointer !important;
+    pointer-events: auto !important;
+
+    opacity: 1 !important;
+    color: white;
+
+    &:focus {
+      color: black !important;
+    }
+  }
+}

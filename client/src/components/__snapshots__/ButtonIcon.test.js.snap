@@ -1,0 +1,23 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`ButtonIcon component matches snapshot 1`] = `
+<Button
+  as="button"
+  className="ButtonIcon"
+  icon={true}
+  size="large"
+  style={
+    Object {
+      "minWidth": "90px",
+    }
+  }
+>
+  <Icon
+    as="i"
+    flipped={null}
+    name="trello"
+  />
+   
+  Board
+</Button>
+`;

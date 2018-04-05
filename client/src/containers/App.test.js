@@ -121,7 +121,7 @@ describe('App Component', () => {
   });
 
   // Snapshot for App React Component
-  describe('snapshot', () => {
+  xdescribe('snapshot', () => {
     it('mathes snapshot', () => {
       const props = {
         fetching: false,
