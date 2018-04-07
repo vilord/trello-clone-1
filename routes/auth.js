@@ -1,5 +1,6 @@
 const express = require('express');
 const auth = express.Router();
+const User = require('../models/user');
 const passportLocal = require('../auth/local');
 const passportGoogle = require('../auth/google');
 const verifyUser = require('../middleware/verifyUser');
@@ -12,9 +13,10 @@ auth.post(
   '/login',
   addLoginEmail,
   passportLocal.authenticate('local'),
-  (req, res) => {
+  async (req, res) => {
+    const user = await User.findById(req.user._id).populate();
     res.json({
-      user: req.user,
+      user,
     });
   },
 );
@@ -49,9 +51,19 @@ auth.get(
  * ALL
  */
 auth.get('/user-session', verifyUser, async (req, res, next) => {
-  res.json({
-    user: req.user,
-  });
+  try {
+    const user = await User.findById({ _id: req.user._id }).populate(
+      'boards.board',
+      'title',
+    );
+
+    res.json({
+      user,
+    });
+  } catch (err) {
+    console.log(err);
+    next(err);
+  }
 });
 
 module.exports = auth;

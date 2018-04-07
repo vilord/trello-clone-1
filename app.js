@@ -42,9 +42,11 @@ app.use(passport.session());
  */
 const auth = require('./routes/auth');
 const users = require('./routes/users');
+const boards = require('./routes/boards');
 
 app.use('/auth', auth);
 app.use('/users', users);
+app.use('/boards', boards);
 
 /*
   Serve the Single Page App in Production only

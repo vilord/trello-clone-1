@@ -1,4 +1,5 @@
 const Board = require('./board');
+const genObjectId = require('mongoose').Types.ObjectId;
 const { ObjectId } = require('mongoose').Schema.Types;
 
 // Constants
@@ -36,6 +37,7 @@ describe('Board Model', () => {
     it('is valid when correctly spaced', () => {
       const board = new Board({
         title: 'valid title',
+        members: [genObjectId()],
       });
       const err = board.validateSync();
       expect(err).toBeUndefined();
@@ -63,8 +65,8 @@ describe('Board Model', () => {
       expect(err.errors.visibility).toBeUndefined();
     });
 
-    it('defaults to public', () => {
-      expect(board.visibility.default).toEqual('public');
+    it('defaults to private', () => {
+      expect(board.visibility.default).toEqual('private');
     });
   });
 
@@ -105,11 +107,19 @@ describe('Board Model', () => {
 
   describe('members', () => {
     it('is an Array', () => {
-      expect(board.members).toBeInstanceOf(Array);
+      expect(board.members.type).toBeInstanceOf(Array);
+    });
+
+    it('requires at least one member', () => {
+      const board = new Board({
+        title: 'Trello Clone',
+      });
+      const err = board.validateSync();
+      expect(err.errors.members).toBeDefined();
     });
 
     describe('obj', () => {
-      const obj = board.members[0];
+      const obj = board.members.type[0];
 
       describe('user', () => {
         const user = obj.user;
@@ -179,6 +189,7 @@ describe('Board Model', () => {
       it('passes with a valid color', () => {
         const board = new Board({
           title: 'some title',
+          members: [genObjectId()],
           theme: {
             color: GREEN,
           },
@@ -207,6 +218,7 @@ describe('Board Model', () => {
       it('pass with a valid URL', () => {
         const board = new Board({
           title: 'some title',
+          members: [genObjectId()],
           theme: {
             picture: 'https://images.unsplash.com/photo',
           },

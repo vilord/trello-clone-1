@@ -77,6 +77,7 @@ const UserSchema = new Schema(
     ],
     boards: [
       {
+        _id: false,
         board: {
           type: ObjectId,
           ref: 'Board',
@@ -87,6 +88,12 @@ const UserSchema = new Schema(
         },
       },
     ],
+    // boards: [
+    //   {
+    //     type: ObjectId,
+    //     ref: 'Board',
+    //   },
+    // ],
     teams: [
       {
         type: ObjectId,
