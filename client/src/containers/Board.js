@@ -27,7 +27,11 @@ export class Board extends Component {
     };
     return (
       <div className="Board">
-        <BoardHeader title="Trello Clone" boardStatus="Private" {...headerProps} />
+        <BoardHeader
+          title="Trello Clone"
+          boardStatus="Private"
+          {...headerProps}
+        />
       </div>
     );
   }

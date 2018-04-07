@@ -8,7 +8,7 @@ exports[`Header Component matches snapshot 1`] = `
     className="Header-left"
   >
     <Route
-      path="/"
+      path="/b"
       render={[Function]}
     />
     <ButtonIcon

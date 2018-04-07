@@ -28,6 +28,7 @@ describe('User Reducer', () => {
       initials: 'JD',
       bio: 'Web Developer',
       avatar: 'http://example.com/prfile_pic',
+      boards: [],
     };
 
     const nextState = {
