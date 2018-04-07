@@ -60,6 +60,13 @@ Object {
 }
 `;
 
+exports[`ui actions Action Creators Header Search creates a SET_HEADER_SEARCH action 1`] = `
+Object {
+  "term": "something",
+  "type": "SET_HEADER_SEARCH",
+}
+`;
+
 exports[`ui actions Action Creators Notifications creates a HIDE_NOTIFICATIONS action 1`] = `
 Object {
   "type": "HIDE_NOTIFICATIONS",

@@ -34,6 +34,11 @@ export const blurHeaderSearch = () => ({
   type: types.BLUR_HEADER_SEARCH,
 });
 
+export const setHeaderSearch = term => ({
+  type: types.SET_HEADER_SEARCH,
+  term,
+});
+
 /**
  * Create Menu
  */

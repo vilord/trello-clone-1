@@ -97,12 +97,27 @@ describe('UI Reducer', () => {
       const newState = {
         ...initState,
         focus: 'search',
+        search: 'something',
       };
       expect(uiReducer(newState, uiActions.blurHeaderSearch())).toEqual(
         initState,
       );
       expect(
         uiReducer(newState, uiActions.blurHeaderSearch()),
+      ).toMatchSnapshot();
+    });
+
+    it('handles SET_HEADER_SEARCH action', () => {
+      const search = 'something';
+      const newState = {
+        ...initState,
+        search,
+      };
+      expect(uiReducer(initState, uiActions.setHeaderSearch(search))).toEqual(
+        newState,
+      );
+      expect(
+        uiReducer(initState, uiActions.setHeaderSearch(search)),
       ).toMatchSnapshot();
     });
   });

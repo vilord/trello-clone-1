@@ -9,6 +9,7 @@ export default {
     visibility: false,
     board: false,
   },
+  search: '',
   // Focus options [ 'search' ]
   focus: '',
   fetching: {

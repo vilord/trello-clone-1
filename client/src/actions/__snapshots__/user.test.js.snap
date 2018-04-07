@@ -100,9 +100,7 @@ Array [
 ]
 `;
 
-exports[`User Actions Async Actions getUserSession on success 1`] = `"/"`;
-
-exports[`User Actions Async Actions getUserSession on success 2`] = `
+exports[`User Actions Async Actions getUserSession on success 1`] = `
 Array [
   Object {
     "type": "GET_USER_SESSION_REQUEST",

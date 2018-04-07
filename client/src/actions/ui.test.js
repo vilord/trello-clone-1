@@ -48,6 +48,13 @@ describe('ui actions', () => {
         expect(actions.blurHeaderSearch()).toEqual(expected);
         expect(actions.blurHeaderSearch()).toMatchSnapshot();
       });
+
+      it('creates a SET_HEADER_SEARCH action', () => {
+        const term = 'something';
+        const expected = { type: types.SET_HEADER_SEARCH, term };
+        expect(actions.setHeaderSearch(term)).toEqual(expected);
+        expect(actions.setHeaderSearch(term)).toMatchSnapshot();
+      });
     });
 
     describe('Create Menu', () => {

@@ -42,6 +42,12 @@ const uiReducer = (state = initState, action) => {
       return {
         ...state,
         focus: '',
+        search: '',
+      };
+    case types.SET_HEADER_SEARCH:
+      return {
+        ...state,
+        search: action.term,
       };
     case types.SHOW_CREATE_MENU:
       return {

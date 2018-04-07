@@ -13,6 +13,10 @@ const userReducer = (state = initUserState, action) => {
       return {
         ...state,
         ...action.user,
+        boards: action.user.boards.map(x => ({
+          ...x.board,
+          favorite: x.favorite,
+        })),
       };
     case types.SET_USER_PROFILE_SUCCESS:
       return {

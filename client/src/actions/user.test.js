@@ -274,9 +274,7 @@ describe('User Actions', () => {
         };
 
         return store.dispatch(actions.getUserSession(historyMock)).then(() => {
-          expect(historyMock.push.mock.calls[0][0]).toBe('/');
           expect(store.getActions()).toEqual(expected);
-          expect(historyMock.push.mock.calls[0][0]).toMatchSnapshot();
           expect(store.getActions()).toMatchSnapshot();
         });
       });

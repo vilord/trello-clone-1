@@ -148,7 +148,6 @@ export const getUserSession = history => async dispatch => {
 
     if (res.status === 200 && user) {
       dispatch(getUserSessionSuccess(user));
-      history.push('/');
       return;
     }
 
