@@ -1,0 +1,33 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`BoardTile Component matches snapshot 1`] = `
+<Link
+  className="BoardTile"
+  replace={false}
+  style={
+    Object {
+      "backgroundColor": "blue",
+      "backgroundImage": null,
+    }
+  }
+  to="b/y42LW46J9luq3Xq9XMly"
+>
+  <h4>
+    Trello Clone
+  </h4>
+  <Icon
+    as="i"
+    name="empty star"
+    style={
+      Object {
+        "color": "white",
+        "right": null,
+        "width": null,
+      }
+    }
+  />
+  <span
+    className="BoardTile-fade"
+  />
+</Link>
+`;

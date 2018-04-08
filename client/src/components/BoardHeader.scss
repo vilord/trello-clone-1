@@ -2,23 +2,22 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
-
   width: 100%;
   height: 40px;
 
-   > p {
+  > p {
     min-width: 110px;
     margin: 0;
     margin-right: 10px;
     padding: 7px;
-
     cursor: pointer;
     text-decoration: underline;
-
     border-radius: 3px;
+
     i {
       text-decoration: none;
     }
+
     &:hover {
       background-color: #0169a8;
     }
@@ -28,7 +27,6 @@
 .BoardHeader > div {
   display: flex;
   align-items: center;
-
   margin-left: 10px;
 
   h3,
@@ -36,9 +34,7 @@
     margin: 3px;
     padding: 0;
     padding: 5px 10px;
-
     cursor: pointer;
-
     border-radius: 3px;
 
     &:hover {
@@ -46,14 +42,13 @@
     }
   }
 
-   > i {
+  > i {
+    font-weight: 900;
     width: 30px;
     height: 30px;
     margin: 3px;
     padding-top: 6px;
-
     cursor: pointer;
-
     border-radius: 3px;
 
     &:hover {

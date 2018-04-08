@@ -54,7 +54,7 @@ auth.get('/user-session', verifyUser, async (req, res, next) => {
   try {
     const user = await User.findById({ _id: req.user._id }).populate(
       'boards.board',
-      'title',
+      'title theme',
     );
 
     res.json({

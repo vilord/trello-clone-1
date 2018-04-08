@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { Route } from 'react-router-dom';
+import { Route, Switch } from 'react-router-dom';
 import { getUserSession } from '../actions/user';
 import {
   showBoardsExplorer,
@@ -12,6 +12,7 @@ import {
 import FontAwesomeIcon from '@fortawesome/react-fontawesome';
 
 import Header from '../components/Header';
+import Home from '../components/Home';
 import Board from './Board';
 
 import './App.css';
@@ -28,6 +29,7 @@ export class App extends Component {
     const {
       user,
       fetching,
+      boards,
       showBoardsExplorer,
       showCreateMenu,
       showNotifications,
@@ -45,7 +47,10 @@ export class App extends Component {
           showNotifications={showNotifications}
           showUserMenu={showUserMenu}
         />
-        <Route path="/b/" component={Board} />
+        <Switch>
+          <Route path="/b" component={Board} />
+          <Route exsct path="/" render={() => <Home boards={boards} />} />
+        </Switch>
       </div>
     );
 
@@ -72,6 +77,7 @@ App.propTypes = {
 const mapStateToProps = state => ({
   user: state.user,
   fetching: state.ui.fetching.login,
+  boards: state.user.boards,
 });
 
 const mapDispatchToProps = dispatch => ({

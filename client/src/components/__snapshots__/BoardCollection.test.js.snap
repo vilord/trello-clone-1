@@ -1,0 +1,32 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`BoardCollection Component matches snapshot 1`] = `
+<div
+  className="BoardCollection"
+>
+  <div>
+    <Icon
+      as="i"
+      name="star"
+      size="large"
+    />
+    <h3>
+      Stared Boards
+    </h3>
+  </div>
+  <div>
+    <BoardTile
+      favorite={false}
+      id="y42LW46J9luq3Xq9XMly"
+      key="BoardTile-0"
+      theme={
+        Object {
+          "color": "blue",
+          "picture": "",
+        }
+      }
+      title="Trello Clone"
+    />
+  </div>
+</div>
+`;

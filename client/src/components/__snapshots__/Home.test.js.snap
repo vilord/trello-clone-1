@@ -1,0 +1,25 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Home Component matches 1`] = `
+<div
+  className="Home"
+>
+  <BoardCollection
+    boards={
+      Array [
+        Object {
+          "favorite": false,
+          "id": "",
+          "theme": Object {
+            "color": "blue",
+            "picture": "",
+          },
+          "title": "Trello Clone",
+        },
+      ]
+    }
+    icon="user outline"
+    title="Personal Boards"
+  />
+</div>
+`;
