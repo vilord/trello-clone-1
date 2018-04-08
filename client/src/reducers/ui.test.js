@@ -1,6 +1,7 @@
 // import * as types from '../constants/actionTypes';
 import * as uiActions from '../actions/ui';
 import * as userActions from '../actions/user';
+import * as boardActions from '../actions/board';
 import initUiState from '../reducers/initUiState';
 import * as errors from '../constants/errors';
 
@@ -454,6 +455,56 @@ describe('UI Reducer', () => {
       };
       expect(uiReducer(initState, userActions.logoutUser())).toEqual(newState);
       expect(uiReducer(initState, userActions.logoutUser())).toMatchSnapshot();
+    });
+  });
+
+  describe('Get Board', () => {
+    it('handles GET_BOARD_REQUEST', () => {
+      const newState = {
+        ...initState,
+        fetching: {
+          ...initState.fetching,
+          board: true,
+        },
+      };
+      expect(uiReducer(initState, boardActions.getBoardRequest())).toEqual(
+        newState,
+      );
+      expect(
+        uiReducer(initState, boardActions.getBoardRequest()),
+      ).toMatchSnapshot();
+    });
+
+    it('handles GET_BOARD_SUCESS', () => {
+      const newState = {
+        ...initState,
+        fetching: {
+          ...initState.fetching,
+          board: true,
+        },
+      };
+      expect(uiReducer(newState, boardActions.getBoardSucess())).toEqual(
+        initState,
+      );
+      expect(
+        uiReducer(newState, boardActions.getBoardSucess()),
+      ).toMatchSnapshot();
+    });
+
+    it('handles GET_BOARD_FAILURE', () => {
+      const newState = {
+        ...initState,
+        fetching: {
+          ...initState.fetching,
+          board: true,
+        },
+      };
+      expect(uiReducer(newState, boardActions.getBoardFailure())).toEqual(
+        initState,
+      );
+      expect(
+        uiReducer(newState, boardActions.getBoardFailure()),
+      ).toMatchSnapshot();
     });
   });
 });

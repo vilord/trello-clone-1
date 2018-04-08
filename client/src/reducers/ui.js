@@ -221,6 +221,23 @@ const uiReducer = (state = initState, action) => {
           login: false,
         },
       };
+    case types.GET_BOARD_REQUEST:
+      return {
+        ...state,
+        fetching: {
+          ...state.fetching,
+          board: true,
+        },
+      };
+    case types.GET_BOARD_SUCESS:
+    case types.GET_BOARD_FAILURE:
+      return {
+        ...state,
+        fetching: {
+          ...state.fetching,
+          board: false,
+        },
+      };
     default:
       return state;
   }

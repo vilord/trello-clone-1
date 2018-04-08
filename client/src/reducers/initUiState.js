@@ -13,9 +13,10 @@ export default {
   // Focus options [ 'search' ]
   focus: '',
   fetching: {
-    signup: false,
-    login: false,
     activity: false,
+    board: false,
+    login: false,
+    signup: false,
   },
   error: {
     kind: '',

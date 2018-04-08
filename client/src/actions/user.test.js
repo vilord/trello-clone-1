@@ -10,12 +10,6 @@ const middleware = [thunk];
 const mockStore = configureStore(middleware);
 
 describe('User Actions', () => {
-  beforeAll(() => {
-    console.error = err => {
-      throw new Error(err);
-    };
-  });
-
   describe('Action Creators', () => {
     describe('Signup User', () => {
       it('creates a SIGNUP_USER_REQUEST', () => {

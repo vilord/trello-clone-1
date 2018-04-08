@@ -1,8 +1,54 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
+exports[`Board Actions Action Creators creates a GET_BOARD_FAILURE action 1`] = `
+Object {
+  "type": "GET_BOARD_FAILURE",
+}
+`;
+
+exports[`Board Actions Action Creators creates a GET_BOARD_REQUEST action 1`] = `
+Object {
+  "type": "GET_BOARD_REQUEST",
+}
+`;
+
+exports[`Board Actions Action Creators creates a GET_BOARD_SUCESS action 1`] = `
+Object {
+  "board": Object {
+    "id": "asdf",
+  },
+  "type": "GET_BOARD_SUCESS",
+}
+`;
+
 exports[`Board Actions Action Creators creates a SET_BOARD_TITLE action 1`] = `
 Object {
   "title": "Some Title",
   "type": "SET_BOARD_TITLE",
 }
+`;
+
+exports[`Board Actions Async Actions getBoard on failure 1`] = `
+Array [
+  Object {
+    "type": "GET_BOARD_REQUEST",
+  },
+  Object {
+    "type": "GET_BOARD_FAILURE",
+  },
+]
+`;
+
+exports[`Board Actions Async Actions getBoard on success 1`] = `
+Array [
+  Object {
+    "type": "GET_BOARD_REQUEST",
+  },
+  Object {
+    "board": Object {
+      "id": "asdf123",
+    },
+    "type": "GET_BOARD_SUCESS",
+  },
+]
 `;

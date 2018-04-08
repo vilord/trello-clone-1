@@ -59,6 +59,10 @@ export const HIDE_BOARD_MENU = 'HIDE_BOARD_MENU';
  */
 export const SET_BOARD_TITLE = 'SET_BOARD_TITLE';
 
+export const GET_BOARD_REQUEST = 'GET_BOARD_REQUEST';
+export const GET_BOARD_SUCESS = 'GET_BOARD_SUCESS';
+export const GET_BOARD_FAILURE = 'GET_BOARD_FAILURE';
+
 /**
  * Cards
  */

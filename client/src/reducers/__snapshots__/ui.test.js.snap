@@ -19,6 +19,7 @@ Object {
   },
   "fetching": Object {
     "activity": false,
+    "board": false,
     "login": false,
     "signup": false,
   },
@@ -46,6 +47,7 @@ Object {
   },
   "fetching": Object {
     "activity": false,
+    "board": false,
     "login": false,
     "signup": false,
   },
@@ -73,6 +75,7 @@ Object {
   },
   "fetching": Object {
     "activity": false,
+    "board": false,
     "login": false,
     "signup": false,
   },
@@ -100,6 +103,7 @@ Object {
   },
   "fetching": Object {
     "activity": false,
+    "board": false,
     "login": false,
     "signup": false,
   },
@@ -127,6 +131,7 @@ Object {
   },
   "fetching": Object {
     "activity": false,
+    "board": false,
     "login": false,
     "signup": false,
   },
@@ -154,6 +159,7 @@ Object {
   },
   "fetching": Object {
     "activity": false,
+    "board": false,
     "login": false,
     "signup": false,
   },
@@ -181,6 +187,7 @@ Object {
   },
   "fetching": Object {
     "activity": false,
+    "board": false,
     "login": false,
     "signup": false,
   },
@@ -208,7 +215,92 @@ Object {
   },
   "fetching": Object {
     "activity": false,
+    "board": false,
     "login": false,
+    "signup": false,
+  },
+  "focus": "",
+  "search": "",
+}
+`;
+
+exports[`UI Reducer Get Board handles GET_BOARD_FAILURE 1`] = `
+Object {
+  "activeMenus": Object {
+    "addToTeam": false,
+    "board": false,
+    "boardsExplorer": false,
+    "create": false,
+    "notifications": false,
+    "renameBoard": false,
+    "user": false,
+    "visibility": false,
+  },
+  "error": Object {
+    "header": "",
+    "kind": "",
+    "message": "",
+  },
+  "fetching": Object {
+    "activity": false,
+    "board": false,
+    "login": true,
+    "signup": false,
+  },
+  "focus": "",
+  "search": "",
+}
+`;
+
+exports[`UI Reducer Get Board handles GET_BOARD_REQUEST 1`] = `
+Object {
+  "activeMenus": Object {
+    "addToTeam": false,
+    "board": false,
+    "boardsExplorer": false,
+    "create": false,
+    "notifications": false,
+    "renameBoard": false,
+    "user": false,
+    "visibility": false,
+  },
+  "error": Object {
+    "header": "",
+    "kind": "",
+    "message": "",
+  },
+  "fetching": Object {
+    "activity": false,
+    "board": true,
+    "login": true,
+    "signup": false,
+  },
+  "focus": "",
+  "search": "",
+}
+`;
+
+exports[`UI Reducer Get Board handles GET_BOARD_SUCESS 1`] = `
+Object {
+  "activeMenus": Object {
+    "addToTeam": false,
+    "board": false,
+    "boardsExplorer": false,
+    "create": false,
+    "notifications": false,
+    "renameBoard": false,
+    "user": false,
+    "visibility": false,
+  },
+  "error": Object {
+    "header": "",
+    "kind": "",
+    "message": "",
+  },
+  "fetching": Object {
+    "activity": false,
+    "board": false,
+    "login": true,
     "signup": false,
   },
   "focus": "",
@@ -235,6 +327,7 @@ Object {
   },
   "fetching": Object {
     "activity": false,
+    "board": false,
     "login": false,
     "signup": false,
   },
@@ -262,6 +355,7 @@ Object {
   },
   "fetching": Object {
     "activity": false,
+    "board": false,
     "login": false,
     "signup": false,
   },
@@ -289,6 +383,7 @@ Object {
   },
   "fetching": Object {
     "activity": false,
+    "board": false,
     "login": false,
     "signup": false,
   },
@@ -316,6 +411,7 @@ Object {
   },
   "fetching": Object {
     "activity": false,
+    "board": false,
     "login": false,
     "signup": false,
   },
@@ -344,6 +440,7 @@ Object {
   },
   "fetching": Object {
     "activity": false,
+    "board": false,
     "login": true,
     "signup": false,
   },
@@ -371,6 +468,7 @@ Object {
   },
   "fetching": Object {
     "activity": false,
+    "board": false,
     "login": false,
     "signup": false,
   },
@@ -399,6 +497,7 @@ Object {
   },
   "fetching": Object {
     "activity": false,
+    "board": false,
     "login": false,
     "signup": false,
   },
@@ -426,6 +525,7 @@ Object {
   },
   "fetching": Object {
     "activity": false,
+    "board": false,
     "login": false,
     "signup": false,
   },
@@ -453,6 +553,7 @@ Object {
   },
   "fetching": Object {
     "activity": false,
+    "board": false,
     "login": false,
     "signup": false,
   },
@@ -480,6 +581,7 @@ Object {
   },
   "fetching": Object {
     "activity": false,
+    "board": false,
     "login": false,
     "signup": false,
   },
@@ -507,6 +609,7 @@ Object {
   },
   "fetching": Object {
     "activity": false,
+    "board": false,
     "login": false,
     "signup": false,
   },
@@ -534,6 +637,7 @@ Object {
   },
   "fetching": Object {
     "activity": false,
+    "board": false,
     "login": false,
     "signup": false,
   },
@@ -561,6 +665,7 @@ Object {
   },
   "fetching": Object {
     "activity": false,
+    "board": false,
     "login": false,
     "signup": true,
   },
@@ -588,6 +693,7 @@ Object {
   },
   "fetching": Object {
     "activity": false,
+    "board": false,
     "login": false,
     "signup": false,
   },
@@ -615,6 +721,7 @@ Object {
   },
   "fetching": Object {
     "activity": false,
+    "board": false,
     "login": false,
     "signup": false,
   },
@@ -642,6 +749,7 @@ Object {
   },
   "fetching": Object {
     "activity": false,
+    "board": false,
     "login": false,
     "signup": false,
   },
@@ -669,6 +777,7 @@ Object {
   },
   "fetching": Object {
     "activity": false,
+    "board": false,
     "login": false,
     "signup": false,
   },
@@ -696,6 +805,7 @@ Object {
   },
   "fetching": Object {
     "activity": false,
+    "board": false,
     "login": false,
     "signup": false,
   },
@@ -723,6 +833,7 @@ Object {
   },
   "fetching": Object {
     "activity": false,
+    "board": false,
     "login": false,
     "signup": false,
   },
@@ -750,6 +861,7 @@ Object {
   },
   "fetching": Object {
     "activity": false,
+    "board": false,
     "login": false,
     "signup": false,
   },
